@@ -10,8 +10,6 @@
 	<!--[if IE]><script language="javascript" type="text/javascript" src="../../Extras/excanvas.js"></script><![endif]-->
 </head>
 <body ng-controller="synonymsController">
-	<H3>                          بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ             &nbsp;&nbsp;&nbsp;&nbsp;In the name of Allah , the Entirely Merciful, the Especially Merciful.</H3>
-	<H4><A HREF=http://linguisticmiracle.wordpress.com/2012/09/04/mutaradifaat/ TARGET=_>Mutaradifaat al Qur’an Translation Project</A></H4>
 	<div Xclass="container fluid">
 	  <div class="row-fluid">
 		<div class=span3>
@@ -25,15 +23,15 @@
 					 <span class="badge" ng-bind="numberOfPages(  ( synonyms | filter:input ).length  )"></span>
 				<button ng-disabled="currentPage >= (synonyms | filter:input).length/pageSize - 1" ng-click="currentPage=currentPage+1">Next</button>
 			  </div>
-			  <TABLE class="table table-striped table-bordered table-condensed">
+			  <TABLE class="table table-striped table-bordered table-condensed table-hover">
 				  <THEAD ng-show="(synonyms | filter:input).length > 0">
-					<tr><TH>#</TH><TH>ID</TH><TH>Synonym topic</TH><TH>topic (urdu)..</TH><TH title='# of synonyms for this topic'>..</TH><!--<TH>&nbsp;</TH><TH>&nbsp;</TH>--></tr>
+					<tr><TH>#</TH><TH>ID</TH><TH>Synonym topic</TH><!--<TH>topic (urdu)..</TH>--><TH title='# of synonyms for this topic'>..</TH><!--<TH>&nbsp;</TH><TH>&nbsp;</TH>--></tr>
 				  </THEAD><TBODY>
 					<tr ng-repeat="synonym in synonyms | filter:input | orderBy:orderProp | startFrom:currentPage*pageSize | limitTo:pageSize"  ng-click="tableRowClicked(synonym, $index)">
 						<td><span ng-bind="1 + $index + currentPage*pageSize "></span></td>
 						<td><A HREF="#{{synonym.id}}"><span ng-bind="synonym.id" class="muted"></span></A></td>
-						<td><A HREF="#{{synonym.id}}"><span class="label label-inverse" ng-bind="synonym.topic"></span></A></td>
-						<td><A HREF="#{{synonym.id}}"><span ng-bind="synonym.topicUr.toLowerCase().substring(0,12) + '…'" title="{{synonym.topicUr}}" class="muted"></span></A></td>
+						<td><A HREF="#{{synonym.id}}"><span class="label label-inverse" ng-bind="synonym.topic"></span><span class=small>&nbsp;&nbsp;{{synonym.topicUr.toLowerCase()}}</span></A></td>
+						<!--<td><A HREF="#{{synonym.id}}"><span ng-bind="synonym.topicUr.toLowerCase().substring(0,12) + '…'" title="{{synonym.topicUr}}" class="muted"></span></A></td>-->
 						<td><A HREF="#{{synonym.id}}"><span ng-bind="synonym.count"></span></A></td>
 						<!--<td>&nbsp;</td>
 						<td>&nbsp;</td>-->
@@ -41,39 +39,38 @@
 				  </TBODY>
 			  </TABLE>
 		</div>
-		<BR>
+
 		<HR>
-		<BR>
 
 		  <div class="">
-			  View <span ng-bind="synonymdetails.length"></span> translated Synonym details from the book:<BR/>	
+<!--			  View <span ng-bind="synonymdetails.length"></span> translated Synonym details from the book:<BR/>	-->
 			  <p ng-show="!!input && (synonymdetails | filter:input).length==0"  class="alert alert-warn">There are no Synonym entries.</p>
 			  <div ng-show="(synonymdetails | filter:input).length > 0"  class="alert alert-success">
-				<b><span ng-bind="( synonymdetails | filter:input ).length"></span> Synonym detail entries</b>&nbsp;&nbsp;&nbsp;&nbsp;
- 			    <button ng-disabled="currentPageForDetails == 0" ng-click="currentPageForDetails=currentPageForDetails-1">Previous</button>
+				<b><span ng-bind="( synonymdetails | filter:input ).length" class="badge badge-info"></span> words</b>&nbsp;
+ 			    <button ng-disabled="currentPageForDetails == 0" ng-click="currentPageForDetails=currentPageForDetails-1" title="Previous">Prev</button>
 				Page <span class="badge badge-inverse" ng-bind="currentPageForDetails+1"></span> / 
 					 <span class="badge" ng-bind="numberOfPagesForDetails(  ( synonymdetails | filter:input ).length  )"></span>
 				<button ng-disabled="currentPageForDetails >= (synonymdetails | filter:input).length/pageSize - 1" ng-click="currentPageForDetails=currentPageForDetails+1">Next</button>
 			  </div>
-			  <TABLE class="table table-striped table-bordered table-condensed">
+			  <TABLE class="table table-striped table-bordered table-condensed  table-hover">
 				  <THEAD ng-show="(synonymdetails | filter:input).length > 0">
-					<tr><TH>#</TH><TH>ID</TH><TH>Synonym</TH><TH>Synonym english</TH><TH>&nbsp;</TH><TH>&nbsp;</TH><TH>&nbsp;</TH></tr>
+					<tr><TH>#</TH><TH>ID</TH><TH>Synonym</TH><TH>Translit..</TH><!--<TH>&nbsp;</TH><TH>&nbsp;</TH><TH>&nbsp;</TH>--></tr>
 				  </THEAD><TBODY>
 					<tr ng-repeat="synonym in synonymdetails | filter:input | orderBy:orderProp | startFrom:currentPageForDetails*pageSize | limitTo:pageSize">
 						<td><span ng-bind="1 + $index + currentPageForDetails*pageSize "></span></td>
-						<td><span ng-bind="synonym.id"></span></td>
+						<td><span ng-bind="synonym.id" class="muted"></span></td>
 						<td><span class=arabic ng-bind="synonym.word"></span></td>
-						<td><span ng-bind="synonym.wordEn"></span></td>
+						<td><span ng-bind="synonym.wordEn" class="muted"></span></td><!--
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
-						<td>&nbsp;</td>
+						<td>&nbsp;</td>-->
 					</tr>
 				  </TBODY>
 			  </TABLE>
 		</div>
 		</div>
-		<HR>
 		<div class=span9>
+			<H4> <span title="In the name of Allah , the Entirely Merciful, the Especially Merciful">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ </span><A HREF=http://linguisticmiracle.wordpress.com/2012/09/04/mutaradifaat/ TARGET=_>Mutaradifaat al Qur’an Translation Project</A></H4><HR>
 			<div ng-view></div>
 		</div>
 	  </div>
