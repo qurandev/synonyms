@@ -1,0 +1,30 @@
+﻿<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title> بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+ Mutaradifaat al Qur'an Translation Project</title>
+  <link rel="stylesheet" href="css/app.css"/>
+</head>
+<body ng-controller="synonymsController">
+	<H3>                          بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ             &nbsp;&nbsp;&nbsp;&nbsp;In the name of Allah , the Entirely Merciful, the Especially Merciful.</H3>
+	<H4><A HREF=http://linguisticmiracle.wordpress.com/2012/09/04/mutaradifaat/ TARGET=_>Mutaradifaat al Qur’an Translation Project</A></H4>
+	<div>
+	View translated Synonyms from the book:<BR/>
+	<ul>
+		<li ng-repeat="synonym in synonyms">
+			{{synonym}}
+		</li>
+	</ul>
+	</div>
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+  -->
+  <script src="lib/angular/angular.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/directives.js"></script>
+</body>
+</html>
