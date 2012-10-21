@@ -13,10 +13,10 @@
 	<H3>                          بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ             &nbsp;&nbsp;&nbsp;&nbsp;In the name of Allah , the Entirely Merciful, the Especially Merciful.</H3>
 	<H4><A HREF=http://linguisticmiracle.wordpress.com/2012/09/04/mutaradifaat/ TARGET=_>Mutaradifaat al Qur’an Translation Project</A></H4>
 	<div>
-			  View {{synonyms.length}} translated Synonyms from the book:<BR/>	
+			  View <span ng-bind="synonyms.length"></span> translated Synonyms from the book:<BR/>	
 			  <p ng-show="!!input && (synonyms | filter:input).length==0"  class="alert alert-warn">There are no Synonym entries.</p>
 			  <div ng-show="(synonyms | filter:input).length > 0"  class="alert alert-success">
-				<b>{{( synonyms | filter:input ).length}} Synonym entries</b>&nbsp;&nbsp;&nbsp;&nbsp;
+				<b><span ng-bind="( synonyms | filter:input ).length"></span> Synonym entries</b>&nbsp;&nbsp;&nbsp;&nbsp;
 				<!--Sort by: {{orderProp}} {{choice}} {{choice2}}
 				<select ng-model="orderProp">
 				  <option value=alphabet>Alphabetical</name>
@@ -24,8 +24,8 @@
 				  <option value=-count># of occurences</name>
 				</select>-->
  			    <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous</button>
-				Page <span class="badge badge-inverse">{{currentPage+1}}</span> / 
-					 <span class="badge">{{numberOfPages(  ( synonyms | filter:input ).length  )}}</span>
+				Page <span class="badge badge-inverse" ng-bind="currentPage+1"></span> / 
+					 <span class="badge" ng-bind="numberOfPages(  ( synonyms | filter:input ).length  )"></span>
 				<button ng-disabled="currentPage >= (synonyms | filter:input).length/pageSize - 1" ng-click="currentPage=currentPage+1">Next</button>
 			  </div>
 			  <TABLE class="table table-striped table-bordered table-condensed">
@@ -33,7 +33,7 @@
 					<tr><TH>#</TH><TH>ID</TH><TH>Synonym topic</TH><TH>topic (urdu)</TH><TH># of synonyms</TH><TH>&nbsp;</TH><TH>&nbsp;</TH></tr>
 				  </THEAD><TBODY>
 					<tr ng-repeat="synonym in synonyms | filter:input | orderBy:orderProp | startFrom:currentPage*pageSize | limitTo:pageSize">
-						<td>{{1 + $index + currentPage*pageSize }}</td>
+						<td><span ng-bind="1 + $index + currentPage*pageSize "></span></td>
 						<td><span ng-bind="synonym.id"></span></td>
 						<td><span class=topic ng-bind="synonym.topic"></span></td>
 						<td><span ng-bind="synonym.topicUr"></span></td>
