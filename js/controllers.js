@@ -18,9 +18,13 @@ var synonymsController = function($scope, $http){
 	$scope.synonyms = SYNONYMS;
 	$scope.synonymdetails = SYNONYMS_DETAILS;
 	$scope.pageSize = 10;
-	$scope.presentPage = 0;
+	$scope.currentPage = 0;
 	$scope.numberOfPages = function(synonymsCount){
 		return Math.ceil( (synonymsCount || $scope.synonyms.length) / $scope.pageSize );
+	}
+	$scope.currentPageForDetails = 0;
+	$scope.numberOfPagesForDetails = function(synonymDetailsCount){
+		return Math.ceil( (synonymDetailsCount || $scope.synonymdetails.length) / $scope.pageSize );
 	}
 }
 
