@@ -29,12 +29,12 @@
 				  <THEAD ng-show="(synonyms | filter:input).length > 0">
 					<tr><TH>#</TH><TH>ID</TH><TH>Synonym topic</TH><TH>topic (urdu)</TH><TH># of synonyms</TH><TH>&nbsp;</TH><TH>&nbsp;</TH></tr>
 				  </THEAD><TBODY>
-					<tr ng-repeat="synonym in synonyms | filter:input | orderBy:orderProp | startFrom:currentPage*pageSize | limitTo:pageSize">
+					<tr ng-repeat="synonym in synonyms | filter:input | orderBy:orderProp | startFrom:currentPage*pageSize | limitTo:pageSize"  ng-click="tableRowClicked(synonym, $index)">
 						<td><span ng-bind="1 + $index + currentPage*pageSize "></span></td>
-						<td><span ng-bind="synonym.id"></span></td>
-						<td><span class=topic ng-bind="synonym.topic"></span></td>
-						<td><span ng-bind="synonym.topicUr"></span></td>
-						<td><span ng-bind="synonym.count"></span></td>
+						<td><A HREF="#{{synonym.id}}"><span ng-bind="synonym.id"></span></A></td>
+						<td><A HREF="#{{synonym.id}}"><span class=topic ng-bind="synonym.topic"></span></A></td>
+						<td><A HREF="#{{synonym.id}}"><span ng-bind="synonym.topicUr"></span></A></td>
+						<td><A HREF="#{{synonym.id}}"><span ng-bind="synonym.count"></span></A></td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 					</tr>

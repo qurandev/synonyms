@@ -14,7 +14,7 @@ function MyCtrl2() {
 MyCtrl2.$inject = [];
 
 
-var synonymsController = function($scope, $http){
+var synonymsController = function($scope, $http, $location){
 	$scope.synonyms = SYNONYMS;
 	$scope.synonymdetails = SYNONYMS_DETAILS;
 	$scope.pageSize = 10;
@@ -25,6 +25,10 @@ var synonymsController = function($scope, $http){
 	$scope.currentPageForDetails = 0;
 	$scope.numberOfPagesForDetails = function(synonymDetailsCount){
 		return Math.ceil( (synonymDetailsCount || $scope.synonymdetails.length) / $scope.pageSize );
+	}
+	
+	$scope.tableRowClicked = function(synonym){ //alert(synonym); console.log(synonym);
+		$location.path(synonym.id); // path not hash
 	}
 	
 	//$http.get( 'content/A/A1.html').success(	function(data){ 
@@ -41,6 +45,17 @@ var _meanings, _MEANINGS_MAP;
 /************************ DATA ***********************/
 
 var SYNONYMS = [ 
+{id: "A1", topic: "To populate, To Settle, To Live", topicUr: "Abad hona (basna) rehna", count: 8},
+{id: "A2", topic: "To make populate, To make settlement", topicUr: "Abad karna; basana", count: 4},
+{id: "A3", topic: "Hereafter", topicUr: "Akhirat", count: 2},
+{id: "A4", topic: "Man, Human", topicUr: "Aadmi (insaan)", count: 3},
+{id: "A5", topic: "", topicUr: "", count: 2},
+{id: "A6", topic: "", topicUr: "", count: 2},
+{id: "A7", topic: "", topicUr: "", count: 2},
+{id: "A8", topic: "", topicUr: "", count: 2},
+{id: "A9", topic: "", topicUr: "", count: 2},
+{id: "A10", topic: "", topicUr: "", count: 2},
+
 {id: "D1", topic: "Guardian?", topicUr: "Daaman", count: 2}, 
 
 {id: "y1", topic: "or", topicUr: "yaa", count: 3}, 
