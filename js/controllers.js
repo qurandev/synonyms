@@ -15,7 +15,8 @@ MyCtrl2.$inject = [];
 
 
 var synonymsController = function($scope, $http){
-	$scope.synonyms = SYNONYMS_DETAILS;
+	$scope.synonyms = SYNONYMS;
+	$scope.synonymdetails = SYNONYMS_DETAILS;
 	$scope.pageSize = 10;
 	$scope.presentPage = 0;
 	$scope.numberOfPages = function(synonymsCount){
