@@ -16,27 +16,27 @@
 	  <div class="row-fluid">
 		<div class=span3>
 		  <div class="">
-			  View <span ng-bind="synonyms.length"></span> translated Synonym topics from the book:<BR/>	
+			  View <span ng-bind="synonyms.length"></span> Synonym topics from the book:<BR/>	
 			  <p ng-show="!!input && (synonyms | filter:input).length==0"  class="alert alert-warn">There are no Synonym entries.</p>
 			  <div ng-show="(synonyms | filter:input).length > 0"  class="alert alert-success">
-				<b><span ng-bind="( synonyms | filter:input ).length"></span> Synonym entries</b>&nbsp;&nbsp;&nbsp;&nbsp;
- 			    <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous</button>
+				<b><span ng-bind="( synonyms | filter:input ).length"  class="badge badge-info"></span> Synonyms</b>&nbsp;&nbsp;
+ 			    <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1" title=Previous>Prev</button>
 				Page <span class="badge badge-inverse" ng-bind="currentPage+1"></span> / 
 					 <span class="badge" ng-bind="numberOfPages(  ( synonyms | filter:input ).length  )"></span>
 				<button ng-disabled="currentPage >= (synonyms | filter:input).length/pageSize - 1" ng-click="currentPage=currentPage+1">Next</button>
 			  </div>
 			  <TABLE class="table table-striped table-bordered table-condensed">
 				  <THEAD ng-show="(synonyms | filter:input).length > 0">
-					<tr><TH>#</TH><TH>ID</TH><TH>Synonym topic</TH><TH>topic (urdu)</TH><TH># of synonyms</TH><TH>&nbsp;</TH><TH>&nbsp;</TH></tr>
+					<tr><TH>#</TH><TH>ID</TH><TH>Synonym topic</TH><TH>topic (urdu)..</TH><TH title='# of synonyms for this topic'>..</TH><!--<TH>&nbsp;</TH><TH>&nbsp;</TH>--></tr>
 				  </THEAD><TBODY>
 					<tr ng-repeat="synonym in synonyms | filter:input | orderBy:orderProp | startFrom:currentPage*pageSize | limitTo:pageSize"  ng-click="tableRowClicked(synonym, $index)">
 						<td><span ng-bind="1 + $index + currentPage*pageSize "></span></td>
-						<td><A HREF="#{{synonym.id}}"><span ng-bind="synonym.id"></span></A></td>
-						<td><A HREF="#{{synonym.id}}"><span class=topic ng-bind="synonym.topic"></span></A></td>
-						<td><A HREF="#{{synonym.id}}"><span ng-bind="synonym.topicUr"></span></A></td>
+						<td><A HREF="#{{synonym.id}}"><span ng-bind="synonym.id" class="muted"></span></A></td>
+						<td><A HREF="#{{synonym.id}}"><span class="label label-inverse" ng-bind="synonym.topic"></span></A></td>
+						<td><A HREF="#{{synonym.id}}"><span ng-bind="synonym.topicUr.toLowerCase().substring(0,12) + '…'" title="{{synonym.topicUr}}" class="muted"></span></A></td>
 						<td><A HREF="#{{synonym.id}}"><span ng-bind="synonym.count"></span></A></td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
+						<!--<td>&nbsp;</td>
+						<td>&nbsp;</td>-->
 					</tr>
 				  </TBODY>
 			  </TABLE>
