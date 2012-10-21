@@ -12,17 +12,14 @@
 <body ng-controller="synonymsController">
 	<H3>                          بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ             &nbsp;&nbsp;&nbsp;&nbsp;In the name of Allah , the Entirely Merciful, the Especially Merciful.</H3>
 	<H4><A HREF=http://linguisticmiracle.wordpress.com/2012/09/04/mutaradifaat/ TARGET=_>Mutaradifaat al Qur’an Translation Project</A></H4>
-	<div>
-			  View <span ng-bind="synonyms.length"></span> translated Synonyms from the book:<BR/>	
+	<div Xclass="container fluid">
+	  <div class="row-fluid">
+		<div class=span3>
+		  <div class="">
+			  View <span ng-bind="synonyms.length"></span> translated Synonym topics from the book:<BR/>	
 			  <p ng-show="!!input && (synonyms | filter:input).length==0"  class="alert alert-warn">There are no Synonym entries.</p>
 			  <div ng-show="(synonyms | filter:input).length > 0"  class="alert alert-success">
 				<b><span ng-bind="( synonyms | filter:input ).length"></span> Synonym entries</b>&nbsp;&nbsp;&nbsp;&nbsp;
-				<!--Sort by: {{orderProp}} {{choice}} {{choice2}}
-				<select ng-model="orderProp">
-				  <option value=alphabet>Alphabetical</name>
-				  <option value=group>Arrangement</name>
-				  <option value=-count># of occurences</name>
-				</select>-->
  			    <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous</button>
 				Page <span class="badge badge-inverse" ng-bind="currentPage+1"></span> / 
 					 <span class="badge" ng-bind="numberOfPages(  ( synonyms | filter:input ).length  )"></span>
@@ -43,19 +40,16 @@
 					</tr>
 				  </TBODY>
 			  </TABLE>
-	</div>
-	<HR>
-	<div>
+		</div>
+		<BR>
+		<HR>
+		<BR>
+
+		  <div class="">
 			  View <span ng-bind="synonymdetails.length"></span> translated Synonym details from the book:<BR/>	
 			  <p ng-show="!!input && (synonymdetails | filter:input).length==0"  class="alert alert-warn">There are no Synonym entries.</p>
 			  <div ng-show="(synonymdetails | filter:input).length > 0"  class="alert alert-success">
 				<b><span ng-bind="( synonymdetails | filter:input ).length"></span> Synonym detail entries</b>&nbsp;&nbsp;&nbsp;&nbsp;
-				<!--Sort by: {{orderProp}} {{choice}} {{choice2}}
-				<select ng-model="orderProp">
-				  <option value=alphabet>Alphabetical</name>
-				  <option value=group>Arrangement</name>
-				  <option value=-count># of occurences</name>
-				</select>-->
  			    <button ng-disabled="currentPageForDetails == 0" ng-click="currentPageForDetails=currentPageForDetails-1">Previous</button>
 				Page <span class="badge badge-inverse" ng-bind="currentPageForDetails+1"></span> / 
 					 <span class="badge" ng-bind="numberOfPagesForDetails(  ( synonymdetails | filter:input ).length  )"></span>
@@ -76,6 +70,13 @@
 					</tr>
 				  </TBODY>
 			  </TABLE>
+		</div>
+		</div>
+		<HR>
+		<div class=span9>
+			<div ng-view></div>
+		</div>
+	  </div>
 	</div>
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
