@@ -48,7 +48,7 @@ var SYNONYMS = [
 {id: "A1", topic: "To populate, To Settle, To Live", topicUr: "Abad hona (basna) rehna", count: 8},
 {id: "A2", topic: "To make populate, To make settlement", topicUr: "Abad karna; basana", count: 4},
 {id: "A3", topic: "Hereafter", topicUr: "Akhirat", count: 2},
-{id: "A4", topic: "Man, Human", topicUr: "Aadmi (insaan)", count: 3},
+{id: "A4", topic: "Man, Human", topicUr: "Aadmi (insaan)", count: 3, pg: 71},
 {id: "A5", topic: "To take rest", topicUr: "aaraam karna", count: 3},
 {id: "A6", topic: "Wish; to make a wish", topicUr: "arzoo; arzoo karna", count: 3},
 {id: "A7", topic: "Barrier", topicUr: "aar", count: 4},
@@ -70,7 +70,7 @@ var SYNONYMS = [
 {id: "A22", topic: "To proceed ahead", topicUr: "AAGAY BARHNA", count: 3},
 {id: "A23", topic: "To send ahead", topicUr: "AAGAY BHEJNA", count: 2},
 {id: "A24", topic: "Equipment of war", topicUr: "AALATE E JUNG", count: 4},
-{id: "A25", topic: "Coming", topicUr: "Aana", count: 5},
+{id: "A25", topic: "Coming", topicUr: "Aana", count: 5, pg: 98},
 {id: "A26", topic: "Eye", topicUr: "AANKH", count: 4},
 {id: "A27", topic: "To wander", topicUr: "AAWARA PHIRNA", count: 2},
 {id: "A28", topic: "Sound & its types", topicUr: "AWAZ AUR US KI IQSAAM", count: 20},
@@ -135,9 +135,33 @@ var SYNONYMS = [
 {id: "b1", topic: "Father", topicUr: "Baap", count: 2},
 {id: "b2", topic: "To be blessed", topicUr: "BABARKAT HONA", count: 4},
 {id: "b3", topic: "Discourse", topicUr: "BAAT", count: 3},
+{id: "b74", topic: "Inna/No doubt", topicUr: "beshak", count: 4, pg: 253},
+
+{id: "d1", topic: "To enter", topicUr: "daakhil hona", count: 4, pg: 473},
+{id: "d30", topic: "To see", topicUr: "dekhna", count: 15, pg: 505}, //5+7+3
+
+{id: "t15", topic: "Hamd/to praise", topicUr: "tareef karna", count: 2, pg: 347},
+
+{id: "j4", topic: "When", topicUr: "Jab", count: 4, pg: 381},
+
+{id: "f2", topic: "being victorious; give victory", topicUr: "fath hona, dena", count: 2, pg: 659},
+
+{id: "l7", topic: "Army", topicUr: "lashkar", count: 6, pg: 762},
+{id: "l13", topic: "to return/to turn towards", topicUr: "lawtna; lawtaana; rujoo", count: 12, pg: 768},
+
+{id: "m18", topic: "Nasr/Help", topicUr: "Madad karna", count: 9, pg: 797},
+{id: "m33", topic: "Istigfaar/to seek forgiveness", topicUr: "maafi chahna", count: 7, pg: 816},
+{id: "m34", topic: "God", topicUr: "ma'bood", count: 2, pg: 88},
+
+{id: "h17", topic: "To be", topicUr: "hona", count: 4, pg: 900},
+
+{id: "p2", topic: "Pure", topicUr: "paak; tasbeeh taqdees; mashgool hona", count: 12, pg: 261, pg2: 344, pg3: 808},
+{id: "p15", topic: "Rabb/fosterer", topicUr: "parvarish karna", count: 5, pg: 279},
+{id: "968", topic: "deen/religion", topicUr: "deen", count: 3, pg: 968},
+
+
 
 {id: "D1", topic: "Guardian?", topicUr: "Daaman", count: 2}, 
-
 {id: "y1", topic: "or", topicUr: "yaa", count: 3}, 
 {id: "y2", topic: "to remember, recall, retain", topicUr: "yaad - karna, aana, rakhna", count: 3}, 
 {id: "y3", topic: "to think to be true", topicUr: "yaqeen karna", count: 2}, 
