@@ -164,11 +164,15 @@ var SYNONYMS = [
 {id: "h4", topic: "To repel/push away", topicUr: "hataana", count: 7, pg: 881, pg2: 775},
 {id: "h17", topic: "To be", topicUr: "hona", count: 4, pg: 900},
 
+
+{id: "gg28", topic: "horse", topicUr: "ghoda", count: 4, pg: 754},
+
 {id: "p2", topic: "Pure", topicUr: "paak; tasbeeh taqdees; mashgool hona", count: 12, pg: 261, pg2: 344, pg3: 808},
 {id: "p15", topic: "Rabb/fosterer", topicUr: "parvarish karna", count: 5, pg: 279},
 {id: "965", topic: "Orphan", topicUr: "yateem", count: 1, pg: 965},
 {id: "968", topic: "deen/religion", topicUr: "deen", count: 3, pg: 968},
 
+{id: "w2", topic: "companion", topicUr: "waala; waalay", count: 4, pg: 873, pg2: 344, pg3: 808},
 
 
 {id: "D1", topic: "Guardian?", topicUr: "Daaman", count: 2}, 
