@@ -78,7 +78,7 @@ var SYNONYMS = [
 
 {id: "AA1", topic: "Boiling; to overflow", topicUr: "UBALNA JOSH MARNA", count: 3},
 {id: "AA2", topic: "Protrusion", topicUr: "UBHAAR", count: 5},
-{id: "AA3", topic: "To excite; to provoke", topicUr: "UBHARNA- BRANGEKHTA KARNA", count: 5},
+{id: "AA3", topic: "To excite; to provoke; encourage", topicUr: "UBHARNA- BRANGEKHTA KARNA", count: 5},
 {id: "AA4", topic: "To Send Down , Descend", topicUr: "UTAARNA UTARNA", count: 4},
 {id: "AA5", topic: "Vanity; haughtiness", topicUr: "ITRAANA,TAKABBUR KARNA", count: 9},
 {id: "AA6", topic: "Trial and Error, or Concocted Discourse", topicUr: "ATKAL PICCHO YAH MAN GHARAT BAATEIN KARNA", count: 4},
@@ -102,7 +102,7 @@ var SYNONYMS = [
 {id: "AA22", topic: "To (following,obedience,subservient) be Submissive", topicUr: "ATA3T (PAYRWY,TAB3DARY,FARMANBARDARI) KARNA", count: 8},
 {id: "AA23", topic: "Moderation", topicUr: "A3TADAL", count: 3},
 {id: "AA24", topic: "Book of deeds", topicUr: "A3MAL NAMA", count: 4},
-{id: "AA25", topic: "Regret", topicUr: "AFSOOS", count: 4},
+{id: "AA25", topic: "Regret", topicUr: "AFSOOS", count: 4, pg:136},
 {id: "AA26", topic: "To grant authority", topicUr: "IQTADAR BAKHSHNA", count: 2},
 {id: "AA27", topic: "To acknowledge", topicUr: "IQRAR KARNA", count: 3},
 {id: "AA28", topic: "To gather; to congregate", topicUr: "IKHATTA KARNA -HONA", count: 10},
@@ -141,10 +141,16 @@ var SYNONYMS = [
 {id: "d30", topic: "To see", topicUr: "dekhna", count: 15, pg: 505}, //5+7+3
 
 {id: "t15", topic: "Hamd/to praise", topicUr: "tareef karna", count: 2, pg: 347},
+{id: "t21", topic: "Poverty/needy", topicUr: "tangdasti", count: 7, pg: 352},
 
 {id: "j4", topic: "When", topicUr: "Jab", count: 4, pg: 381},
+{id: "j28", topic: "Disbelieving", topicUr: "Jhutlaana", count: 2, pg: 407, note: "incomplete!"},
+
 
 {id: "f2", topic: "being victorious; give victory", topicUr: "fath hona, dena", count: 2, pg: 659},
+
+{id: "k34", topic: "Food", topicUr: "khana", count: 3, pg: 762},
+{id: "k35", topic: "Feeding", topicUr: "khilaana", count: 2, pg: 762},
 
 {id: "l7", topic: "Army", topicUr: "lashkar", count: 6, pg: 762},
 {id: "l13", topic: "to return/to turn towards", topicUr: "lawtna; lawtaana; rujoo", count: 12, pg: 768},
@@ -153,10 +159,14 @@ var SYNONYMS = [
 {id: "m33", topic: "Istigfaar/to seek forgiveness", topicUr: "maafi chahna", count: 7, pg: 816},
 {id: "m34", topic: "God", topicUr: "ma'bood", count: 2, pg: 88},
 
+{id: "n28", topic: "No", topicUr: "naheen", count: 7, pg: 863, note:'incomplete'},
+
+{id: "h4", topic: "To repel/push away", topicUr: "hataana", count: 7, pg: 881, pg2: 775},
 {id: "h17", topic: "To be", topicUr: "hona", count: 4, pg: 900},
 
 {id: "p2", topic: "Pure", topicUr: "paak; tasbeeh taqdees; mashgool hona", count: 12, pg: 261, pg2: 344, pg3: 808},
 {id: "p15", topic: "Rabb/fosterer", topicUr: "parvarish karna", count: 5, pg: 279},
+{id: "965", topic: "Orphan", topicUr: "yateem", count: 1, pg: 965},
 {id: "968", topic: "deen/religion", topicUr: "deen", count: 3, pg: 968},
 
 
