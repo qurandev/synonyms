@@ -6,7 +6,8 @@
   <link rel="stylesheet" href="css/app.css"/>
 	<!-- CSS Files -->
 	<link type="text/css" href="css/base.css" rel="stylesheet" />
-	<link type="text/css" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet" />
+	<link type="text/css" href="css/bootstrap.css" rel="stylesheet" />
+<!--	<link type="text/css" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet" />-->
 	<!--[if IE]><script language="javascript" type="text/javascript" src="../../Extras/excanvas.js"></script><![endif]-->
 </head>
 <body ng-controller="synonymsController">
@@ -56,11 +57,11 @@
 				  <THEAD ng-show="(synonymdetails | filter:input).length > 0">
 					<tr><TH>#</TH><TH>ID</TH><TH>Synonym</TH><TH>Translit..</TH><!--<TH>&nbsp;</TH><TH>&nbsp;</TH><TH>&nbsp;</TH>--></tr>
 				  </THEAD><TBODY>
-					<tr ng-repeat="synonym in synonymdetails | filter:input | orderBy:orderProp | startFrom:currentPageForDetails*pageSize | limitTo:pageSize">
+					<tr ng-repeat="synonymdetail in synonymdetails | filter:synonymDetailSelected | filter:input | orderBy:orderProp | startFrom:currentPageForDetails*pageSize | limitTo:pageSize" ng-click="tableDetailRowClicked(synonymdetail, $index)">
 						<td><small><span ng-bind="1 + $index + currentPageForDetails*pageSize "></span></small></td>
-						<td><small><span ng-bind="synonym.id" class="muted"></span></small></td>
-						<td><span class=arabic ng-bind="synonym.word"></span></td>
-						<td><span ng-bind="synonym.wordEn" class="muted"></span></td><!--
+						<td><small><span ng-bind="synonymdetail.id" class="muted"></span></small></td>
+						<td><span class=arabic ng-bind="synonymdetail.word"></span></td>
+						<td><span ng-bind="synonymdetail.wordEn" class="muted"></span></td><!--
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>-->
@@ -85,5 +86,6 @@
   <script src="js/controllers.js"></script>
   <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
+  <script src="js/underscore-min.js"></script>
 </body>
 </html>

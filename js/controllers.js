@@ -16,7 +16,7 @@ MyCtrl2.$inject = [];
 
 var synonymsController = function($scope, $http, $location){
 	$scope.synonyms = SYNONYMS;
-	$scope.synonymdetails = SYNONYMS_DETAILS;
+	$scope.synonymdetails = _.sortBy(SYNONYMS_DETAILS, function(item){ return item.id; } ); //SYNONYMS_DETAILS;
 	$scope.pageSize = 10;
 	$scope.currentPage = 0;
 	$scope.numberOfPages = function(synonymsCount){
@@ -27,8 +27,16 @@ var synonymsController = function($scope, $http, $location){
 		return Math.ceil( (synonymDetailsCount || $scope.synonymdetails.length) / $scope.pageSize );
 	}
 	
-	$scope.tableRowClicked = function(synonym){ //alert(synonym); console.log(synonym);
+	$scope.tableRowClicked = function(synonym, index){ //alert(synonym); console.log(synonym);
+		$scope.synonymSelected = synonym; console.log( synonym );
+		//$scope.synonymDetailSelected = {id: synonym.id};
 		$location.path(synonym.id); // path not hash
+	}
+	
+	$scope.tableDetailRowClicked = function(synonymdetail, index){
+		//$scope.synonymDetailSelected = synonymdetail; console.log( synonymdetail );
+		//$scope.synoymSelected = {id: synonymdetail.id};
+		$location.path( synonymdetail.id );
 	}
 	
 	//$http.get( 'content/A/A1.html').success(	function(data){ 
