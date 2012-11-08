@@ -1,0 +1,133 @@
+[OPTIONS]
+Auto Index=Yes
+Binary TOC=No
+Binary Index=Yes
+Compatibility=1.1
+Compiled file=synonyms.chm
+Contents file=synonyms.hhc
+Default topic=A\A1.html
+Error log file=_errorlog.txt
+Index file=synonyms.hhk
+Title=synonyms
+Full-text search=Yes
+Display compile progress=Yes
+Display compile notes=Yes
+Default window=main
+
+[WINDOWS]
+main=,"synonyms.hhc","synonyms.hhk","A\A1.html","A\A1.html",,,,,0x23520,222,0x1046,[10,10,780,560],0xB0000,,,,,,0
+
+[FILES]
+urlrouter.html
+_misc\965.html
+_misc\968Deen.html
+_misc\a4 dupe - Insaan - the Human.htm
+_misc\AA3 dupe - 108.html
+_misc\d30 dupe - Ra'a - to See .htm
+_misc\gg26 - Aadiyaat-horse.htm
+_misc\w2 - Ashaab-companions.htm
+A\A1.html
+A\A10.html
+A\A11.html
+A\A12.html
+A\A13.html
+A\A14.html
+A\A15.html
+A\A16.html
+A\A17.html
+A\A18.html
+A\A19.html
+A\A2.html
+A\A20.html
+A\A21.html
+A\A22.html
+A\A23.html
+A\A24.html
+A\A25.html
+A\A26.html
+A\A27.html
+A\A28.html
+A\A29.html
+A\A3.html
+A\A4.html
+A\A5.html
+A\A6.html
+A\A7.html
+A\A8.html
+A\A9.html
+AA\AA1.html
+AA\AA10.html
+AA\AA11.html
+AA\AA12.html
+AA\AA13.html
+AA\AA14.html
+AA\AA15.html
+AA\AA16.html
+AA\AA17.html
+AA\AA18.html
+AA\AA19.html
+AA\AA2.html
+AA\AA20.html
+AA\AA21.html
+AA\AA22.html
+AA\AA23.html
+AA\AA24.html
+AA\AA25.html
+AA\AA26.html
+AA\AA27.html
+AA\AA28.html
+AA\AA29.html
+AA\AA3.html
+AA\AA30.html
+AA\AA31.html
+AA\AA32.html
+AA\AA33.html
+AA\AA34.html
+AA\AA35.html
+AA\AA36.html
+AA\AA37.html
+AA\AA38.html
+AA\AA39.html
+AA\AA4.html
+AA\AA40.html
+AA\AA41.html
+AA\AA42.html
+AA\AA43.html
+AA\AA44.html
+AA\AA45.html
+AA\AA46.html
+AA\AA47.html
+AA\AA48.html
+AA\AA49.html
+AA\AA5.html
+AA\AA50.html
+AA\AA51.html
+AA\AA6.html
+AA\AA7.html
+AA\AA8.html
+AA\AA9.html
+b\b1.html
+b\b2.html
+b\b3.html
+b\b74.html
+d\d1.html
+d\d30.html
+f\f2.html
+gg\gg26.htm
+h\h17.html
+h\h4.html
+j\j28.html
+j\j4.html
+k\k34.html
+k\k35.html
+l\l13.html
+l\l7.html
+m\m18.html
+m\m33.html
+m\m34.html
+n\n28.html
+p\p15.html
+p\p2.html
+t\t15.html
+t\t21.html
+w\w2.html

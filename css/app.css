@@ -1,5 +1,58 @@
 /* app css stylesheet */
 
+
+.arabic{
+	font-size: 2.5em!important;
+}
+
+.arabicsmall{
+	font-size: 2em!important;
+}
+
+.arabicsmaller{
+	font-size: 1.4em!important;
+}
+
+span.r0{ color: #3B5998;}
+span.r1{ color: red;}
+span.r2{ color: green;}
+span.r3{ color: blue;}
+span.r1, span.r2, span.r3 {
+	--font-weight: bold !important;
+}
+
+/***************/
+/* this is a CSS answer to fix the hover/focus '~' and hover/focus '+' problem in safari and chrome */
+/* tabindex="1" in the link code to fix the 'focus persist' problem in safari and chrome */
+html {-webkit-animation: safariSelectorFix infinite 1s;}
+@-webkit-keyframes safariSelectorFix {
+0% {zoom:1;} 
+100% {zoom:1;}
+}
+
+/* for Internet Explorer to force a menu refresh after :active + ul */
+#showMe p.showMe a,
+html {behavior:url(cssplay19/trigger.htc)}
+
+p.showMe {font:normal 12px/20px arial, sans-serif; color:#666; padding:10px; margin:0 auto;}
+p.showMe a.more, p.showMe a.less {color:#c00; font-weight:bold; text-decoration:none; outline:0;}
+p.showMe a.more + a.less {display:none;}
+p.showMe span {display:none;}
+
+p.showMe a.more:active {*display:none;}
+p.showMe a.more:active ~ span {*display:inline;}
+p.showMe a.more:active + a.less {*display:inline;}
+p.showMe a.less:active {*display:none;}
+
+p.showMe a.more:focus {display:none;}
+p.showMe a.more:focus ~ span {display:inline;}
+p.showMe a.more:focus + a.less {display:inline;}
+p.showMe a.less:focus {display:none;}
+
+p.showMe span:hover {display:inline;}
+/***************/
+
+
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;

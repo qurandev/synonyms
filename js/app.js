@@ -4,11 +4,29 @@
 // Declare app level module which depends on filters, and services
 var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives']).
   config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/view1', {templateUrl: 'partials/partial1.html', controller: MyCtrl1});
-    $routeProvider.when('/view2', {templateUrl: 'partials/partial2.html', controller: MyCtrl2});
-    $routeProvider.otherwise({redirectTo: '/view1'});
+    $routeProvider.when('/A1', {templateUrl: 'content/A/A1.html', controller: synonymsController});
+    $routeProvider.when('/A2', {templateUrl: 'content/A/A2.html', controller: synonymsController});
+    $routeProvider.when('/A3', {templateUrl: 'content/A/A3.html', controller: synonymsController});
+	
+	$routeProvider.when('/:primaryNav',{ // /:secondaryNav', {
+            templateUrl: 'content/urlrouter.html', //'resources/angular/templates/nav/urlRouter.html',
+            controller: 'RouteController'
+        });
+		
+    $routeProvider.otherwise({redirectTo: '/A1'});
   }]);
   
+  
+  function RouteController($scope, $routeParams) {
+		var path = '', number='', hash = $routeParams.primaryNav;
+		if(hash){
+			var arr = hash.match(/\d+$/), arr2 = hash.match(/[^\d]+/);
+			if(arr && arr[0]){	number = arr[0]; }
+			if(arr2 && arr2[0]){ path = arr2[0]; } console.log(path +' '+ number);
+		}
+        //$scope.templateUrl = 'resources/angular/templates/nav/'+$routeParams.primaryNav+'/'+$routeParams.secondaryNav+'.html';
+		$scope.templateUrl = 'content/' + path + '/'+$routeParams.primaryNav+ '.html'; // /*'/'+$routeParams.secondaryNav */ '.html';
+    }
   
   
   app.filter('startFrom', function() {
