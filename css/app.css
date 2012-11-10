@@ -1,6 +1,50 @@
 /* app css stylesheet */
+body {
+	padding-top: 10px!important;
+	padding-bottom: 10px!important;
+}
+.hero-unit{
+	padding: 10px!important;
+}
+.well{
+	padding: 2px!important;
+	overflow: auto!important;	
+}
+#index1{
+	overflow: auto;
+	height: 440px;
+	margin: 0px!important;
+}
+#index2{
+	overflow: auto;
+	height: 220px;
+}
+#index1 > table{ margin: 0px!important; }
+#index1 > .heading{ margin-bottom: 5px!important; }
+#index2 > table{ margin: 0px!important; }
+#index2 > .heading{ margin-bottom: 5px!important; }
+.sidebar-nav-fixed {
+    position:fixed;
+    top:10px;
+    width:21.97%;
+	height: 96.5%;
+}
+.row-fluid > .span-fixed-sidebar {
+    margin-left: 290px;
+}
 
+@media (max-width: 767px) {
+    .sidebar-nav-fixed {
+        position:static;
+        width:auto;
+    }
+}
 
+@media (max-width: 979px) {
+    .sidebar-nav-fixed {
+        top:70px;
+    }
+}
 .arabic{
 	font-size: 2.5em!important;
 }
