@@ -4,11 +4,11 @@
 // Declare app level module which depends on filters, and services
 var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives']).
   config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/A1', {templateUrl: 'content/A/A1.html', controller: synonymsController});
-    $routeProvider.when('/A2', {templateUrl: 'content/A/A2.html', controller: synonymsController});
-    $routeProvider.when('/A3', {templateUrl: 'content/A/A3.html', controller: synonymsController});
+    //$routeProvider.when('/A1', {templateUrl: 'content/A/A1.html', controller: synonymsController});
+    //$routeProvider.when('/A2', {templateUrl: 'content/A/A2.html', controller: synonymsController});
+    //$routeProvider.when('/A3', {templateUrl: 'content/A/A3.html', controller: synonymsController});
 	
-	$routeProvider.when('/:primaryNav',{ // /:secondaryNav', {
+	$routeProvider.when('/:primaryNav', {// '/:secondaryNav', {
             templateUrl: 'content/urlrouter.html', //'resources/angular/templates/nav/urlRouter.html',
             controller: 'RouteController'
         });
@@ -30,10 +30,6 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
     }
 	
 	var urlCheck = function( url, hash ){console.log('urlCheck ' + url + ' '+ hash);
-		var synonym = _.find(SYNONYMS, function(o){return o.id == hash;}); //#page/n$PAGE/mode/2up
-		var _URL = "http://archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran", _PREFIX = "?ui=embed#mode/2up/page/n$PAGE", pageno = 83;
-		if(synonym && synonym.pg && parseInt(synonym.pg) ){ pageno = 17 + parseInt(synonym.pg); }
-		_URL = _URL + _PREFIX.replace(/\$PAGE/g, pageno);
 		$.ajax({
 			type: 'HEAD',
 			url: url, //'content/A/A1.html',
@@ -44,8 +40,9 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 		error: function() {
 				console.log('urlCheck error');// page does not exist
 				$('#banner').slideUp();
-				$('#ng-view').html( '<img id="banner-message" src="img/quransynonyms-banner.jpg"/><BR/><HR><H4>We apologize. This Article hasn\'t been translated just yet.</H4> Please check back later or volunteer as a translator by <A HREF=mailto:linguisticmiracle@gmail.com>Contacting  us</A>..<HR>' +
-				'<IFRAME SRC="' + _URL + '" STYLE=height:680px;width:95%;></IFRAME>');
+				$('#ng-view').html( '<img id="banner-message" src="img/quransynonyms-banner.jpg"/><BR/><HR><H4>We apologize. This Article hasn\'t been translated just yet.</H4> Please check back later or volunteer as a translator by <A HREF=mailto:linguisticmiracle@gmail.com>Contacting  us</A>..<HR>'
+				+'You can click the <i class="icon-book"></i>&nbsp;Book tab'
+				+' on top to see the original Book pages (in Urdu).' );
 		}
 		});
 		

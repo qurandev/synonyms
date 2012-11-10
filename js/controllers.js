@@ -31,6 +31,7 @@ var synonymsController = function($scope, $http, $location){
 		$scope.synonymSelected = synonym; console.log( synonym );
 		//$scope.synonymDetailSelected = {id: synonym.id};
 		$location.path(synonym.id); // path not hash
+		$scope.tabClick($scope.tab, $scope.synonymSelected.id); //$scope.tab = 1;
 	}
 	
 	$scope.tableDetailRowClicked = function(synonymdetail, index){
@@ -47,6 +48,33 @@ var synonymsController = function($scope, $http, $location){
 			if(items){ response = items.join(', '); }
 		}
 		return response;
+	}
+	
+	$scope.tabClick = function(tabNo, id){
+		var IDs = ['', 'trans', 'book', 'pdf'];
+		var element = '#tab-' + IDs[tabNo], _html = '';
+
+		var hash = id || location.hash || '#\A1'; 
+		hash = hash.replace(/\#\//g, '');
+		var synonym = _.find(SYNONYMS, function(o){return o.id == hash;}); //#page/n$PAGE/mode/2up
+		
+		if(IDs[tabNo] == 'book'){
+			var _URL = "http://archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran", _PREFIX = "?ui=embed#mode/2up/page/n$PAGE", pageno = 83;
+			if(synonym && synonym.pg && parseInt(synonym.pg) ){ pageno = 17 + parseInt(synonym.pg); }
+			else _html = '<div class="alert alert-error">Page number not yet available. Showing default page.</div>';
+			_URL = _URL + _PREFIX.replace(/\$PAGE/g, pageno);
+			_html += '<IFRAME SRC="' + _URL + '" STYLE=height:680px;width:95%;></IFRAME>'
+			$(element).html( _html );
+		}
+		else if(IDs[tabNo] == 'pdf'){
+			_html = '<div class="alert alert-info">Below you can download the PDF either by right clicking the Document or the link below. <span class=muted>NOTE: this <A HREF=http://qurandev.github.com/widgets/book.html?pageno=67 target=_>feature</A> still in beta.</span></div>';
+			var _URL = "http://qurandev.github.com/widgets/book.html?pageno=$PAGE", pageno = 66;
+			if(synonym && synonym.pg && parseInt(synonym.pg) ){ pageno = 17 + parseInt(synonym.pg); }
+			else _html = '<div class="alert alert-error">Page number not yet available. Showing default page.</div>';
+			_URL = _URL.replace(/\$PAGE/g, pageno);
+			_html += '<IFRAME SRC="' + _URL + '" STYLE=height:680px;width:95%;></IFRAME>'
+			$(element).html( _html );
+		}
 	}
 	
 	//$http.get( 'content/A/A1.html').success(	function(data){ 
