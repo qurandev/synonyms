@@ -40,7 +40,8 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 		error: function() {
 				console.log('urlCheck error');// page does not exist
 				$('#banner').slideUp();
-				$('#ng-view').html( '<img id="banner-message" src="img/quransynonyms-banner.jpg"/><BR/><HR><H4>We apologize. This Article hasn\'t been translated just yet.</H4> Please check back later or volunteer as a translator by <A HREF=mailto:linguisticmiracle@gmail.com>Contacting  us</A>..<HR>' );
+				$('#ng-view').html( '<img id="banner-message" src="img/quransynonyms-banner.jpg"/><BR/><HR><H4>We apologize. This Article hasn\'t been translated just yet.</H4> Please check back later or volunteer as a translator by <A HREF=mailto:linguisticmiracle@gmail.com>Contacting  us</A>..<HR>' +
+				'<IFRAME SRC=http://archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran#page/n83/mode/2up STYLE=height:680px;width:95%;></IFRAME>');
 		}
 		});
 		
