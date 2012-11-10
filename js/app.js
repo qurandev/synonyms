@@ -26,7 +26,25 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 		}
         //$scope.templateUrl = 'resources/angular/templates/nav/'+$routeParams.primaryNav+'/'+$routeParams.secondaryNav+'.html';
 		$scope.templateUrl = 'content/' + path + '/'+$routeParams.primaryNav+ '.html'; // /*'/'+$routeParams.secondaryNav */ '.html';
+		setTimeout("urlCheck('" + $scope.templateUrl + "')", 0);
     }
+	
+	var urlCheck = function( url ){console.log('urlCheck ' + url);
+		$.ajax({
+			type: 'HEAD',
+			url: url, //'content/A/A1.html',
+		success: function() {
+				console.log('urlCheck success');// page exists
+				$('#banner').slideUp();
+		},
+		error: function() {
+				console.log('urlCheck error');// page does not exist
+				$('#banner').slideUp();
+				$('#ng-view').html( '<img id="banner-message" src="img/quransynonyms-banner.jpg"/><BR/><HR><H4>We apologize. This Article hasn\'t been translated just yet.</H4> Please check back later or volunteer as a translator by <A HREF=mailto:linguisticmiracle@gmail.com>Contacting  us</A>..<HR>' );
+		}
+		});
+		
+	}
   
   
   app.filter('startFrom', function() {
