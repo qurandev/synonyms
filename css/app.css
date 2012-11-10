@@ -12,7 +12,7 @@ body {
 }
 #index1{
 	overflow: auto;
-	height: 440px;
+	height: 350px;
 	margin: 0px!important;
 }
 #index2{
@@ -20,9 +20,9 @@ body {
 	height: 220px;
 }
 #index1 > table{ margin: 0px!important; cursor:pointer; }
-#index1 > .heading{ margin-bottom: 5px!important; }
 #index2 > table{ margin: 0px!important; cursor:pointer; }
-#index2 > .heading{ margin-bottom: 5px!important; }
+#index1outer > .heading{ margin-bottom: 2px!important; }
+#index2outer > .heading{ margin-bottom: 2px!important; }
 .sidebar-nav-fixed {
     position:fixed;
     top:10px;

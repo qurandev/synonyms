@@ -16,7 +16,7 @@
 	  <div class="row-fluid">
 		<div class="span3">
 		  <div class="well sidebar-nav-fixed">
-			<div id="index1">
+			<div id="index1outer">
 			   <!--View <span ng-bind="synonyms.length"></span> Synonym topics from the book:<BR/>	-->
 			   <p ng-show="!!input && (synonyms | filter:input).length==0"  class="alert alert-warn">There are no Synonym entries.</p>
 			   <div ng-show="(synonyms | filter:input).length > 0"  class="heading alert alert-success">
@@ -27,6 +27,7 @@
 					 <span class="badge" ng-bind="numberOfPages(  ( synonyms | filter:input ).length  )"></span>
 				<button ng-disabled="currentPage >= (synonyms | filter:input).length/pageSize - 1" title="Next page" ng-click="currentPage=currentPage+1" class="btn btn-mini"><i class="icon-chevron-right"></i></button>
 			   </div>
+			   <div id=index1>
 			   <TABLE class="table table-striped table-bordered table-condensed table-hover">
 				  <THEAD ng-show="(synonyms | filter:input).length > 0">
 					<tr><TH>#</TH><TH>Synonym topic</TH><!--<TH>topic (urdu)..</TH>--><TH>pg#</TH><TH title='# of synonyms for this topic'>..</TH><!--<TH>&nbsp;</TH><TH>&nbsp;</TH>--></tr>
@@ -48,10 +49,11 @@
 					</tr>
 				  </TBODY>
 			   </TABLE>
+			   </div>
 			</div> 
 			<!-- /#index1 -->
 			<br/>
-			<div id="index2">
+			<div id="index2outer">
 			   <!--			  View <span ng-bind="synonymdetails.length"></span> translated Synonym details from the book:<BR/>	-->
 			   <p ng-show="!!input && (synonymdetails | filter:input).length==0"  class="alert alert-warn">There are no Synonym entries.</p>
 			   <div ng-show="(synonymdetails | filter:input).length > 0"  class="heading alert alert-success">
@@ -61,6 +63,7 @@
 					 <span class="badge" ng-bind="numberOfPagesForDetails(  ( synonymdetails | filter:input ).length  )"></span>
 				<button ng-disabled="currentPageForDetails >= (synonymdetails | filter:input).length/pageSize - 1" title="Next page" ng-click="currentPageForDetails=currentPageForDetails+1" class="btn btn-small"><i class="icon-chevron-right"></i></button>
 			   </div>
+			   <div id=index2>
 			   <TABLE class="table table-striped table-bordered table-condensed  table-hover">
 				  <THEAD ng-show="(synonymdetails | filter:input).length > 0">
 					<tr><TH>#</TH><TH>Synonym</TH><TH>Translit..</TH><TH>Root</TH><!--<TH>&nbsp;</TH><TH>&nbsp;</TH><TH>&nbsp;</TH>--></tr>
@@ -84,6 +87,7 @@
 					</tr>
 				  </TBODY>
 			   </TABLE>
+			   </div>
 			</div>
 			<!-- /#index2-->
 		  </div>
