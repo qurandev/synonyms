@@ -26,10 +26,14 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 		}
         //$scope.templateUrl = 'resources/angular/templates/nav/'+$routeParams.primaryNav+'/'+$routeParams.secondaryNav+'.html';
 		$scope.templateUrl = 'content/' + path + '/'+$routeParams.primaryNav+ '.html'; // /*'/'+$routeParams.secondaryNav */ '.html';
-		setTimeout("urlCheck('" + $scope.templateUrl + "')", 0);
+		setTimeout("urlCheck('" + $scope.templateUrl + "', '" + hash + "')", 0);
     }
 	
-	var urlCheck = function( url ){console.log('urlCheck ' + url);
+	var urlCheck = function( url, hash ){console.log('urlCheck ' + url + ' '+ hash);
+		var synonym = _.find(SYNONYMS, function(o){return o.id == hash;}); //#page/n$PAGE/mode/2up
+		var _URL = "http://archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran", _PREFIX = "?ui=embed#mode/2up/page/n$PAGE", pageno = 83;
+		if(synonym && synonym.pg && parseInt(synonym.pg) ){ pageno = 17 + parseInt(synonym.pg); }
+		_URL = _URL + _PREFIX.replace(/\$PAGE/g, pageno);
 		$.ajax({
 			type: 'HEAD',
 			url: url, //'content/A/A1.html',
@@ -41,7 +45,7 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 				console.log('urlCheck error');// page does not exist
 				$('#banner').slideUp();
 				$('#ng-view').html( '<img id="banner-message" src="img/quransynonyms-banner.jpg"/><BR/><HR><H4>We apologize. This Article hasn\'t been translated just yet.</H4> Please check back later or volunteer as a translator by <A HREF=mailto:linguisticmiracle@gmail.com>Contacting  us</A>..<HR>' +
-				'<IFRAME SRC=http://archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran#page/n83/mode/2up STYLE=height:680px;width:95%;></IFRAME>');
+				'<IFRAME SRC="' + _URL + '" STYLE=height:680px;width:95%;></IFRAME>');
 		}
 		});
 		

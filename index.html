@@ -29,7 +29,7 @@
 			   </div>
 			   <TABLE class="table table-striped table-bordered table-condensed table-hover">
 				  <THEAD ng-show="(synonyms | filter:input).length > 0">
-					<tr><TH>#</TH><TH>Synonym topic</TH><!--<TH>topic (urdu)..</TH>--><TH title='# of synonyms for this topic'>..</TH><!--<TH>&nbsp;</TH><TH>&nbsp;</TH>--></tr>
+					<tr><TH>#</TH><TH>Synonym topic</TH><!--<TH>topic (urdu)..</TH>--><TH>pg#</TH><TH title='# of synonyms for this topic'>..</TH><!--<TH>&nbsp;</TH><TH>&nbsp;</TH>--></tr>
 				  </THEAD><TBODY>
 					<tr ng-repeat="synonym in synonyms | filter:input | orderBy:orderProp | startFrom:currentPage*pageSize | limitTo:pageSize"  ng-click="tableRowClicked(synonym, $index)">
 						<td><small><span ng-bind="1 + $index + currentPage*pageSize " title="{{synonym.id}}" class="muted"></span></small></td>
@@ -41,7 +41,8 @@
 							</A>
 						</td>
 						<!--<td><A HREF="#{{synonym.id}}"><span ng-bind="synonym.topicUr.toLowerCase().substring(0,12) + '…'" title="{{synonym.topicUr}}" class="muted"></span></A></td>-->
-						<td><A HREF="#{{synonym.id}}"><span ng-bind="synonym.count"></span></A></td>
+						<td><A HREF="#{{synonym.id}}"><span ng-bind="synonym.pg || '-'" class="muted"></span></A></td>
+						<td><A HREF="#{{synonym.id}}"><span ng-bind="synonym.count || '-'" class="muted"></span></A></td>
 						<!--<td>&nbsp;</td>
 						<td>&nbsp;</td>-->
 					</tr>
