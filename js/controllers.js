@@ -51,7 +51,8 @@ var synonymsController = function($scope, $http, $location){
 	}
 	
 	$scope.tabClick = function(tabNo, id){
-		var IDs = ['', 'trans', 'book', 'pdf'];
+		var IDs = ['', 'trans', 'book', 'pdf', 'info'];
+		if(tabNo <= 0 || tabNo > IDs.length) return;
 		var element = '#tab-' + IDs[tabNo], _html = '';
 
 		var hash = id || location.hash || '#\A1'; 
@@ -73,6 +74,10 @@ var synonymsController = function($scope, $http, $location){
 			else _html = '<div class="alert alert-error">Page number not yet available. Showing default page.</div>';
 			_URL = _URL.replace(/\$PAGE/g, pageno);
 			_html += '<IFRAME SRC="' + _URL + '" STYLE=height:680px;width:95%;></IFRAME>'
+			$(element).html( _html );
+		}
+		else if(IDs[tabNo] == 'info'){
+			_html = $('#info-template').html();
 			$(element).html( _html );
 		}
 	}

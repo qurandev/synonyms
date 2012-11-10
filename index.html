@@ -110,7 +110,7 @@
 				  </ul>
 				  <div class="Xtab-content">
 					<div class="tab-pane" ng:show="!tab || tab==1" id="tab-trans">
-						<div ng-view id="ng-view" style="text-align: left!important; background-color: beige; border-style: dotted; border-width: 1px; padding: 8px; border-radius: 8px;">
+						<div ng-view id="ng-view">
 						</div>
 					</div>
 					<div class="tab-pane"  ng:show="tab==2" id="tab-book">
@@ -118,13 +118,6 @@
 					<div class="tab-pane"  ng:show="tab==3" id="tab-pdf">
 					</div>
 					<div class="tab-pane"  ng:show="tab==4" id="tab-info">
-					  <p>
-						<img id="banner" src="img/quransynonyms-banner.jpg"/><BR/><BR/>
-						For more details on the project, or to contact us <A HREF="http://linguisticmiracle.wordpress.com/2012/09/04/mutaradifaat/" TARGET=_>click here</A>.<BR/><BR/>
-						You can <A HREF='https://github.com/qurandev/synonyms/archive/gh-pages.zip'>download all content</A> for offline use! All the translations are stored alphabatically in Content folder.<BR/><BR/>
-						Thanks to Allah swt & Jazakallah khair to all the countless volunteers without whose efforts this project wouldn't have taken off the ground. Special tip of the hat to <A HREF=http://www.linguisticmiracle.com/>http://www.linguisticmiracle.com/</A>.<BR/><BR/>
-						Please pray that Allah swt accept these humble efforts from everyone involved. Salaam! :-D
-					  </p>
 					</div>
 				  </div>
 				</div>
@@ -137,6 +130,15 @@
 	  </div><!--/.row-fluid-->
 	</div><!--/.fluid-container-->
 	
+	<script id=info-template type='text/template'>
+		<p>
+			<img id="banner" src="img/quransynonyms-banner.jpg"/><BR/><BR/>
+			For more details on the project, or to contact us <A HREF="http://linguisticmiracle.wordpress.com/2012/09/04/mutaradifaat/" TARGET=_>click here</A>.<BR/><BR/>
+			You can <A HREF='https://github.com/qurandev/synonyms/archive/gh-pages.zip'>download all content</A> for offline use! All the translations are stored alphabatically in Content folder.<BR/><BR/>
+			Thanks to Allah swt & Jazakallah khair to all the countless volunteers without whose efforts this project wouldn't have taken off the ground. Special tip of the hat to <A HREF=http://www.linguisticmiracle.com/>http://www.linguisticmiracle.com/</A>.<BR/><BR/>
+			Please pray that Allah swt accept these humble efforts from everyone involved. Salaam! :-D
+		</p>
+	</script>
 	<!-- Le javascript
     ================================================== -->
   <!-- In production use:
