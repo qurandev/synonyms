@@ -106,7 +106,7 @@
 					<li class="{{(!tab || tab==1) && 'active' || ''}}"><a href data-toggle="tab" ng:click="tab=1"><i class="icon-home"></i>&nbsp;Translation</a></li>
 					<li class="{{(tab==2 && 'active') || ''}}"><a href data-toggle="tab" ng:click="tab=2; tabClick(tab);"><i class="icon-book"></i>&nbsp;Book</a></li>
 					<li class="{{(tab==3 && 'active') || ''}}"><a href data-toggle="tab" ng:click="tab=3; tabClick(tab);"><i class="icon-download-alt"></i>&nbsp;PDF</a></li>
-					<li class="{{(tab==4 && 'active') || ''}}"><a href data-toggle="tab" ng:click="tab=4"><i class="icon-question-sign"></i>&nbsp;Info</a></li>
+					<li class="{{(tab==4 && 'active') || ''}}"><a href data-toggle="tab" ng:click="tab=4; tabClick(tab);"><i class="icon-question-sign"></i>&nbsp;Info</a></li>
 				  </ul>
 				  <div class="Xtab-content">
 					<div class="tab-pane" ng:show="!tab || tab==1" id="tab-trans">
