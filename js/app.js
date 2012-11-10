@@ -35,7 +35,7 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 			url: url, //'content/A/A1.html',
 		success: function() {
 				console.log('urlCheck success');// page exists
-				$('#banner').slideUp();
+				$('#banner').delay(7000).slideUp(2500);
 		},
 		error: function() {
 				console.log('urlCheck error');// page does not exist
