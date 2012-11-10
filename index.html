@@ -69,7 +69,7 @@
 						<td><small><span ng-bind="1 + $index + currentPageForDetails*pageSize " title="{{synonymdetail.id}}" class="muted"></span></small></td>
 						<!--<td><small><span ng-bind="synonymdetail.id" class="muted"></span></small></td>-->
 						<td><span dir=rtl class=arabic ng-bind="synonymdetail.word"></span></td>
-						<td><span ng-bind="synonymdetail.wordEn" class="muted"></span></td>
+						<td><span ng-bind="synonymdetail.wordEn" xclass="muted"></span></td>
 						<td><!--<span ng-bind="EnToAr( synonymdetail.root )" class=arabic></span>-->
 							<span class="muted" ng-show="!synonymdetail.root">-</span>
 							<span class="arabicsmaller" ng-show="synonymdetail.root">

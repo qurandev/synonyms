@@ -14,10 +14,12 @@ body {
 	overflow: auto;
 	height: 440px;
 	margin: 0px!important;
+	cursor:pointer;
 }
 #index2{
 	overflow: auto;
 	height: 220px;
+	cursor:pointer;
 }
 #index1 > table{ margin: 0px!important; }
 #index1 > .heading{ margin-bottom: 5px!important; }
