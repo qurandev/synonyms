@@ -22,10 +22,10 @@
 			   <div ng-show="(synonyms | filter:input).length > 0"  class="heading alert alert-success">
 				<span ng-bind="( synonyms | filter:input ).length"  class="badge badge-info"></span> 
 				<abbr title='View Synonyms translated from the book.'><b>Synonyms</b></abbr>
- 			    <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1" title=Previous class="btn btn-small"><b>Prev</b></button>
-				<b>Page</b><span class="badge badge-inverse" ng-bind="currentPage+1"></span> / 
+ 			    <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1" title="Previous page" class="btn btn-mini"><i class="icon-chevron-left"></i></button>
+				<span class="badge badge-inverse" ng-bind="currentPage+1"></span> / 
 					 <span class="badge" ng-bind="numberOfPages(  ( synonyms | filter:input ).length  )"></span>
-				<button ng-disabled="currentPage >= (synonyms | filter:input).length/pageSize - 1" ng-click="currentPage=currentPage+1" class="btn btn-small"><b>Next</b></button>
+				<button ng-disabled="currentPage >= (synonyms | filter:input).length/pageSize - 1" title="Next page" ng-click="currentPage=currentPage+1" class="btn btn-mini"><i class="icon-chevron-right"></i></button>
 			   </div>
 			   <TABLE class="table table-striped table-bordered table-condensed table-hover">
 				  <THEAD ng-show="(synonyms | filter:input).length > 0">
@@ -55,10 +55,10 @@
 			   <p ng-show="!!input && (synonymdetails | filter:input).length==0"  class="alert alert-warn">There are no Synonym entries.</p>
 			   <div ng-show="(synonymdetails | filter:input).length > 0"  class="heading alert alert-success">
 				<b><span ng-bind="( synonymdetails | filter:input ).length" class="badge badge-info"></span> words</b> 
- 			    <button ng-disabled="currentPageForDetails == 0" ng-click="currentPageForDetails=currentPageForDetails-1" title="Previous" class="btn btn-small"><b>Prev</b></button>
-				<b>Page</b> <span class="badge badge-inverse" ng-bind="currentPageForDetails+1"></span> / 
+ 			    <button ng-disabled="currentPageForDetails == 0" ng-click="currentPageForDetails=currentPageForDetails-1" title="Previous page" class="btn btn-small"><i class="icon-chevron-left"></i></button>
+				<span class="badge badge-inverse" ng-bind="currentPageForDetails+1"></span> / 
 					 <span class="badge" ng-bind="numberOfPagesForDetails(  ( synonymdetails | filter:input ).length  )"></span>
-				<button ng-disabled="currentPageForDetails >= (synonymdetails | filter:input).length/pageSize - 1" ng-click="currentPageForDetails=currentPageForDetails+1" class="btn btn-small"><b>Next</b></button>
+				<button ng-disabled="currentPageForDetails >= (synonymdetails | filter:input).length/pageSize - 1" title="Next page" ng-click="currentPageForDetails=currentPageForDetails+1" class="btn btn-small"><i class="icon-chevron-right"></i></button>
 			   </div>
 			   <TABLE class="table table-striped table-bordered table-condensed  table-hover">
 				  <THEAD ng-show="(synonymdetails | filter:input).length > 0">
