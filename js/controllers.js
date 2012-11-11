@@ -68,10 +68,10 @@ var synonymsController = function($scope, $http, $location){
 			$(element).html( _html );
 		}
 		else if(IDs[tabNo] == 'pdf'){
-			_html = '<div class="alert alert-info">Below you can download the PDF either by right clicking the Document or the link below. <span class=muted>NOTE: this <A HREF=http://qurandev.github.com/widgets/book.html?pageno=67 target=_>feature</A> still in beta.</span></div>';
+			_html = $('#info-pdf').html();;
 			var _URL = "http://qurandev.github.com/widgets/book.html?pageno=$PAGE", pageno = 66;
-			if(synonym && synonym.pg && parseInt(synonym.pg) ){ pageno = parseInt(synonym.pg); }
-			else _html = '<div class="alert alert-error"><B>Page number not yet available. Showing default page.</B></div>';
+			if(synonym && synonym.pg && parseInt(synonym.pg) ){ pageno = parseInt(synonym.pg) - 1; }
+			else _html = '<div class="alert alert-error"><B>Page number not yet available. Showing default page.</B></div>' + _html;
 			_URL = _URL.replace(/\$PAGE/g, pageno);
 			_html += '<IFRAME SRC="' + _URL + '" STYLE=height:680px;width:95%;></IFRAME>'
 			$(element).html( _html );
