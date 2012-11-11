@@ -12,12 +12,12 @@ body {
 }
 #index1{
 	overflow: auto;
-	height: 350px;
+	height: 395px;
 	margin: 0px!important;
 }
 #index2{
 	overflow: auto;
-	height: 220px;
+	height: 240px;
 }
 #index1 > table{ margin: 0px!important; cursor:pointer; }
 #index2 > table{ margin: 0px!important; cursor:pointer; }
