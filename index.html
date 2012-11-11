@@ -36,8 +36,8 @@
 						<td><small><span ng-bind="1 + $index + currentPage*pageSize " title="{{synonym.id  +'  '+ (synonym.count || '-') + ' words' }}" class="muted"></span></small></td>
 						<!--<td><small><A HREF="#{{synonym.id}}"><span ng-bind="synonym.id" class="muted"></span></A></small></td>-->
 						<td><A HREF="#{{synonym.id}}">
-								<span class="label label-inverse" ng-bind="synonym.topic"></span>
-								<span class=small>&nbsp;&nbsp;{{synonym.topicUr.toLowerCase()}}</span>
+								<span class="label label-inverse" ng-bind="synonym.topic"></span>&nbsp;&nbsp;
+								<span class="small" ng-bind="synonym.topicUr.toLowerCase()"></span>
 								<span class="arabicsmaller" dir="rtl" ng-bind="getSynonymDetails( synonym.id )"></span>
 							</A>
 						</td>
@@ -114,6 +114,7 @@
 					<li class="{{(tab==2 && 'active') || ''}}"><a href data-toggle="tab" ng:click="tab=2; tabClick(tab);"><i class="icon-book"></i>&nbsp;Book</a></li>
 					<li class="{{(tab==3 && 'active') || ''}}"><a href data-toggle="tab" ng:click="tab=3; tabClick(tab);"><i class="icon-download-alt"></i>&nbsp;PDF</a></li>
 					<li class="{{(tab==4 && 'active') || ''}}"><a href data-toggle="tab" ng:click="tab=4; tabClick(tab);"><i class="icon-question-sign"></i>&nbsp;Info</a></li>
+					<!--<li><B><SPAN ng-bind="{{synonymSelected.topic +' '+ synonymSelected.topicUr}}">{{synonymSelected}}&nbsp;</SPAN></B></li>-->
 				  </ul>
 				  <div class="Xtab-content">
 					<div class="tab-pane" ng:show="!tab || tab==1" id="tab-trans">
