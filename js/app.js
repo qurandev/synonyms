@@ -33,7 +33,7 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
   }]);
   
   
-  function RouteController($scope, $routeParams) {
+  function RouteController($scope, $routeParams) {console.log('RouteController ' + JSON.stringify($routeParams) );
 		var path = '', number='', hash = $routeParams.primaryNav, mode = $routeParams.mode;
 		if(hash){
 			var arr = hash.match(/\d+$/), arr2 = hash.match(/[^\d]+/);

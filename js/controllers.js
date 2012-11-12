@@ -34,7 +34,7 @@ var topicsController = function($scope, $route, $routeParams, $location, $http){
 }
 
 
-var synonymsController = function($scope, $route, $routeParams, $location, $http){
+var synonymsController = function($scope, $route, $routeParams, $location, $http){console.log('synonymsController ' + JSON.stringify($routeParams));
 	$scope.$route = $route;
 	$scope.$location = $location;
 	$scope.$routeParams = $routeParams;

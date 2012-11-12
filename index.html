@@ -179,7 +179,7 @@
 		<tr ng-repeat="synonym in synonyms | filter:input | orderBy:orderProp | startFrom:currentPage*pageSize | limitTo:pageSize"  ng-click="tableRowClicked(synonym, $index)">
 			<td><small><span ng-bind="1 + $index + currentPage*pageSize " title="{{synonym.id  +'  '+ (synonym.count || '-') + ' words' }}" class="muted"></span></small></td>
 			<!--<td><small><A HREF="#{{synonym.id}}"><span ng-bind="synonym.id" class="muted"></span></A></small></td>-->
-			<td><A HREF="#{{synonym.id}}">
+			<td><A XHREF="#{{synonym.id}}">
 					<span class="label label-inverse" ng-bind="synonym.topic"></span>&nbsp;&nbsp;
 					<span class="small" ng-bind="synonym.topicUr.toLowerCase()"></span>
 					<span class="arabicsmaller" dir="rtl" ng-bind="getSynonymDetails( synonym.id )"></span>
@@ -215,15 +215,15 @@
 			<tr ng-repeat="synonymdetail in synonymdetails | filter:synonymDetailSelected | filter:input | orderBy:orderProp | startFrom:currentPageForDetails*pageSize | limitTo:pageSize" ng-click="tableDetailRowClicked(synonymdetail, $index)">
 				<td><small><span ng-bind="1 + $index + currentPageForDetails*pageSize " title="{{synonymdetail.id}}" class="muted"></span></small></td>
 				<!--<td><small><span ng-bind="synonymdetail.id" class="muted"></span></small></td>-->
-				<td><span dir=rtl class=arabic ng-bind="synonymdetail.word"></span></td>
-				<td><span ng-bind="synonymdetail.wordEn" xclass="muted"></span></td>
-				<td><!--<span ng-bind="EnToAr( synonymdetail.root )" class=arabic></span>-->
+				<td><A HREF><span dir=rtl class=arabicsmall ng-bind="synonymdetail.word"></span></A></td>
+				<td><A HREF><span ng-bind="synonymdetail.wordEn" xclass="muted"></span></A></td>
+				<td><A HREF><!--<span ng-bind="EnToAr( synonymdetail.root )" class=arabic></span>-->
 					<span class="muted" ng-show="!synonymdetail.root">-</span>
-					<span class="arabicsmaller" ng-show="synonymdetail.root">
-					  <A HREF="http://corpus.quran.com/search.jsp?q=root:{{synonymdetail.root}}" TARGET=_>
+					<span ng-show="synonymdetail.root">
+					  <A class="arabicsmaller" HREF="http://corpus.quran.com/search.jsp?q=root:{{synonymdetail.root}}" TARGET=_>
 						<span class=r0 ng-bind="EnToAr(synonymdetail.root[0])"></span>&zwnj;<span class=r1 ng-bind="EnToAr(synonymdetail.root[1])"></span>&zwnj;<span class=r2 ng-bind="EnToAr(synonymdetail.root[2])"></span>&zwnj;<span class=r3 ng-bind="EnToAr(synonymdetail.root.substring(3))"></span>
 					  </A>
-					</span>
+					</span></A>
 				</td>
 			</tr>
 		  </TBODY>
