@@ -13,18 +13,6 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 			templateUrl: 'partials/index.html',
 			controller: 'indexController'
 	});
-	$routeProvider.when('/topics', {
-			templateUrl: 'partials/topics.html',
-			controller: 'topicsController'
-	});
-	$routeProvider.when('/words', {
-			templateUrl: 'partials/words.html',
-			controller: 'topicsController'
-	});
-	$routeProvider.when('/roots', {
-			templateUrl: 'partials/roots.html',
-			controller: 'rootsController'
-	});
 	$routeProvider.when('/:primaryNav', {// '/:secondaryNav', {
             templateUrl: 'content/urlrouter.html',
             controller: 'RouteController'
