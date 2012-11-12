@@ -17,6 +17,10 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 			templateUrl: 'partials/topics.html',
 			controller: 'topicsController'
 	});
+	$routeProvider.when('/words', {
+			templateUrl: 'partials/words.html',
+			controller: 'topicsController'
+	});
 	$routeProvider.when('/roots', {
 			templateUrl: 'partials/roots.html',
 			controller: 'rootsController'
@@ -41,7 +45,11 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 			if(arr2 && arr2[0]){ path = arr2[0]; } console.log(path +' '+ number);
 		}
         //$scope.templateUrl = 'resources/angular/templates/nav/'+$routeParams.primaryNav+'/'+$routeParams.secondaryNav+'.html';
-		$scope.templateUrl = 'content/' + path + '/'+$routeParams.primaryNav+ '.html';
+		if(number){
+			$scope.templateUrl = 'content/' + path + '/'+$routeParams.primaryNav+ '.html';
+		}else{
+			$scope.templateUrl = 'content/' + $routeParams.primaryNav+ '.html';
+		}
 		$scope.mode = mode;
 		var IDs = ['', 'trans', 'book', 'pdf', 'info'];
 		if( _.indexOf(IDs, mode) != -1){

@@ -2,26 +2,24 @@
 <html lang="en" ng-app="myApp" ng-controller="synonymsController">
 <head>
   <meta charset="utf-8">
-  <title ng-bind="'[' + synonymSelected.topic + '] Mutaradifaat ul Qur\'an'"> بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ Mutaradifaat al Qur'an Translation Project</title>
+  <title ng-bind="getCurrentSynonymProperty() + 'Mutaradifaat ul Qur\'an'"> بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ Mutaradifaat al Qur'an Translation Project</title>
   <link rel="stylesheet" href="css/app.css"/>
 	<!-- CSS Files -->
 	<link type="text/css" href="css/base.css" rel="stylesheet" />
-	<link type="text/css" href="css/bootstrap.css" rel="stylesheet" />
-	<link type="text/css" href="css/bootstrap-responsive.css" rel="stylesheet" />
+	<link type="text/css" href="css/bootstrap.min.css" rel="stylesheet" />
+	<link type="text/css" href="css/bootstrap-responsive.min.css" rel="stylesheet" />
 <!--	<link type="text/css" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet" />-->
 	<!--[if IE]><script language="javascript" type="text/javascript" src="../../Extras/excanvas.js"></script><![endif]-->
 </head>
 
 
 <script type="text/ng-template" id="content/urlrouter.html">
-	<!--<div ng-include src="templateUrl" style="text-align: left!important; background-color: beige; border-style: dotted; border-width: 1px; padding: 8px; border-radius: 8px;">
-	</div>-->
-	<div ng-switch on="templateUrl != null" style="text-align: left!important; background-color: beige; border-style: dotted; border-width: 1px; padding: 8px; border-radius: 8px;">
+	<div ng-switch on="templateUrl != null" class="ngview">
       <div ng-switch-when="true" ng-include src="templateUrl"></div>
-	  <!--<div ng-switch-when="false" ng-include="'partials/index.html'"></div>-->
-	  <div ng-switch-when="false" ng-include="'content/A/A1.html'"></div>
+	  <div ng-switch-when="false" ng-include="'content/A/A1.html'"></div>	  <!--<div ng-switch-when="false" ng-include="'partials/index.html'"></div>-->
     </div>
 </script>
+
 
 
 <script type="text/ng-template" id="partials/index.html">
@@ -233,6 +231,38 @@
 	<!-- /#index2outer-->
 </script>
 
+<script type="text/ng-template" id="partials/hero-unit.html">
+  <div class="hero-unit">
+	<H3>
+		<span title="In the name of Allah , the Entirely Merciful, the Especially Merciful">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ </span>&nbsp;&nbsp;
+		<A HREF=".">Mutaradifaat al Qur’an Translation Project</A>&nbsp;&nbsp;
+		<A HREF="http://linguisticmiracle.wordpress.com/2012/09/04/mutaradifaat/" TARGET="_"><i class="icon-info-sign"></i></A>
+	</H3>
+	<img id="banner" src="img/quransynonyms-banner.jpg"/>
+  </div>
+</script>
+
+<script type="text/ng-template" id="partials/msie-error.html">
+	<div id=IE-ERRROR class="alert alert-error" style="display:none;z-index:10;">
+		Note: <b>having issues using this app in Internet Explorer?</b> Please retry in Google Chrome or Firefox browser (our main test browsers). <BR/>We apologize for the inconvenience.
+	</div>
+</script>
+
+
+
+<script type="text/ng-template" id="partials/navbar.html">
+ <div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <a class="brand" href="#">Title</a>
+    <ul class="nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Link</a></li>
+      <li><a href="#">Link</a></li>
+    </ul>
+  </div>
+ </div>
+</script>
+
 
 <body>
 	<div class="container-fluid">
@@ -249,26 +279,35 @@
 		</div> 
 		<!--/.span3-->
 
-		<div class="span9 span-fixed-sidebar">
-			<div id=IE-ERRROR class="alert alert-error" style="display:none;z-index:10;">
-				Note: <b>having issues using this app in Internet Explorer?</b> Please retry in Google Chrome or Firefox browser (our main test browsers). <BR/>We apologize for the inconvenience.
+		<div class="span9 span-fixed-sidebar stagearea">
+			<div ng-include src="'partials/msie-error.html'">
 			</div>
-			<div class="hero-unit">
-				<H3>
-					<span title="In the name of Allah , the Entirely Merciful, the Especially Merciful">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ </span>&nbsp;&nbsp;
-					<A HREF=".">Mutaradifaat al Qur’an Translation Project</A>&nbsp;&nbsp;
-					<A HREF="http://linguisticmiracle.wordpress.com/2012/09/04/mutaradifaat/" TARGET="_"><i class="icon-info-sign"></i></A>
-				</H3>
-				<img id="banner" src="img/quransynonyms-banner.jpg"/>
-			</div>
-			<div class="row-fluid">
+			<!--<div ng-include src="'partials/navbar.html'">
+			</div>-->
+			<div ng-include src="'partials/hero-unit.html'">
+			</div>			
+			<div class="row-fluid">			
 				<div class="tabbable"> <!-- Only required for left/right tabs -->
 				  <ul class="nav nav-tabs">
 					<li class="{{(!tab || tab==1) && 'active' || ''}}"><a href data-toggle="tab" ng:click="tab=1"><i class="icon-home"></i>&nbsp;Translation</a></li>
 					<li class="{{(tab==2 && 'active') || ''}}"><a href data-toggle="tab" ng:click="tab=2; tabClick(tab);"><i class="icon-book"></i>&nbsp;Book</a></li>
 					<li class="{{(tab==3 && 'active') || ''}}"><a href data-toggle="tab" ng:click="tab=3; tabClick(tab);"><i class="icon-download-alt"></i>&nbsp;PDF</a></li>
 					<li class="{{(tab==4 && 'active') || ''}}"><a href data-toggle="tab" ng:click="tab=4; tabClick(tab);"><i class="icon-question-sign"></i>&nbsp;Info</a></li>
-					<!--<li><B><SPAN ng-bind="{{synonymSelected.topic +' '+ synonymSelected.topicUr}}">{{synonymSelected}}&nbsp;</SPAN></B></li>-->
+					
+					<ul class="breadcrumb">
+						<li ng-show="!!getCurrentSynonymProperty()" class="active"><strong><p class="text-success">
+							<span class="label label-success" ng-bind="getCurrentSynonymProperty()"></SPAN></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+							<SPAN class="label label-info" ng-bind="getCurrentSynonymProperty('topicUr').toLowerCase()"></SPAN>
+							<SPAN style="margin-left:20px">&nbsp;</SPAN></p>
+						</li>
+						<li><a href="#">Home</a> <span class="divider">|</span></li>
+						<li><a href="#/index"><strong>INDEX/Search</strong></a> <span class="divider">|</span></li>
+						<li><a href="#/preface">Preface</a> <span class="divider">|</span></li>
+						<!--<li><a href="#/topics">Topics</a> <span class="divider">|</span></li>
+						<li><a href="#/words">Words</a> <span class="divider">|</span></li>-->
+						<li><a href="#/references">References</a> <span class="divider">|</span></li>
+						<li><a href="#/appendices">Appendices</a>
+					</ul><!--<li><B><SPAN ng-bind="{{synonymSelected.topic +' '+ synonymSelected.topicUr}}">{{synonymSelected}}&nbsp;</SPAN></B></li>-->
 				  </ul>
 				  <div class="Xtab-content">
 					<div class="tab-pane" ng:show="!tab || tab==1" id="tab-trans">

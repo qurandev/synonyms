@@ -84,6 +84,15 @@ var synonymsController = function($scope, $route, $routeParams, $location, $http
 		return response;
 	}
 	
+	$scope.getCurrentSynonymProperty = function(property){ if(!property) property = "topic";
+		var ret = '', hash = location.hash, synonym;
+		if(hash){
+			hash = hash.replace(/\#\//g, '');
+			synonym = _.find(SYNONYMS, function(o){return o.id == hash;});
+			if(synonym && synonym[property]){ ret = '['+ synonym[property] +'] '; }
+		}
+		return ret;
+	}
 	
 	$scope.tabClick = function(tabNo, id){
 		var IDs = ['', 'trans', 'book', 'pdf', 'info'];

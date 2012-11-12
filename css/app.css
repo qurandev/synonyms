@@ -32,12 +32,36 @@ body {
 .row-fluid > .span-fixed-sidebar {
     margin-left: 290px;
 }
-.hero-unit, .nav{
+.hero-unit, .nav, .navbar{
 	margin-bottom: 5px!important;
 }
 .alert{
 	margin-bottom: 4px!important;
 }
+.navbar-fixed-top{
+	margin-left: 23.5%;
+	z-index:-1;
+}
+.breadcrumb{
+	margin-left:35%!important;
+	margin-bottom:0px!important;
+	text-align:left!important;
+	//color: #ffffff!important;
+	//background-color: #eedc94!important; //background-color: #62cffc
+	margin-right:30%!important;
+}
+.ng-view, div#ng-view{
+	text-align: left!important; 
+	background-color: beige!important; 
+	border-style: dotted; 
+	border-width: 1px; 
+	padding: 8px; 
+	border-radius: 8px;
+}
+div#ng-view > span{
+	background-color: rgba(0, 0, 0, 0)!important;
+}
+
 @media (max-width: 767px) {
     .sidebar-nav-fixed {
         position:static;
