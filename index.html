@@ -18,10 +18,103 @@
 	</div>-->
 	<div ng-switch on="templateUrl != null" style="text-align: left!important; background-color: beige; border-style: dotted; border-width: 1px; padding: 8px; border-radius: 8px;">
       <div ng-switch-when="true" ng-include src="templateUrl"></div>
+	  <!--<div ng-switch-when="false" ng-include="'partials/index.html'"></div>-->
 	  <div ng-switch-when="false" ng-include="'content/A/A1.html'"></div>
     </div>
 </script>
 
+
+<script type="text/ng-template" id="partials/index.html">
+	<div class="container-fluid">
+	  <div class="row-fluid">
+		<div class="span3">
+			<div ng-include src="'partials/bookcontents.html'"></div></div>
+		<div class="span3">
+			<div ng-include src="'partials/topics.html'"></div></div>
+		<div class="span3">
+			<div ng-include src="'partials/roots.html'"></div>
+		</div>
+	  </div>
+	</div>
+</script>
+
+
+<script type="text/ng-template" id="partials/bookcontents.html">
+  <div style="width: 270px;overflow:auto;">
+	<TABLE class="table table-striped table-bordered table-condensed table-hover" style="width:95%; margin-top:5px;">
+	  <THEAD ng-show="(synonymsindex | filter:synonymsindex_keyword).length > 0">
+		<tr><TH>#</TH><TH>Synonym section #</TH><TH># of topics</TH><TH>pg#</TH></tr>
+	  </THEAD>
+	  <TBODY>
+		<tr ng-repeat="item in synonymsindex"  ng-click="tableRowClicked(synonym, $index)">
+			<td ng-bind="1 + $index"></td>
+			<td ng-bind="item.l"></td>
+			<td ng-bind="item.n"></td>
+			<td ng-bind="item.pg"></td>
+		</tr>
+	  </TBODY>
+	</TABLE>
+  </div>
+</script>
+
+
+<script type="text/ng-template" id="partials/topics.html">
+  <div style="width: 240px;overflow:auto;">
+	<input type=text ng-model="topic_keyword" ng-change="change()" class="search-query" placeholder="Search topics..." style="width:85%;align:center;margin-bottom:11px;" />
+	<TABLE class="table table-striped table-bordered table-condensed table-hover" style="width:95%">
+	  <THEAD ng-show="(topics | filter:topic_keyword).length > 0">
+		<tr><TH>#</TH><TH>Topic</TH></tr>
+	  </THEAD>
+	  <TBODY>
+		<tr ng-repeat="item in (topics | filter:topic_keyword)"  ng-click="tableRowClicked(synonym, $index)">
+			<td ng-bind="1 + $index"></td>
+			<td ng-bind="item"></td>
+		</tr>
+	  </TBODY>
+	</TABLE>
+  </div>
+</script>
+
+<script type="text/ng-template" id="partials/roots.html">
+  <div style="width: 240px;overflow:auto;">
+	<input type=text ng-model="root_keyword" ng-change="change()" class="search-query" placeholder="Search roots..." style="width:85%;align:center;margin-bottom:11px;" />
+	<TABLE class="table table-striped table-bordered table-condensed table-hover" style="width:95%">
+	  <THEAD ng-show="(roots | filter:root_keyword).length > 0">
+		<tr><TH>#</TH><TH>Root</TH></tr>
+	  </THEAD>
+	  <TBODY>
+		<tr ng-repeat="item in (roots | filter:root_keyword)"  ng-click="tableRowClicked(synonym, $index)">
+			<td ng-bind="1 + $index"></td>
+			<td><!--<span ng-bind="EnToAr( synonymdetail.root )" class=arabic></span>-->
+				<span class="muted" ng-show="!item">-</span>
+				<span class="arabicsmaller" ng-show="item">
+				  <A HREF="http://corpus.quran.com/search.jsp?q=root:{{item}}" TARGET=_>
+					<span class=r0 ng-bind="EnToAr(item[0])"></span>&zwnj;<span class=r1 ng-bind="EnToAr(item[1])"></span>&zwnj;<span class=r2 ng-bind="EnToAr(item[2])"></span>&zwnj;<span class=r3 ng-bind="EnToAr(item.substring(3))"></span>
+				  </A>
+				</span>
+			</td>
+		</tr>
+	  </TBODY>
+	</TABLE>
+  </div>
+</script>
+
+
+<script type="text/ng-template" id="partials/mode.html">
+	mode: {{mode}}
+	<TABLE class="table table-striped table-bordered table-condensed table-hover">
+	  <THEAD ng-show="(synonymsindex | filter:input).length > 0">
+		<tr><TH>#</TH><TH>Synonym topic</TH><!--<TH>topic (urdu)..</TH>--><TH>pg#</TH><!--<TH title='# of synonyms for this topic'>..</TH><TH>&nbsp;</TH><TH>&nbsp;</TH>--></tr>
+	  </THEAD>
+	  <TBODY>
+		<tr ng-repeat="item in synonymsindex"  ng-click="tableRowClicked(synonym, $index)">
+			<td ng-bind="item.l"></td>
+			<td ng-bind="item.n"></td>
+			<td ng-bind="item.pg"></td>
+		</tr>
+	  </TBODY>
+	</TABLE>
+</script>
 
 <script type="text/ng-template" id="partials/index1.html">
   <div id="index1outer">
