@@ -41,16 +41,17 @@
 
 <script type="text/ng-template" id="partials/bookcontents.html">
   <div style="width: 270px;overflow:auto;">
-	<TABLE class="table table-striped table-bordered table-condensed table-hover" style="width:95%; margin-top:5px;">
+	<TABLE class="table table-striped table-bordered table-condensed table-hover" style="width:95%; margin-top:5px;cursor:pointer;">
 	  <THEAD ng-show="(synonymsindex | filter:synonymsindex_keyword).length > 0">
-		<tr><TH>#</TH><TH>Synonym section #</TH><TH># of topics</TH><TH>pg#</TH></tr>
+		<tr><TH>#</TH><TH>Synonym section #</TH><TH>pg#</TH><TH>Topics done</TH><TH>Total topics</TH></tr>
 	  </THEAD>
 	  <TBODY>
 		<tr ng-repeat="item in synonymsindex"  ng-click="tableRowClicked(synonym, $index)">
-			<td ng-bind="1 + $index"></td>
-			<td ng-bind="item.l"></td>
-			<td ng-bind="item.n"></td>
-			<td ng-bind="item.pg"></td>
+			<td><XA HREF="#{{item.l}}1"><SPAN ng-bind="1 + $index"></SPAN></XA></td>
+			<td><A HREF="#{{item.l}}1"><SPAN ng-bind="item.l"></SPAN></A></td>
+			<td><A HREF="#{{item.l}}1"><SPAN ng-bind="item.pg"></SPAN></A></td>
+			<TD>-</TD>
+			<td><SPAN ng-bind="item.n"></SPAN></td>
 		</tr>
 	  </TBODY>
 	</TABLE>
@@ -58,6 +59,24 @@
 </script>
 
 
+<script type="text/ng-template" id="partials/topics.html">
+  <div style="width: 240px;overflow:auto;">
+	<input type=text ng-model="topic_keyword" ng-change="change()" class="search-query" placeholder="Search topics..." style="width:85%;align:center;margin-bottom:11px;" />
+	<TABLE class="table table-striped table-bordered table-condensed table-hover" style="width:95%">
+	  <THEAD ng-show="(synonyms | filter:topic_keyword).length > 0">
+		<tr><TH>#</TH><TH>Topic</TH></tr>
+	  </THEAD>
+	  <TBODY>
+		<tr ng-repeat="item in (synonyms | filter:topic_keyword)"  ng-click="tableRowClicked(synonym, $index)">
+			<td><XA HREF="#{{item.id}}"><SPAN ng-bind="1 + $index"></SPAN></XA></td>
+			<td><A HREF="#{{item.id}}"><SPAN ng-bind="item.topic"></SPAN></A></td>
+		</tr>
+	  </TBODY>
+	</TABLE>
+  </div>
+</script>
+
+<!--
 <script type="text/ng-template" id="partials/topics.html">
   <div style="width: 240px;overflow:auto;">
 	<input type=text ng-model="topic_keyword" ng-change="change()" class="search-query" placeholder="Search topics..." style="width:85%;align:center;margin-bottom:11px;" />
@@ -74,6 +93,7 @@
 	</TABLE>
   </div>
 </script>
+-->
 
 <script type="text/ng-template" id="partials/roots.html">
   <div style="width: 240px;overflow:auto;">
