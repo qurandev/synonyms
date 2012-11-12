@@ -21,10 +21,10 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 			templateUrl: 'partials/roots.html',
 			controller: 'rootsController'
 	});
-//	$routeProvider.when('/:primaryNav', {// '/:secondaryNav', {
-//            templateUrl: 'content/urlrouter.html',
-//            controller: 'RouteController'
-//    });
+	$routeProvider.when('/:primaryNav', {// '/:secondaryNav', {
+            templateUrl: 'content/urlrouter.html',
+            controller: 'RouteController'
+    });
 	$routeProvider.when('/:primaryNav/:mode', {// '/:secondaryNav', {
             templateUrl: 'content/urlrouter.html',
             controller: 'synonymsController'
