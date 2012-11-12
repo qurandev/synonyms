@@ -83,6 +83,7 @@ var synonymsController = function($scope, $route, $routeParams, $location, $http
 		return response;
 	}
 	
+	
 	$scope.tabClick = function(tabNo, id){
 		var IDs = ['', 'trans', 'book', 'pdf', 'info'];
 		if(tabNo <= 0 || tabNo > IDs.length) return;
@@ -95,7 +96,10 @@ var synonymsController = function($scope, $route, $routeParams, $location, $http
 		if(IDs[tabNo] == 'book'){
 			var _URL = "http://archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran", _PREFIX = "?ui=embed#mode/2up/page/n$PAGE", pageno = 83;
 			if(synonym && synonym.pg && parseInt(synonym.pg) ){ pageno = 17 + parseInt(synonym.pg); }
-			else _html = '<div class="alert alert-error"><B>Page number not yet available. Showing default page.</B></div>';
+			else{
+				var o = findApproxPageNo( id, 17 );
+				if(o.pg) pageno = o.pg; _html = o.html;
+			}
 			_URL = _URL + _PREFIX.replace(/\$PAGE/g, pageno);
 			_html += '<IFRAME SRC="' + _URL + '" STYLE=height:680px;width:95%;></IFRAME>'
 			$(element).html( _html );
@@ -104,7 +108,10 @@ var synonymsController = function($scope, $route, $routeParams, $location, $http
 			_html = $('#info-pdf').html();;
 			var _URL = "http://qurandev.github.com/widgets/book.html?pageno=$PAGE", pageno = 66;
 			if(synonym && synonym.pg && parseInt(synonym.pg) ){ pageno = parseInt(synonym.pg) - 1; }
-			else _html = '<div class="alert alert-error"><B>Page number not yet available. Showing default page.</B></div>' + _html;
+			else{
+				var o = findApproxPageNo( id, -1 );
+				if(o.pg) pageno = o.pg; _html = o.html;
+			}
 			_URL = _URL.replace(/\$PAGE/g, pageno);
 			_html += '<IFRAME SRC="' + _URL + '" STYLE=height:680px;width:95%;></IFRAME>'
 			$(element).html( _html );
@@ -121,6 +128,17 @@ var synonymsController = function($scope, $route, $routeParams, $location, $http
 }
 
 
+	var findApproxPageNo = function(id, offset){
+		var pageno, _html=''; if(!offset) offset = 0;
+		var sectionAlphabet = id && id.match( /[^\d]*/ );
+		var sectionAlphabetObj = sectionAlphabet && _.find( SYNONYMS_INDEX, function(o){ return o.l == sectionAlphabet; }); 
+		if(sectionAlphabetObj && parseInt(sectionAlphabetObj.pg)){ 
+			pageno = parseInt(sectionAlphabetObj.pg); 
+			_html = '<div class="alert alert-error"><B>Showing first page of section for this topic. Use page navigation buttons below to find topic.</B></div>' 
+		}
+		else{ _html = '<div class="alert alert-error"><B>Page number not yet available. Showing default page.</B></div>'; }
+		return {pg: pageno + offset, html: _html};
+	}
 
 
 
