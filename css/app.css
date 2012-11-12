@@ -35,6 +35,9 @@ body {
 .hero-unit, .nav{
 	margin-bottom: 5px!important;
 }
+.alert{
+	margin-bottom: 4px!important;
+}
 @media (max-width: 767px) {
     .sidebar-nav-fixed {
         position:static;
