@@ -7,11 +7,14 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
     //$routeProvider.when('/A1', {templateUrl: 'content/A/A1.html', controller: synonymsController});
     //$routeProvider.when('/A2', {templateUrl: 'content/A/A2.html', controller: synonymsController});
     //$routeProvider.when('/A3', {templateUrl: 'content/A/A3.html', controller: synonymsController});
-	
+	$routeProvider.when('', {
+			templateUrl: 'content/urlrouter.html',
+			controller: 'synonymsController'
+	});
 	$routeProvider.when('/:primaryNav', {// '/:secondaryNav', {
             templateUrl: 'content/urlrouter.html', //'resources/angular/templates/nav/urlRouter.html',
             controller: 'RouteController'
-        });
+    });
 		
     $routeProvider.otherwise({redirectTo: '/A1'});
   }]);
