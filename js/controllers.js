@@ -14,7 +14,12 @@ function MyCtrl2() {
 MyCtrl2.$inject = [];
 
 
-var synonymsController = function($scope, $http, $location){
+var synonymsController = function($scope, $http, $location, $route, $routeParams){
+	$scope.$route = $route;
+	$scope.$location = $location;
+	$scope.$routeParams = $routeParams;
+	//$scope.$location.path('/AA22');
+
 	$scope.synonyms = SYNONYMS; $scope.EnToAr = EnToAr;
 	$scope.synonymdetails = SYNONYMS_DETAILS; //_.sortBy(SYNONYMS_DETAILS, function(item){ return item.id; } );
 	$scope.pageSize = 10;
