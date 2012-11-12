@@ -32,7 +32,9 @@ body {
 .row-fluid > .span-fixed-sidebar {
     margin-left: 290px;
 }
-
+.hero-unit, .nav{
+	margin-bottom: 5px!important;
+}
 @media (max-width: 767px) {
     .sidebar-nav-fixed {
         position:static;

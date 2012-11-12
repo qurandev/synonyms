@@ -50,6 +50,7 @@ var synonymsController = function($scope, $route, $routeParams, $location, $http
 	$scope.synonyms = SYNONYMS; $scope.EnToAr = EnToAr;
 	$scope.synonymdetails = SYNONYMS_DETAILS; //_.sortBy(SYNONYMS_DETAILS, function(item){ return item.id; } );
 	$scope.synonymsindex = SYNONYMS_INDEX;
+	$scope.synonymSelected = SYNONYMS[0];
 	$scope.pageSize = 10;
 	$scope.currentPage = 0;
 	$scope.numberOfPages = function(synonymsCount){

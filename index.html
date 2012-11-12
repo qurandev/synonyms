@@ -1,8 +1,8 @@
 ﻿<!DOCTYPE html>
-<html lang="en" ng-app="myApp">
+<html lang="en" ng-app="myApp" ng-controller="synonymsController">
 <head>
   <meta charset="utf-8">
-  <title> بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ Mutaradifaat al Qur'an Translation Project</title>
+  <title ng-bind="'[' + synonymSelected.topic + '] Mutaradifaat ul Qur\'an'"> بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ Mutaradifaat al Qur'an Translation Project</title>
   <link rel="stylesheet" href="css/app.css"/>
 	<!-- CSS Files -->
 	<link type="text/css" href="css/base.css" rel="stylesheet" />
@@ -234,7 +234,7 @@
 </script>
 
 
-<body ng-controller="synonymsController">
+<body>
 	<div class="container-fluid">
 	  <div class="row-fluid">
 		<div class="span3">
