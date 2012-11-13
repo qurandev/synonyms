@@ -1,0 +1,80 @@
+
+<!--<script src="controllers/searchController.js"></script>-->
+<!--<script type="text/ng-template" id="partials/search.html">-->
+<div class="container-fluid">
+  <div class="row-fluid">
+	<div class="span3">
+		<div ng-include src="'partials/rootToTopics.html'"></div></div>
+	<div class="span3">
+		<div ng-include src="'partials/topicToRoots.html'"></div></div>
+	<div class="span3">
+		<div ng-include src="'partials/words.html'"></div>
+	</div>
+	<div class="span1">
+		<div ng-include src="'partials/roots.html'"></div>
+	</div>
+  </div>
+</div>
+
+<script type="text/ng-template" id="partials/rootToTopics.html">
+  <div style="width:280px;overflow:auto;">
+	<input type=text ng-model="search_keyword" ng-change="change()" class="search-query" placeholder="Search roots..." style="width:59%;align:center;margin-bottom:11px;" />
+	<TABLE class="table table-striped table-bordered table-condensed table-hover" style="width:95%;margin-left:2px!important;">
+	  <THEAD ng-show="(roots | filter:search_keyword).length > 0">
+		<tr><TH>Root</TH><TH>Topics</TH></tr>
+	  </THEAD>
+	  <TBODY>
+		<tr ng-repeat="item in (roots | filter:search_keyword) | limitTo:pageSize*2"  ng-click="tableRowClicked(synonym, $index)">
+			<!--<td ng-bind="1 + $index"></td>-->
+			<td><!--<span ng-bind="EnToAr( synonymdetail.root )" class=arabic></span>-->
+				<span class="muted" ng-show="!item">-</span>
+				<span class="arabicsmaller" ng-show="item">
+				  <A HREF="http://corpus.quran.com/search.jsp?q=root:{{item}}" TARGET=_>
+					<span dir=rtl class=r0 ng-bind="EnToAr(item[0])"></span>&zwnj;<span class=r1 ng-bind="EnToAr(item[1])"></span>&zwnj;<span class=r2 ng-bind="EnToAr(item[2])"></span>&zwnj;<span class=r3 ng-bind="EnToAr(item.substring(3))"></span>
+				  </A>
+				</span>
+			</td>
+			<TD>
+				<span ng-repeat="synonym in (mapRootToTopics(item) | filter:search_keyword | limitTo:pageSize*2)"  ng-click="tableRowClicked(synonym, $index)">
+					<A HREF="#{{synonym.id}}">
+						<span ng-bind="synonym.topic" class="label label-inverse"></span> 
+						<!--<small><span ng-bind="synonym.topicUr" class="muted"></span></small>-->
+					</A>
+				</span>
+				</A>
+			</TD>
+		</tr>
+	  </TBODY>
+	</TABLE>
+  </div>
+</script>
+
+
+<script type="text/ng-template" id="partials/topicToRoots.html">
+  <div style="width:280px;overflow:auto;">
+	<input type=text ng-model="search_keyword" ng-change="change()" class="search-query" placeholder="Search roots..." style="width:59%;align:center;margin-bottom:11px;" />
+	<TABLE class="table table-striped table-bordered table-condensed table-hover" style="width:95%;margin-left:2px!important;">
+	  <THEAD ng-show="(roots | filter:search_keyword).length > 0">
+		<tr><TH>Topic</TH><TH>Roots</TH></tr>
+	  </THEAD>
+	  <TBODY>
+		<tr ng-repeat="item in (synonyms | filter:search_keyword) | limitTo:pageSize*2"  ng-click="tableRowClicked(synonym, $index)">
+			<td>
+				<span ng-bind="item.topic" xclass="label label-inverse"></span>
+			</td>
+			<TD>
+				<span ng-repeat="item in (mapTopicToRoots(item.id) | filter:search_keyword | limitTo:pageSize*2)"  ng-click="tableRowClicked(synonym, $index)">
+					<span class="muted" ng-show="!item">-</span>
+					<span class="arabicsmaller root" ng-show="item">
+					  <A HREF="http://corpus.quran.com/search.jsp?q=root:{{item}}" TARGET=_>
+						<span dir=rtl class=r0 ng-bind="EnToAr(item[0])"></span>&zwnj;<span class=r1 ng-bind="EnToAr(item[1])"></span>&zwnj;<span class=r2 ng-bind="EnToAr(item[2])"></span>&zwnj;<span class=r3 ng-bind="EnToAr(item.substring(3))"></span>
+					  </A>
+					</span>&nbsp;
+				</span>
+				</A>
+			</TD>
+		</tr>
+	  </TBODY>
+	</TABLE>
+  </div>
+</script>

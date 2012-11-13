@@ -288,11 +288,12 @@
 			</div>			
 			<div class="row-fluid">			
 				<div class="tabbable"> <!-- Only required for left/right tabs -->
+				{{$routeParams.mode}} - {{mode}}
 				  <ul class="nav nav-tabs">
 					<li class="{{(!tab || tab==1) && 'active' || ''}}"><a href data-toggle="tab" ng:click="tab=1"><i class="icon-home"></i>&nbsp;Translation</a></li>
-					<li class="{{(tab==2 && 'active') || ''}}"><a href data-toggle="tab" ng:click="tab=2; tabClick(tab);"><i class="icon-book"></i>&nbsp;Book</a></li>
-					<li class="{{(tab==3 && 'active') || ''}}"><a href data-toggle="tab" ng:click="tab=3; tabClick(tab);"><i class="icon-download-alt"></i>&nbsp;PDF</a></li>
-					<li class="{{(tab==4 && 'active') || ''}}"><a href data-toggle="tab" ng:click="tab=4; tabClick(tab);"><i class="icon-question-sign"></i>&nbsp;Info</a></li>
+					<li class="{{(tab==2 && 'active') || ''}}"><a href data-toggle="tab" ng:click="tab=2; tabClick(tab, synonymSelected.id);"><i class="icon-book"></i>&nbsp;Book</a></li>
+					<li class="{{(tab==3 && 'active') || ''}}"><a href data-toggle="tab" ng:click="tab=3; tabClick(tab, synonymSelected.id);"><i class="icon-download-alt"></i>&nbsp;PDF</a></li>
+					<li class="{{(tab==4 && 'active') || ''}}"><a href data-toggle="tab" ng:click="tab=4; tabClick(tab, synonymSelected.id);"><i class="icon-question-sign"></i>&nbsp;Info</a></li>
 					
 					<ul class="breadcrumb">
 						<li ng-show="!!getCurrentSynonymProperty()" class="active"><strong><p class="text-success">
@@ -302,6 +303,7 @@
 						</li>
 						<li><a href="#">Home</a> <span class="divider">|</span></li>
 						<li><a href="#/index"><strong>Index</strong></a> <span class="divider">|</span></li>
+						<li><a href="#/search"><strong>Search</strong></a> <span class="divider">|</span></li>
 						<li><a href="#/preface">Preface</a> <span class="divider">|</span></li>
 						<!--<li><a href="#/topics">Topics</a> <span class="divider">|</span></li>
 						<li><a href="#/words">Words</a> <span class="divider">|</span></li>-->
@@ -368,6 +370,7 @@
   <script src="js/directives.js"></script>
   <script src="js/jquery-1.8.2.min.js"></script>
   <script src="js/underscore-min.js"></script>
+  <script src="js/yepnope.1.5.4-min.js"></script>
   <script type="text/javascript">
 	$(document).ready(function() {
 	   if ($.browser.msie) {

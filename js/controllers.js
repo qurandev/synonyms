@@ -14,22 +14,94 @@ function MyCtrl2() {
 MyCtrl2.$inject = [];
 
 
-var indexController = function($scope, $route, $routeParams, $location, $http){
+var searchController = function($scope, $route, $routeParams, $location, $http){console.log('searchController ' + JSON.stringify($routeParams));
 	$scope.roots = _.without( _.uniq(_.map(SYNONYMS_DETAILS, function(o){ return o.root; }) ), undefined );
+	$scope.EnToAr = EnToAr;
+	$scope.synonyms = SYNONYMS;
+	$scope.getRoots = getRoots;
+	$scope.getTopics = getTopics;
+	$scope.mapTopicToRoots = mapTopicToRoots;
+	$scope.mapRootToTopics = mapRootToTopics;	
+	
+	$scope.roots = $scope.getRoots();
+}
+
+var ROOTS;
+var initQuranRoots = function(){ if(ROOTS) return;
+	yepnope({
+	  test : ROOTS,
+	  yep  : '',
+	  nope : ['data/qRoot.txt_script.js'],
+	  callback: function(testResult, key){
+		console.log('yepnope callback ' + testResult +' '+ key);
+	  },
+	  complete: function(o){
+		console.log('yepnope complete ' + o);
+	  }
+	});
+	console.log( ROOTS );
+}
+
+var processdata = function(type, data){
+	ROOTS = data;
+}
+
+var mapRootToVerses = function(root){ initQuranRoots();
+	
+}
+
+var mapVerseToRoots = function(verse){ initQuranRoots();
+
+}
+
+
+var getRoots = function(){
+	return _.chain(SYNONYMS_DETAILS)
+			.map(function(sd){ return sd.root; })
+			.uniq()
+			.without(undefined)
+			.value();
+}
+
+var getTopics = function(){
+	return _.map(SYNONYMS, function(o){ return o.topic; });
+}
+
+var mapTopicToRoots = function(topicID){
+	return _.chain(SYNONYMS_DETAILS)
+	 .filter(function(sd){ return sd.id == topicID; })
+	 .map(function(sd){ return sd.root; })
+	 .uniq()
+	 .value();
+}
+
+var mapRootToTopics = function(root, returnAsArray){
+	return _.chain(SYNONYMS_DETAILS)
+	 .filter(function(sd){ return sd.root == root; })
+	 .map(function(sd){ return sd.id; })
+	 .uniq()
+	 .map(function(id){ 
+		  return _.find( SYNONYMS, function(s){ return s.id == id })
+	  })
+	 .map(function(s){ return returnAsArray ? s.topic : s; })
+	 .value();
+}
+
+var indexController = function($scope, $route, $routeParams, $location, $http){
+	$scope.roots = getRoots();
 	$scope.EnToAr = EnToAr;
 
 	$scope.topics = _.map(SYNONYMS, function(o){ return o.topic; });
 	$scope.EnToAr = EnToAr;
 }
 
-
 var rootsController = function($scope, $route, $routeParams, $location, $http){
-	$scope.roots = _.without( _.uniq(_.map(SYNONYMS_DETAILS, function(o){ return o.root; }) ), undefined );
+	$scope.roots = getRoots();
 	$scope.EnToAr = EnToAr;
 }
 
 var topicsController = function($scope, $route, $routeParams, $location, $http){
-	$scope.topics = _.map(SYNONYMS, function(o){ return o.topic; });
+	$scope.topics = getTopics();
 	$scope.EnToAr = EnToAr;
 }
 
@@ -38,6 +110,10 @@ var synonymsController = function($scope, $route, $routeParams, $location, $http
 	$scope.$route = $route;
 	$scope.$location = $location;
 	$scope.$routeParams = $routeParams;
+	$scope.mode = $routeParams.mode;
+	if($routeParams.primaryNav){
+		$scope.synonymSelected = $routeParams.primaryNav;
+	}
 	//$scope.$location.path('/AA22');
 
 	//var IDs = ['', 'trans', 'book', 'pdf', 'info'];
@@ -50,7 +126,7 @@ var synonymsController = function($scope, $route, $routeParams, $location, $http
 	$scope.synonyms = SYNONYMS; $scope.EnToAr = EnToAr;
 	$scope.synonymdetails = SYNONYMS_DETAILS; //_.sortBy(SYNONYMS_DETAILS, function(item){ return item.id; } );
 	$scope.synonymsindex = SYNONYMS_INDEX;
-	$scope.synonymSelected = SYNONYMS[0];
+	//$scope.synonymSelected = SYNONYMS[0];
 	$scope.pageSize = 10;
 	$scope.currentPage = 0;
 	$scope.numberOfPages = function(synonymsCount){
@@ -65,7 +141,7 @@ var synonymsController = function($scope, $route, $routeParams, $location, $http
 		$scope.synonymSelected = synonym; console.log( synonym );
 		//$scope.synonymDetailSelected = {id: synonym.id};
 		$location.path(synonym.id); // path not hash
-		$scope.tabClick($scope.tab, $scope.synonymSelected.id); //$scope.tab = 1;
+		$scope.tabClick($scope.tab, ($scope.synonymSelected || SYNONYMS[0]).id); //$scope.tab = 1;
 	}
 	
 	$scope.tableDetailRowClicked = function(synonymdetail, index){
@@ -95,19 +171,19 @@ var synonymsController = function($scope, $route, $routeParams, $location, $http
 	}
 	
 	$scope.tabClick = function(tabNo, id){
-		var IDs = ['', 'trans', 'book', 'pdf', 'info'];
+		var IDs = TABLIST; //['', 'trans', 'book', 'pdf', 'info'];
 		if(tabNo <= 0 || tabNo > IDs.length) return;
 		var element = '#tab-' + IDs[tabNo], _html = '';
 
 		var hash = id || location.hash || '#\A1'; 
-		hash = hash.replace(/\#\//g, '');
+		hash = hash.replace(/\#\//g, '').replace(/\/.*/g, '');
 		var synonym = _.find(SYNONYMS, function(o){return o.id == hash;}); //#page/n$PAGE/mode/2up
 		
 		if(IDs[tabNo] == 'book'){
 			var _URL = "http://archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran", _PREFIX = "?ui=embed#mode/2up/page/n$PAGE", pageno = 83;
 			if(synonym && synonym.pg && parseInt(synonym.pg) ){ pageno = 17 + parseInt(synonym.pg); }
 			else{
-				var o = findApproxPageNo( id, 17 );
+				var o = findApproxPageNo( hash, 17 );
 				if(o.pg) pageno = o.pg; _html = o.html;
 			}
 			_URL = _URL + _PREFIX.replace(/\$PAGE/g, pageno);
@@ -130,8 +206,10 @@ var synonymsController = function($scope, $route, $routeParams, $location, $http
 			_html = $('#info-template').html();
 			$(element).html( _html );
 		}
+		$(element).show();
 	}
-	
+	var tabno = _.indexOf(['', 'trans', 'book', 'pdf', 'info'], $routeParams.mode);
+	if(tabno && tabno > 0){ $scope.tab = tabno; $scope.tabClick(tabno, ($scope.synonymSelected || $scope.synonyms[0]).id); }
 	//$http.get( 'content/A/A1.html').success(	function(data){ 
 	//	$scope.contentpane = data; debugger;
 	//});	
@@ -162,6 +240,7 @@ DATA.SYNONYMS_DETAILS = SYNONYMS_DETAILS;
 
 SYNONYMS_INDEX = [{"l":"A","pg":"67","n":"29"},{"l":"AA","pg":"106","n":"51"},{"l":"b","pg":"167","n":"80"},{"l":"p","pg":"260","n":"59"},{"l":"t","pg":"326","n":"34"},{"l":"tt","pg":"367","n":"8"},{"l":"v","pg":"377","n":"2"},{"l":"j","pg":"379","n":"28"},{"l":"jj","pg":"408","n":"29"},{"l":"H","pg":"441","n":"15"},{"l":"x","pg":"454","n":"21"},{"l":"d","pg":"473","n":"36"},{"l":"dd","pg":"516","n":"10"},{"l":"*","pg":"527","n":"6"},{"l":"r","pg":"533","n":"21"},{"l":"z","pg":"556","n":"10"},{"l":"s","pg":"570","n":"30"},{"l":"$","pg":"604","n":"15"},{"l":"S","pg":"617","n":"5"},{"l":"D","pg":"621","n":"1"},{"l":"T","pg":"622","n":"7"},{"l":"Z","pg":"631","n":"3"},{"l":"E","pg":"634","n":"13"},{"l":"g","pg":"648","n":"9"},{"l":"f","pg":"658","n":"14"},{"l":"q","pg":"671","n":"18"},{"l":"k","pg":"689","n":"46"},{"l":"gg","pg":"726","n":"27"},{"l":"l","pg":"757","n":"17"},{"l":"m","pg":"775","n":"48"},{"l":"n","pg":"834","n":"33"},{"l":"w","pg":"871","n":"4"},{"l":"h","pg":"878","n":"17"},{"l":"y","pg":"902","n":"4"}];
 
+var TABLIST = ['', 'trans', 'book', 'pdf', 'info'];
 
 SYNONYMS = [ 
 {id: "A1", topic: "To settle", topicUr: "Abad hona (basna) rehna", count: 8, pg:67},

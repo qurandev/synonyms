@@ -13,6 +13,10 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 			templateUrl: 'partials/index.html',
 			controller: 'indexController'
 	});
+	$routeProvider.when('/search', {
+			templateUrl: 'partials/search.html',
+			controller: 'searchController'
+	});
 	$routeProvider.when('/:primaryNav', {// '/:secondaryNav', {
             templateUrl: 'content/urlrouter.html',
             controller: 'RouteController'
@@ -35,9 +39,11 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
         //$scope.templateUrl = 'resources/angular/templates/nav/'+$routeParams.primaryNav+'/'+$routeParams.secondaryNav+'.html';
 		if(number){
 			$scope.templateUrl = 'content/' + path + '/'+$routeParams.primaryNav+ '.html';
+			$scope.synonymSelected = path + number;
 		}else{
 			$scope.templateUrl = 'content/' + $routeParams.primaryNav+ '.html';
 		}
+
 		$scope.mode = mode;
 		var IDs = ['', 'trans', 'book', 'pdf', 'info'];
 		if( _.indexOf(IDs, mode) != -1){
