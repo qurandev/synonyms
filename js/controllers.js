@@ -18,6 +18,8 @@ var searchController = function($scope, $route, $routeParams, $location, $http){
 	$scope.roots = _.without( _.uniq(_.map(SYNONYMS_DETAILS, function(o){ return o.root; }) ), undefined );
 	$scope.EnToAr = EnToAr;
 	$scope.synonyms = SYNONYMS;
+	$scope.search = search;
+	$scope.ayah = ayah;
 	$scope.getRoots = getRoots;
 	$scope.getTopics = getTopics;
 	$scope.mapTopicToRoots = mapTopicToRoots;
@@ -47,8 +49,8 @@ var processdata = function(type, _ROOTS_QURAN){
 }
 
 
-var search = function(keyword){if(!keyword) return;
-	if(!ROOTS_QURAN){ initSearch(function(){ search(keyword); } ); return; }//cleanup
+var search = function(keyword, index){if(!keyword) return;
+	if(!ROOTS_QURAN){ initSearch(function(){ search(keyword, index); } ); return; }//cleanup
 	var ret, regexp;
 	regexp = new RegExp(".*" + escapeRegex(keyword), "g"); //new RegExp(".*(?:" + escapeRegex(keyword) + ").*", "g");
 	ret = ROOTS_QURAN.match( regexp ); //console.log( ret );
@@ -56,11 +58,13 @@ var search = function(keyword){if(!keyword) return;
 						var arr = o.split('\|');
 						return parseFloat( arr[0] +'.'+ arr[1].split(' ').length )
 					});	console.log( ret );
+	$('#verse'+index).html( ret.join('&nbsp;&nbsp;') );
+	$('#count'+index).html( ret.length );
 	return ret; //$.each(ret, getAyah);
 }
 
 
-var getAyah = function(lineno){
+var ayah = function(lineno){
 	var verseno = parseInt(lineno);
 	$.ajaxSetup({ cache: true, jsonpCallback: 'quranData' }); // define ajax setup
 	var URL = "http://api.globalquran.com/ayah/$REF/quran-simple?jsoncallback=?".replace(/\$REF/g, verseno); console.log(URL);
