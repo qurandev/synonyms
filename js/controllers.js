@@ -26,25 +26,58 @@ var searchController = function($scope, $route, $routeParams, $location, $http){
 	$scope.roots = $scope.getRoots();
 }
 
-var ROOTS;
-var initQuranRoots = function(){ if(ROOTS) return;
+//when below is called, ROOTS_QURAN is setup with raw data
+var ROOTS_QURAN;
+
+var initSearch = function(fnCallback){ if(ROOTS_QURAN) return;
 	yepnope({
-	  test : ROOTS,
+	  test : ROOTS_QURAN,
 	  yep  : '',
 	  nope : ['data/qRoot.txt_script.js'],
 	  callback: function(testResult, key){
-		console.log('yepnope callback ' + testResult +' '+ key);
+		console.log('yepnope callback ' + testResult +' '+ key + ROOTS_QURAN.length);
+		fnCallback();
 	  },
-	  complete: function(o){
-		console.log('yepnope complete ' + o);
-	  }
+	  //complete: function(o){console.log('yepnope complete ' + o + ROOTS_QURAN.length); }
 	});
-	console.log( ROOTS );
 }
 
-var processdata = function(type, data){
-	ROOTS = data;
+var processdata = function(type, _ROOTS_QURAN){
+	if(!ROOTS_QURAN){ ROOTS_QURAN = prefixLineno( _ROOTS_QURAN.split('\n') ); _ROOTS_QURAN = ''; }//cleanup
 }
+
+
+var search = function(keyword){if(!keyword) return;
+	if(!ROOTS_QURAN){ initSearch(function(){ search(keyword); } ); return; }//cleanup
+	var ret, regexp;
+	regexp = new RegExp(".*" + escapeRegex(keyword), "g"); //new RegExp(".*(?:" + escapeRegex(keyword) + ").*", "g");
+	ret = ROOTS_QURAN.match( regexp ); //console.log( ret );
+	ret = _.map(ret, function(o){ 
+						var arr = o.split('\|');
+						return parseFloat( arr[0] +'.'+ arr[1].split(' ').length )
+					});	console.log( ret );
+	return ret; //$.each(ret, getAyah);
+}
+
+
+var getAyah = function(lineno){
+	var verseno = parseInt(lineno);
+	$.ajaxSetup({ cache: true, jsonpCallback: 'quranData' }); // define ajax setup
+	var URL = "http://api.globalquran.com/ayah/$REF/quran-simple?jsoncallback=?".replace(/\$REF/g, verseno); console.log(URL);
+	$.getJSON(URL, {
+		format : "jsonp"
+	}, function(data){    
+		$.each(data.quran, function(i, by){
+			$.each(by, function (verseNo, line) { console.log('');
+				console.log(line.surah+':'+line.ayah+' '+line.verse);
+			});
+		});
+	});   
+}
+
+
+
+
 
 var mapRootToVerses = function(root){ initQuranRoots();
 	
@@ -52,6 +85,17 @@ var mapRootToVerses = function(root){ initQuranRoots();
 
 var mapVerseToRoots = function(verse){ initQuranRoots();
 
+}
+
+var prefixLineno = function(DATAarr){ if(!DATAarr) return; var out = []; 
+    $.each(DATAarr, function(lineno, line){
+        out.push(++lineno + '|'+ line);
+    });
+    return out.join('\n');
+}
+
+var escapeRegex = function (str) {
+        return str.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
 
 
