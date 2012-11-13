@@ -288,7 +288,6 @@
 			</div>			
 			<div class="row-fluid">			
 				<div class="tabbable"> <!-- Only required for left/right tabs -->
-				{{$routeParams.mode}} - {{mode}}
 				  <ul class="nav nav-tabs">
 					<li class="{{(!tab || tab==1) && 'active' || ''}}"><a href data-toggle="tab" ng:click="tab=1"><i class="icon-home"></i>&nbsp;Translation</a></li>
 					<li class="{{(tab==2 && 'active') || ''}}"><a href data-toggle="tab" ng:click="tab=2; tabClick(tab, synonymSelected.id);"><i class="icon-book"></i>&nbsp;Book</a></li>
