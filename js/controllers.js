@@ -37,42 +37,28 @@ var initSearch = function(fnCallback){ if(ROOTS_QURAN) return;
 	  yep  : '',
 	  nope : ['data/qRoot.txt_script.js'],
 	  callback: function(testResult, key){
-		console.log('yepnope callback ' + testResult +' '+ key + ROOTS_QURAN.length);
+		console.log('yepnope callback ' + testResult +' '+ key +' '+ ROOTS_QURAN.length +' '+ ROOTS_QURAN_RAW.length);
 		fnCallback();
 	  },
 	  //complete: function(o){console.log('yepnope complete ' + o + ROOTS_QURAN.length); }
 	});
 }
-
+var ROOTS_QURAN_RAW;
 var processdata = function(type, _ROOTS_QURAN){
-	if(!ROOTS_QURAN){ ROOTS_QURAN = prefixLineno( _ROOTS_QURAN.split('\n') ); _ROOTS_QURAN = ''; }//cleanup
-}
-
-
-var search = function(keyword, index){if(!keyword) return;
-	if(!ROOTS_QURAN){ initSearch(function(){ search(keyword, index); } ); return; }//cleanup
-	var ret, regexp;
-	regexp = new RegExp(".*" + escapeRegex(keyword), "g"); //new RegExp(".*(?:" + escapeRegex(keyword) + ").*", "g");
-	ret = ROOTS_QURAN.match( regexp ); //console.log( ret );
-	ret = _.map(ret, function(o){ 
-						var arr = o.split('\|');
-						return parseFloat( arr[0] +'.'+ arr[1].split(' ').length )
-					});	console.log( ret );
-	$('#verse'+index).html( ret.join('&nbsp;&nbsp;') );
-	$('#count'+index).html( ret.length );
-	return ret; //$.each(ret, getAyah);
+	if(!ROOTS_QURAN){ ROOTS_QURAN = prefixLineno( _ROOTS_QURAN.split('\n') ); 
+	ROOTS_QURAN_RAW = _ROOTS_QURAN; _ROOTS_QURAN = ''; }//cleanup
 }
 
 
 var ayah = function(lineno){
 	var verseno = parseInt(lineno);
 	$.ajaxSetup({ cache: true, jsonpCallback: 'quranData' }); // define ajax setup
-	var URL = "http://api.globalquran.com/ayah/$REF/quran-simple?jsoncallback=?".replace(/\$REF/g, verseno); console.log(URL);
+	var URL = "http://api.globalquran.com/ayah/$REF/quran-simple?jsoncallback=?".replace(/\$REF/g, verseno); //console.log(URL);
 	$.getJSON(URL, {
 		format : "jsonp"
 	}, function(data){    
 		$.each(data.quran, function(i, by){
-			$.each(by, function (verseNo, line) { console.log('');
+			$.each(by, function (verseNo, line) { 
 				console.log(line.surah+':'+line.ayah+' '+line.verse);
 			});
 		});
@@ -80,20 +66,45 @@ var ayah = function(lineno){
 }
 
 
-
-
-
-var mapRootToVerses = function(root){ initQuranRoots();
-	
+var search = function(keyword, index){if(!keyword) return;
+	if(!ROOTS_QURAN){ initSearch(function(){ search(keyword, index); } ); return; }//cleanup
+	var ret = mapRootToVerses(keyword);
+	$('#verse'+index).html( ret.hits.join('&nbsp;&nbsp;') );
+	$('#count'+index).html( ret.count2 );
+	return ret; //$.each(ret, getAyah);
 }
 
-var mapVerseToRoots = function(verse){ initQuranRoots();
 
+var mapRootToVerses = function(root){
+	if(!ROOTS_QURAN){ initSearch(function(){ mapRootToVerses(root); } ); return; }//cleanup
+	var ret, regexp, regexpForCount, n = -1, m = -1, temp;
+	regexp = new RegExp(".*" + escapeRegex(root), "gm");
+	regexpForCount = new RegExp(escapeRegex(root), "gm");
+	ret = ROOTS_QURAN.match( regexp ); if(ret) n = ret.length; //console.log( ret ); 
+	temp = ret.join('\n').match( regexpForCount ); if(temp) m = temp.length;
+	if(n != m){ console.log('found init ' + n + '. Actual total results: ' + m); }
+	
+	ret = _.map(ret, function(o){ 
+					var arr = o.split('\|');
+					return parseFloat( arr[0] +'.'+ arr[1].split(' ').length )
+				});	//console.log( ret );
+	var o = {"count": n, "count2": m, "hits": ret}; o.count = n; o.count2 = m; console.log( o );
+	return o;
+}
+
+var mapVerseToRoots = function(versefrom, verseto){ if(!verseto) verseto = versefrom; if(!versefrom || !verseto) return;
+	if(!ROOTS_QURAN){ initSearch(function(){ mapVerseToRoots(versefrom, verseto); } ); return; }//cleanup
+	var input = ROOTS_QURAN_RAW.split('\n').slice(versefrom-1, verseto), output;
+	output = _.chain( input.join(' ').split(' ') )
+			 .uniq()
+			 .without('-')
+			 .value(); //console.log(output);
+	return output;
 }
 
 var prefixLineno = function(DATAarr){ if(!DATAarr) return; var out = []; 
     $.each(DATAarr, function(lineno, line){
-        out.push(++lineno + '|'+ line);
+        out.push(++lineno + '| '+ line +' ');
     });
     return out.join('\n');
 }
