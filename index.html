@@ -71,7 +71,7 @@
 		<tr ng-repeat="item in (synonyms | filter:topic_keyword | limitTo:pageSize*2)"  ng-click="tableRowClicked(synonym, $index)">
 			<!--<td><XA HREF="#{{item.id}}"><SPAN ng-bind="1 + $index"></SPAN></XA></td>-->
 			<td><A HREF="#{{item.id}}"><SPAN ng-bind="item.topic"></SPAN></A></td>
-			<td><A HREF="#{{item.id}}"><SPAN ng-bind="item.topicUr"></SPAN></A></td>
+			<td><A HREF="#{{item.id}}"><SPAN ng-bind="item.topicUr.toLowerCase()"></SPAN></A></td>
 		</tr>
 	  </TBODY>
 	</TABLE>
