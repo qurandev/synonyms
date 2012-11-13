@@ -61,7 +61,10 @@ body {
 div#ng-view > span{
 	background-color: rgba(0, 0, 0, 0)!important;
 }
-
+#work.progress{
+	height:10px!important;
+	margin-bottom:0px!important;
+}
 @media (max-width: 767px) {
     .sidebar-nav-fixed {
         position:static;

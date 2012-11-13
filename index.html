@@ -44,15 +44,23 @@
   <div style="width: 270px;overflow:auto;">
 	<TABLE class="table table-striped table-bordered table-condensed table-hover" style="width:95%; margin-top:5px;cursor:pointer;">
 	  <THEAD ng-show="(synonymsindex | filter:synonymsindex_keyword).length > 0">
-		<tr><TH>#</TH><TH>Section name</TH><TH>pg#</TH><TH>Topics done</TH><TH>Total</TH></tr>
+		<tr><TH>Section name</TH><TH>pg#</TH><TH>Topics done</TH><TH>Total</TH></tr>
 	  </THEAD>
 	  <TBODY>
 		<tr ng-repeat="item in synonymsindex"  ng-click="tableRowClicked(synonym, $index)">
-			<td><XA HREF="#{{item.l}}1"><SPAN ng-bind="1 + $index"></SPAN></XA></td>
-			<td><A HREF="#{{item.l}}1"><SPAN ng-bind="item.l"></SPAN></A></td>
+			<!--<td><XA HREF="#{{item.l}}1"><SPAN ng-bind="1 + $index"></SPAN></XA></td>-->
+			<td><A HREF="#{{item.l}}1">
+				<SPAN class=arabic ng-bind="(item.l.length ==1 && EnToAr(item.l) ) || ''"></SPAN>&nbsp;
+				<SPAN ng-bind="item.ll"></SPAN></A>
+			</td>
 			<td><A HREF="#{{item.l}}1"><SPAN ng-bind="item.pg"></SPAN></A></td>
-			<TD>-</TD>
-			<td><SPAN ng-bind="item.n"></SPAN></td>
+			<TD>
+			 <div id=work class="progress progress-success progress-striped">
+			  <div class="bar" style="width: {{item.d*100/item.n}}%"></div>
+			 </div>
+			 <span class=muted ng-bind="' (' + (item.d*100/item.n).toFixed()+'%)'"></span>
+			</TD>
+			<td style="background-color:{{ ((item.n - item.d > 50) && 'red') || ( ((item.n - item.d > 20) && 'orange') || ( ((item.n - item.d < 10) && 'yellowgreen') || '' )) }}"><SPAN ng-bind="item.d + '/'+ item.n"></SPAN></td>
 		</tr>
 	  </TBODY>
 	</TABLE>
@@ -294,7 +302,7 @@
 					<li class="{{(tab==3 && 'active') || ''}}"><a href data-toggle="tab" ng:click="tab=3; tabClick(tab, synonymSelected.id);"><i class="icon-download-alt"></i>&nbsp;PDF</a></li>
 					<li class="{{(tab==4 && 'active') || ''}}"><a href data-toggle="tab" ng:click="tab=4; tabClick(tab, synonymSelected.id);"><i class="icon-question-sign"></i>&nbsp;Info</a></li>
 					
-					<ul class="breadcrumb">
+					<ul ng-click="tab=1;" class="breadcrumb">
 						<li ng-show="!!getCurrentSynonymProperty()" class="active"><strong><p class="text-success">
 							<span class="label label-success" ng-bind="getCurrentSynonymProperty()"></SPAN></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 							<SPAN class="label label-info" ng-bind="getCurrentSynonymProperty('topicUr').toLowerCase()"></SPAN>
