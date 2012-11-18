@@ -18,7 +18,9 @@ var searchController = function($scope, $route, $routeParams, $location, $http){
 	$scope.roots = _.without( _.uniq(_.map(SYNONYMS_DETAILS, function(o){ return o.root; }) ), undefined );
 	$scope.EnToAr = EnToAr;
 	$scope.synonyms = SYNONYMS;
-	$scope.search = search;
+	$scope.search = function(keyword, index){
+		return search($scope, keyword, index);
+	}
 	$scope.ayah = ayah;
 	$scope.getRoots = getRoots;
 	$scope.getTopics = getTopics;
@@ -66,11 +68,12 @@ var ayah = function(lineno){
 }
 
 
-var search = function(keyword, index){if(!keyword) return;
-	if(!ROOTS_QURAN){ initSearch(function(){ search(keyword, index); } ); return; }//cleanup
+var search = function($scope, keyword, index){if(!keyword) return;
+	if(!ROOTS_QURAN){ initSearch(function(){ search($scope, keyword, index); } ); return; }//cleanup
 	var ret = mapRootToVerses(keyword);
-	$('#verse'+index).html( ret.hits.join('&nbsp;&nbsp;') );
-	$('#count'+index).html( ret.count2 );
+	if(!$scope.result || !$scope.result[keyword]){ $scope.result = {}; $scope.result[keyword] = {};}
+	$scope.result[keyword] = ret; //.push /*$('#verse'+index).html*/( ret.hits.join('&nbsp;&nbsp;') );
+	//$scope.resultcount.push /*$('#count'+index).html*/( ret.count2 );
 	return ret; //$.each(ret, getAyah);
 }
 
@@ -580,7 +583,6 @@ SYNONYMS = [
 
 
 
-{"id":"d1","topic":"To enter, to be entered","topicUr":"داخل ہونا - کرنا"},{"id":"d2","topic":"Superintendent","topicUr":"داروغہ"},{"id":"d3","topic":"To mark/scar","topicUr":"داغ دینا"},{"id":"d4","topic":"slim, lean","topicUr":"دبلا"},{"id":"d5","topic":"Prolong, lengthen","topicUr":"دراز ہونا - کرنا"},{"id":"d6","topic":"Very persistent","topicUr":"در پے ہونا"},{"id":"d7","topic":"Trees and shrubs","topicUr":"درخت اور پودے"},{"id":"d8","topic":"Correct, sound","topicUr":"درست ٹھیک"},{"id":"d9","topic":"To correct, rectify","topicUr":"درست کرنا"},{"id":"d10","topic":"In between","topicUr":"درمیان"},{"id":"d11","topic":"Enemy, animosity","topicUr":"دشمن دشمنی"},{"id":"d12","topic":"To pray for/to","topicUr":"دعا دینا - کرنا"},{"id":"d13","topic":"Heart","topicUr":"دل"},{"id":"d14","topic":"Inspiration in the heart","topicUr":"دل میں بات ڈالنا"},{"id":"d15","topic":"Proof","topicUr":"دلیل"},{"id":"d16","topic":"Day and its times","topicUr":"دن اور اسکے اوقات"},{"id":"d17","topic":"Different names for the world","topicUr":"دنیا کے مختلف نام"},{"id":"d18","topic":"Far away","topicUr":"دور"},{"id":"d19","topic":"To distance, to be distanced","topicUr":"دور کرنا - ہونا"},{"id":"d20","topic":"To run","topicUr":"ڈورنا"},{"id":"d21","topic":"Cause to run","topicUr":"ڈورانا"},{"id":"d22","topic":"Hell and its various names","topicUr":"دوزخ اور اسکے مختلف نام"},{"id":"d23","topic":"Angels of hell fire","topicUr":"دوزخ کے فرشتے"},{"id":"d24","topic":"friend","topicUr":"دوست"},{"id":"d25","topic":"Drive (dogs out), revile, reprove","topicUr":"دھتکارنا"},{"id":"d26","topic":"Concealed","topicUr":"دھندلانا"},{"id":"d27","topic":"Smoke","topicUr":"دھواں"},{"id":"d28","topic":"Sunshine","topicUr":"دھوپ"},{"id":"d29","topic":"To deceive","topicUr":"دھوکہ دینا"},{"id":"d30","topic":"To see, look ","topicUr":"دیکھنا"},{"id":"d31","topic":"Various ways of looking","topicUr":"دیکھنا [کیفیت نظر]"},{"id":"d32","topic":"To show/reveal","topicUr":"دکھلانا"},{"id":"d33","topic":"Religion","topicUr":"دین"},{"id":"d34","topic":"To give","topicUr":"دینا"},{"id":"d35","topic":"Wall","topicUr":"دیوار"},{"id":"d36","topic":"Lunatic , insanity","topicUr":"دیوانہ- دیوانگی"},{"id":"d37","topic":"To throw, pour, cast away","topicUr":"ڈالنا"},{"id":"d38","topic":"To drown, dip","topicUr":"ڈبونا"},{"id":"d39","topic":"To fear","topicUr":"ڈرنا"},{"id":"d40","topic":"To frighten","topicUr":"ڈرانا"},{"id":"d41","topic":"Bucket","topicUr":"ڈول"},{"id":"d42","topic":"Shield","topicUr":"ڈھال"},{"id":"d43","topic":"To cover","topicUr":"ڈھانکنا"},{"id":"d44","topic":"Setting (ie sun)","topicUr":"ڈھلنا"},{"id":"d45","topic":"To search","topicUr":"ڈھونڈنا"}
 ];
 
 
