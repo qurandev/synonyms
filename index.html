@@ -14,7 +14,7 @@
 
 
 <script type="text/ng-template" id="content/urlrouter.html">
-	<div ng-switch on="templateUrl != null" class="ngview">
+	<div ng-switch on="templateUrl != null && templateUrl != ''" class="ngview">
       <div ng-switch-when="true" ng-include src="templateUrl"></div>
 	  <div ng-switch-when="false" ng-include="'content/A/A1.html'"></div>	  <!--<div ng-switch-when="false" ng-include="'partials/index.html'"></div>-->
     </div>
