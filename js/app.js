@@ -29,6 +29,11 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
     //$routeProvider.otherwise({redirectTo: '/A1'});
   }]);
   
+  app.filter('prettify', function() {
+    return function(input, scope) {
+        return input.toString().split('.').join(':');
+    }
+  });
   
   function RouteController($scope, $routeParams) {console.log('RouteController ' + JSON.stringify($routeParams) );
 		var path = '', number='', hash = $routeParams.primaryNav, mode = $routeParams.mode;

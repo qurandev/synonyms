@@ -34,15 +34,12 @@
 				  </A>
 				</span>
 			</td>
-			<TD><SPAN id="count{{$index}}">&nbsp;</SPAN></TD>
+			<TD><SPAN id="count{{$index}}" ng-bind="result[item].count2 || '-'">&nbsp;</SPAN></TD>
 			<TD>
-				<SPAN id="verse{{$index}}" ng-show="item && item.length >=3">{{search(item, $index)}}</SPAN>
-				<!--<span ng-repeat="synonym in (mapRootToTopics(item) | filter:search_keyword | limitTo:pageSize*2)">
-					<A HREF="#{{synonym.id}}">
-						<span ng-bind="synonym.topic" class="label label-inverse"></span> 
-					</A>
-				</span>
-				</A>-->
+			  <SPAN id="verse{{$index}}" ng-show="item && item.length >=3">
+				<SPAN ng-bind="search(item, $index)" style=display:none></SPAN>
+				<SPAN ng-bind="result[item].hits.join(' ')"></SPAN>
+			  </SPAN>
 			</TD>
 		</tr>
 	  </TBODY>
