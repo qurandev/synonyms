@@ -279,7 +279,7 @@ var synonymsController = function($scope, $route, $routeParams, $location, $http
 
 var pageOffsets = {
 	'A': [,2,1,1,3,,2,2,1,1,2,1,1,1,,1,2,1,1,1,2,1,1,1,1,1,1,1,3,2],
-	'AA': [],
+	'AA': [,,2,1,3,2,1,3,1,1,1,,2,1,1,1,1,1,1,1,1,1,2,1,1,1,,1,2,,3,1,1,2,2,1,,2,1,,1,1,2,1,,1,3,,3,,1,],
 }
 	var findApproxPageNo = function(id, offset){
 		var pageno, _html='', page_offset=0; if(!offset) offset = 0;
