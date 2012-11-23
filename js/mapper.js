@@ -57,12 +57,13 @@ var ArToEn = function(word){
 					break;
 				}
 			}
-			if(!found){  ar += '?'; _log('No mapping found:\t' + letter + ''); 
+			if(!found){  ar += '?'; console.log('No mapping found:\t' + letter + ''); ar += letter;
 			}
 		}
 	}catch(ex){
-		debugger;
+		//debugger;
 		ar = '-err: ' + ex + ex.message + ex.lineno;
+		console.log(ar);
 	}
 	return ar;
 }
