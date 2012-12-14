@@ -1,19 +1,19 @@
 l,ll,pg,n,d
 A,Alif mamdooah,67,29,29
 AA,Alif maqsoora,106,51,51
-b,beh,167,80,22
+b,beh,167,80,35
 p,(peh),260,59,28
-t,teh,336,34,2
+t,teh,336,34,3
 tt,(tteh),367,8,2
 th,theh,377,2,0
 j,jim,379,28,2
-ch,(cheem),408,29,1
+ch,(cheem),408,29,5
 HA,Ha,441,15,0
 kh,kha,454,21,3
-d,dal,473,36,4
-dd,(ddal),516,10,0
-dh,dhal,527,6,0
-r,ra,533,21,8
+d,dal,473,36,13
+dd,(ddal),516,10,7
+dh,dhal,527,6,6
+r,ra,533,21,14
 z,zin,556,10,5
 s,sin,570,30,25
 sh,shin,604,15,0
@@ -21,11 +21,11 @@ SA,Sad,617,5,0
 DA,Dad,621,1,0
 TA,Ta,622,7,0
 ZA,Dha,631,2,2
-E,ain,634,13,5
+E,ain,634,13,6
 gh,gain,648,9,0
-f,feh,658,14,1
-q,qaf,671,18,8
-k,kaf,689,46,2
+f,feh,658,14,13
+q,qaf,671,18,16
+k,kaf,689,46,21
 gg,(gaaf),726,27,1
 l,lam,757,17,2
 m,mim,775,48,3
