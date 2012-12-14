@@ -42,6 +42,9 @@
 
 <script type="text/ng-template" id="partials/bookcontents.html">
   <div style="width: 270px;overflow:auto;">
+	<HR/>Total progress: <B><span ng-bind="totalDone().percent"></span>%</B> topics complete<BR>
+	(<B><span ng-bind="totalDone().done"></span></B> of <span ng-bind="totalDone().total"></span> total topics)
+	<HR/>
 	<TABLE class="table table-striped table-bordered table-condensed table-hover" style="width:95%; margin-top:5px;cursor:pointer;">
 	  <THEAD ng-show="(synonymsindex | filter:synonymsindex_keyword).length > 0">
 		<tr><TH>Section name</TH><TH>pg#</TH><TH>Topics done</TH><TH>Total</TH></tr>
@@ -60,10 +63,15 @@
 			 </div>
 			 <span class=muted ng-bind="' (' + (item.d*100/item.n).toFixed()+'%)'"></span>
 			</TD>
-			<td style="background-color:{{ ((item.n - item.d > 50) && 'red') || ( ((item.n - item.d > 20) && 'orange') || ( ((item.n - item.d < 10) && 'yellowgreen') || '' )) }}"><SPAN ng-bind="item.d + '/'+ item.n"></SPAN></td>
+			<td style="background-color:{{ ((item.n - item.d > 15) && item.d / item.n < 0.25 && 'red') || ( ((item.n - item.d > 15 && item.d / item.n < 0.75) && 'orange') || ( ((item.n - item.d < 7) && 'yellowgreen') || '' )) }}"><SPAN ng-bind="item.d + '/'+ item.n"></SPAN></td>
 		</tr>
 	  </TBODY>
 	</TABLE>
+	<BR><BR>
+	Colors legend:<BR>
+	Red: less than 25% done<BR>
+	Orange: less than 75% done<BR>
+	Green: <7 topics remaining.
   </div>
 </script>
 

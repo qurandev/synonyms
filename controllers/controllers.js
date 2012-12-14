@@ -194,6 +194,15 @@ var synonymsController = function($scope, $route, $routeParams, $location, $http
 	$scope.numberOfPages = function(synonymsCount){
 		return Math.ceil( (synonymsCount || $scope.synonyms.length) / $scope.pageSize );
 	}
+	
+	$scope.totalDone = function(){
+		var o = {};
+		o.done  = _.reduce( _.map(SYNONYMS_INDEX, function(o){return parseInt( o.d );}), function(a,b){return a+b;});
+		o.total = _.reduce( _.map(SYNONYMS_INDEX, function(o){return parseInt( o.n );}), function(a,b){return a+b;});
+		o.percent = (100*o.done/o.total).toFixed();
+		return o;
+	}
+	
 	$scope.currentPageForDetails = 0;
 	$scope.numberOfPagesForDetails = function(synonymDetailsCount){
 		return Math.ceil( (synonymDetailsCount || $scope.synonymdetails.length) / $scope.pageSize );
