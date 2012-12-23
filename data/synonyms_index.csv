@@ -3,12 +3,12 @@ A,Alif mamdooah,67,29,29
 AA,Alif maqsoora,106,51,51
 b,beh,167,80,72
 p,(peh),260,59,28
-t,teh,336,34,3
+t,teh,336,34,20
 tt,(tteh),367,8,2
 th,theh,377,2,0
 j,jim,379,28,2
-ch,(cheem),408,29,5
-HA,Ha,441,15,0
+ch,(cheem),408,29,13
+HA,Ha,441,15,4
 kh,kha,454,21,3
 d,dal,473,36,13
 dd,(ddal),516,10,7
@@ -21,7 +21,7 @@ SA,Sad,617,5,0
 DA,Dad,621,1,0
 TA,Ta,622,7,0
 ZA,Dha,631,2,2
-E,ain,634,13,6
+E,ain,634,13,7
 gh,gain,648,9,0
 f,feh,658,14,13
 q,qaf,671,18,18
