@@ -311,7 +311,7 @@
 					<li class="{{(tab==4 && 'active') || ''}}"><a href data-toggle="tab" ng:click="tab=4; tabClick(tab, synonymSelected.id);"><i class="icon-question-sign"></i>&nbsp;Info</a></li>
 					
 					<ul ng-click="tab=1;" class="breadcrumb">
-						<li ng-show="!!getCurrentSynonymProperty()" class="active"><strong><p class="text-success">
+						<li ng-show="!!mID && !!getCurrentSynonymProperty()" class="active"><strong><p class="text-success">
 							<span class="label label-success" ng-bind="getCurrentSynonymProperty()"></SPAN></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 							<SPAN class="label label-info" ng-bind="getCurrentSynonymProperty('topicUr').toLowerCase()"></SPAN>
 							<SPAN style="margin-left:20px">&nbsp;</SPAN></p>
@@ -325,11 +325,11 @@
 						<li><a href="#/words">Words</a> <span class="divider">|</span></li>-->
 						<li><a href="#/references">References</a> <span class="divider">|</span></li>
 						<li><a href="#/appendices">Appendices</a></li>
-						
-						<BR><span class="divider">|</span>
-						<span ng-bind="mLetterLong +' #'+ mIndex" class="muted badge badge-inverse"></span>
-						Page
-						<select ng-options="opt for opt in pageRange" ng-model="mPage" class="pageDD"></select>
+						<span ng-show="!!mID">
+							<span class="divider">|</span>
+							<span ng-bind="mLetterLong +' #'+ mIndex" class="muted badge"></span>
+							Page <select ng-options="opt for opt in pageRange" ng-model="mPage" class="pageDD"></select>
+						</span>
 						<!--Topic   
 						<select ng-options="opt.ll for opt in synonymsindex" ng-model="mLetter" class="letterDD"></select>
 						#   <select ng-options="opt for opt in mIndexRange" ng-model="mIndex" class="indexDD"></select>-->

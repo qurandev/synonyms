@@ -144,9 +144,8 @@ var statusController = function($scope, $route, $routeParams, $location, $http, 
 
 	$scope.click = function(o){		$rootScope._log(o);
 		var pg = o.pg, letter = o.l, pgLetterStart, oLookup, id;
-		id = $rootScope.findLetterEntryFromPage( pg );
-		console.log( id );
-		location.href = '#/' + id;
+		//id = $rootScope.findLetterEntryFromPage( pg ); console.log( id );
+		location.href = '#/page/' + pg; //id;
 	}
 	//$scope.mouseover = function(o){
 	//	_log(o);

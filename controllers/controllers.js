@@ -242,7 +242,7 @@ var synonymsController = function($scope, $route, $routeParams, $location, $http
 	}
 	
 	$scope.getCurrentSynonymProperty = function(property){ if(!property) property = "topic";
-		var ret = '', hash = location.hash, synonym;
+		var ret = '', hash = $rootScope.mID || location.hash, synonym;
 		if(hash){
 			hash = hash.replace(/\#\//g, '');
 			synonym = _.find(SYNONYMS, function(o){return o.id == hash;});

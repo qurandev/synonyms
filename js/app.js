@@ -58,6 +58,7 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 			letterLong = (_.where(SYNONYMS_INDEX, {l: letter})[0].ll);
 		}else{
 			$scope.templateUrl = 'content/' + $routeParams.primaryNav+ '.html';
+			letter = letterLong = id = null;
 		}
 
 		var IDs = ['', 'trans', 'book', 'pdf', 'info'];
