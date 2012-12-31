@@ -75,7 +75,7 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
   function PageController($scope, $routeParams, $rootScope) {console.log('PageController ' + JSON.stringify($routeParams) );
 		var pg = $routeParams.pg, id, hash;
 		if( !(pg = parseInt(pg)) ){ console.log('FATAL ERROR: invalid param ' + pg); return; }
-		id = hash = $rootScope.findLetterEntryFromPage(pg);
+		id = hash = findLetterEntryFromPage(pg);
 
 		var path = '', number='', mode = $routeParams.mode, letter, max;
 		if(hash){

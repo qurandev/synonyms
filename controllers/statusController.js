@@ -27,45 +27,8 @@ var statusController = function($scope, $route, $routeParams, $location, $http, 
 		}
 	}
 	
-	$rootScope.findLetterEntryFromPage = function(pageToFind){
-	  var match = -2, oLetterLookup, offsets, letter, index, maxEntry; 
-	  _.find(SYNONYMS_INDEX, function(o, key, list){
-		  ++match; return parseInt(o.pg) > pageToFind; 
-		}, match); 
-	  if(match < 0){ return; } //invalid?
-	  oLetterLookup = SYNONYMS_INDEX[match];
-	  letter = oLetterLookup.l;
-	  maxEntry = oLetterLookup.n;
-	  //console.log( JSON.stringify(oLetterLookup) );
-	  if((findApproxPageNo(letter + 1) ).pg == pageToFind) return letter + 1;
-	  index = 1;
-	  for(; (findApproxPageNo(letter + index) ).pg <= pageToFind && index <= maxEntry; ++index){
-	  }
-	  if(index-1 <= 0) return letter + 1;
-	  return ( letter + (index-1) );
-	}
+	$rootScope.findLetterEntryFromPage = findLetterEntryFromPage;
 	
-	$rootScope.findApproxPageNo = function(id, offset){
-		var pageno, _html='', page_offset=0; if(!offset) offset = 0;
-		var sectionAlphabet = id && id.match( /[^\d]*/ ), sectionNumber = id && id.match( /\d+/g );
-		var sectionAlphabetObj = sectionAlphabet && _.find( SYNONYMS_INDEX, function(o){ return o.l == sectionAlphabet; }); 
-		if(sectionAlphabetObj && parseInt(sectionAlphabetObj.pg)){ 
-			pageno = parseInt(sectionAlphabetObj.pg); 
-			_html = '<div class="alert alert-error"><B>Showing first page of section for this topic. Use page navigation buttons below to find topic.</B></div>' 
-		}
-		else{ _html = '<div class="alert alert-error"><B>Page number not yet available. Showing default page.</B></div>'; }
-		try{
-			if(pageOffsets[sectionAlphabet] && pageOffsets[sectionAlphabet].length >= sectionNumber ){ 
-				page_offset = _.reduce(pageOffsets[sectionAlphabet].slice(0, sectionNumber), function(memo, num){ return memo + num; }, 0); //parseInt( pageOffsets[sectionAlphabet][sectionNumber-1] );
-				_html = '';
-			}
-		}catch(e){debugger;}
-		return {id: id,
-				pg: pageno + offset + page_offset, 
-				pgEnd: pageno + offset + page_offset + (pageOffsets[sectionAlphabet][sectionNumber] || 0), 
-				l: (pageOffsets[sectionAlphabet][sectionNumber] || 0),
-				html: _html};
-	}
 
 
 	$rootScope.pageStatus = {};
@@ -189,3 +152,44 @@ var statusController = function($scope, $route, $routeParams, $location, $http, 
 	//	_log(o);
 	//}	
 }
+
+
+	var findLetterEntryFromPage = function(pageToFind){
+	  var match = -2, oLetterLookup, offsets, letter, index, maxEntry; 
+	  _.find(SYNONYMS_INDEX, function(o, key, list){
+		  ++match; return parseInt(o.pg) > pageToFind; 
+		}, match); 
+	  if(match < 0){ return; } //invalid?
+	  oLetterLookup = SYNONYMS_INDEX[match];
+	  letter = oLetterLookup.l;
+	  maxEntry = oLetterLookup.n;
+	  //console.log( JSON.stringify(oLetterLookup) );
+	  if((findApproxPageNo(letter + 1) ).pg == pageToFind) return letter + 1;
+	  index = 1;
+	  for(; (findApproxPageNo(letter + index) ).pg <= pageToFind && index <= maxEntry; ++index){
+	  }
+	  if(index-1 <= 0) return letter + 1;
+	  return ( letter + (index-1) );
+	}
+	
+	var findApproxPageNo = function(id, offset){
+		var pageno, _html='', page_offset=0; if(!offset) offset = 0;
+		var sectionAlphabet = id && id.match( /[^\d]*/ ), sectionNumber = id && id.match( /\d+/g );
+		var sectionAlphabetObj = sectionAlphabet && _.find( SYNONYMS_INDEX, function(o){ return o.l == sectionAlphabet; }); 
+		if(sectionAlphabetObj && parseInt(sectionAlphabetObj.pg)){ 
+			pageno = parseInt(sectionAlphabetObj.pg); 
+			_html = '<div class="alert alert-error"><B>Showing first page of section for this topic. Use page navigation buttons below to find topic.</B></div>' 
+		}
+		else{ _html = '<div class="alert alert-error"><B>Page number not yet available. Showing default page.</B></div>'; }
+		try{
+			if(pageOffsets[sectionAlphabet] && pageOffsets[sectionAlphabet].length >= sectionNumber ){ 
+				page_offset = _.reduce(pageOffsets[sectionAlphabet].slice(0, sectionNumber), function(memo, num){ return memo + num; }, 0); //parseInt( pageOffsets[sectionAlphabet][sectionNumber-1] );
+				_html = '';
+			}
+		}catch(e){debugger;}
+		return {id: id,
+				pg: pageno + offset + page_offset, 
+				pgEnd: pageno + offset + page_offset + (pageOffsets[sectionAlphabet][sectionNumber] || 0), 
+				l: (pageOffsets[sectionAlphabet][sectionNumber] || 0),
+				html: _html};
+	}

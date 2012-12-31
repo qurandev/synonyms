@@ -258,7 +258,7 @@ var synonymsController = function($scope, $route, $routeParams, $location, $http
 		if(tabNo <= 0 || tabNo > IDs.length) return;
 		var element = '#tab-' + IDs[tabNo], _html = '';
 
-		var hash = id || location.hash || '#\A1'; 
+		var hash = ($rootScope.mLetter + $rootScope.mIndex) || id || location.hash || '#\A1'; 
 		hash = hash.replace(/\#\//g, '').replace(/\/.*/g, '');
 		var synonym = _.find(SYNONYMS, function(o){return o.id == hash;}); //#page/n$PAGE/mode/2up
 		
@@ -278,7 +278,7 @@ var synonymsController = function($scope, $route, $routeParams, $location, $http
 			var _URL = "http://qurandev.github.com/widgets/book.html?pageno=$PAGE", pageno = 66;
 			if(synonym && synonym.pg && parseInt(synonym.pg) ){ pageno = parseInt(synonym.pg) - 1; }
 			else{
-				var o = findApproxPageNo( id, -1 );
+				var o = findApproxPageNo( hash, -1 );
 				if(o.pg) pageno = o.pg; _html = o.html;
 			}
 			_URL = _URL.replace(/\$PAGE/g, pageno);
