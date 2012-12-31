@@ -12,12 +12,12 @@ body {
 }
 #index1{
 	overflow: auto;
-	height: 395px;
+	height: 315px;
 	margin: 0px!important;
 }
 #index2{
 	overflow: auto;
-	height: 240px;
+	height: 160px;
 }
 #index1 > table{ margin: 0px!important; cursor:pointer; }
 #index2 > table{ margin: 0px!important; cursor:pointer; }
@@ -194,3 +194,13 @@ background-color: #BB312F; //maroon
 color: white!important;
 }
 
+.pageDD{
+	width: 70px!important;
+}
+
+.letterDD{
+	width: 70px!important;
+}
+.indexDD{
+	width: 60px!important;
+}

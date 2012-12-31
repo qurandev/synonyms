@@ -168,11 +168,19 @@ var topicsController = function($scope, $route, $routeParams, $location, $http){
 }
 
 
-var synonymsController = function($scope, $route, $routeParams, $location, $http){console.log('synonymsController ' + JSON.stringify($routeParams));
+var synonymsController = function($scope, $route, $routeParams, $location, $http, $rootScope){console.log('synonymsController ' + JSON.stringify($routeParams));
 	$scope.$route = $route;
 	$scope.$location = $location;
 	$scope.$routeParams = $routeParams;
-	$scope.mode = $routeParams.mode;
+	
+	$rootScope.mLetter = "A"; //"Alif mamdooah";
+	$rootScope.mIndex = 1;
+	$rootScope.mIndexRange = _.range(1, 1+ 29);//$scope.indexCount);
+	$rootScope.mPage = 67;
+	//$scope.indexCount = (_.where(SYNONYMS_INDEX, {l: $scope.letter}))[0].n;
+	$scope.pageRange = _.range(67, 1+ 904);
+	
+	$rootScope.mMode = $routeParams.mode;
 	if($routeParams.primaryNav){
 		$scope.synonymSelected = $routeParams.primaryNav;
 	}
@@ -239,6 +247,10 @@ var synonymsController = function($scope, $route, $routeParams, $location, $http
 			if(synonym && synonym[property]){ ret = '['+ synonym[property] +'] '; }
 		}
 		return ret;
+	}
+	
+	$scope.onLetterChange = function(){
+		console.log( letter );
 	}
 	
 	$scope.tabClick = function(tabNo, id){

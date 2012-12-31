@@ -159,7 +159,7 @@
 
 
 <script type="text/ng-template" id="partials/mode.html">
-	mode: {{mode}}
+	mode: {{mMode}}
 	<TABLE class="table table-striped table-bordered table-condensed table-hover">
 	  <THEAD ng-show="(synonymsindex | filter:input).length > 0">
 		<tr><TH>#</TH><TH>Synonym topic</TH><!--<TH>topic (urdu)..</TH>--><TH>pg#</TH><!--<TH title='# of synonyms for this topic'>..</TH><TH>&nbsp;</TH><TH>&nbsp;</TH>--></tr>
@@ -324,7 +324,16 @@
 						<!--<li><a href="#/topics">Topics</a> <span class="divider">|</span></li>
 						<li><a href="#/words">Words</a> <span class="divider">|</span></li>-->
 						<li><a href="#/references">References</a> <span class="divider">|</span></li>
-						<li><a href="#/appendices">Appendices</a>
+						<li><a href="#/appendices">Appendices</a></li>
+						
+						<BR><span class="divider">|</span>
+						<span ng-init="letter='A'"></span>
+						<span ng-bind="mLetter + mIndex" class="muted badge badge-inverse"></span>
+						Page
+						<select ng-options="opt for opt in pageRange" ng-model="mPage" class="pageDD"></select>
+						Topic   
+						<select ng-options="opt.ll for opt in synonymsindex" ng-model="mLetter" class="letterDD"></select>
+						#   <select ng-options="opt for opt in mIndexRange" ng-model="mIndex" class="indexDD"></select>
 					</ul><!--<li><B><SPAN ng-bind="{{synonymSelected.topic +' '+ synonymSelected.topicUr}}">{{synonymSelected}}&nbsp;</SPAN></B></li>-->
 				  </ul>
 				  <div class="Xtab-content">

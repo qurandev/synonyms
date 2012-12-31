@@ -1,33 +1,33 @@
-var statusController = function($scope, $route, $routeParams, $location, $http){console.log('statusController ' + JSON.stringify($routeParams));
+var statusController = function($scope, $route, $routeParams, $location, $http, $rootScope){console.log('statusController ' + JSON.stringify($routeParams));
 
-	var lookup = function(letter){
+	$rootScope.lookup = function(letter){
 		var pgStart, pgCount, o, ret = {};
 		ret.l = letter;
 
 		o = _.where(SYNONYMS_INDEX, {l: letter}); //console.log( JSON.stringify(o) );
-		assert(o && o.length > 0, "lookup pgStart "+letter);
+		$rootScope.assert(o && o.length > 0, "lookup pgStart "+letter);
 		pgStart = o[0].pg;
 		ret.pg = parseInt( pgStart ); //console.log( letter + " pgStart " + pgStart );
 
 		pgCount = _.reduce(pageOffsets[ letter ], function(a,b){return (a||0) + (b||0); }, 0);
-		assert(pgCount && pgCount > 0, "lookup pgCount "+letter);
+		$rootScope.assert(pgCount && pgCount > 0, "lookup pgCount "+letter);
 		ret.pgEnd = ret.pg + pgCount;
 		ret.pgCount = ++pgCount;
 		return ret;
 	}
 
-	var _log = function(o){
+	$rootScope._log = function(o){
 		console.log( JSON.stringify(o) + "\n\n" );
 	}
 
-	var assert = function(pred, prefix){ 
+	$rootScope.assert = function(pred, prefix){ 
 		prefix = prefix || "";
 		if(!pred){
 			console.log(prefix +" Assert failed! ***********"); //debugger;
 		}
 	}
 	
-	var findLetterEntryFromPage = function(pageToFind){
+	$rootScope.findLetterEntryFromPage = function(pageToFind){
 	  var match = -2, oLetterLookup, offsets, letter, index, maxEntry; 
 	  _.find(SYNONYMS_INDEX, function(o, key, list){
 		  ++match; return parseInt(o.pg) > pageToFind; 
@@ -45,7 +45,7 @@ var statusController = function($scope, $route, $routeParams, $location, $http){
 	  return ( letter + (index-1) );
 	}
 	
-	var findApproxPageNo = function(id, offset){
+	$rootScope.findApproxPageNo = function(id, offset){
 		var pageno, _html='', page_offset=0; if(!offset) offset = 0;
 		var sectionAlphabet = id && id.match( /[^\d]*/ ), sectionNumber = id && id.match( /\d+/g );
 		var sectionAlphabetObj = sectionAlphabet && _.find( SYNONYMS_INDEX, function(o){ return o.l == sectionAlphabet; }); 
@@ -68,7 +68,8 @@ var statusController = function($scope, $route, $routeParams, $location, $http){
 	}
 
 
-	var pageStatus = {}, letterStatus = {
+	$rootScope.pageStatus = {};
+	$rootScope.letterStatus = {
 		'A': "1-29",
 		'AA': "1-51",
 		'b': "1-37 46-80",
@@ -112,10 +113,10 @@ var statusController = function($scope, $route, $routeParams, $location, $http){
 
 	var getStatus = function(){
 		var o = {}, oo = {}, pageStatus = {}, regexp = /(\d+)\-(\d+)/;
-		$.each( letterStatus, function(l, data){
+		$.each( $rootScope.letterStatus, function(l, data){
 			var arr = [], arrPg = [], pgPrevious, pgLast, oPgLookup, oPgEndLookup, oPgLetterLookup, nDataParts, pgLetterFirst, pgLetterLast;
 			if(l){ 
-				oPgLetterLookup = lookup( l );
+				oPgLetterLookup = $rootScope.lookup( l );
 				pgLetterFirst = oPgLetterLookup.pg; pgLetterLast = oPgLetterLookup.pgEnd;
 				nDataParts = data.split(' ') && data.split(' ').length; 
 			}
@@ -124,45 +125,45 @@ var statusController = function($scope, $route, $routeParams, $location, $http){
 				isPgRange = regexp.test(d);
 				if(d && !isPgRange && parseInt(d)){
 					start = end = parseInt(d);
-					oPgLookup = oPgEndLookup = findApproxPageNo(l + d);
+					oPgLookup = oPgEndLookup = $rootScope.findApproxPageNo(l + d);
 				}else if(d && isPgRange){
 					var matches = d.match( regexp );
 					if(matches && (start=parseInt(matches[1])) && (end=parseInt(matches[2])) ){
-						oPgLookup = findApproxPageNo(l + start);
-						oPgEndLookup = findApproxPageNo(l + end);
+						oPgLookup = $rootScope.findApproxPageNo(l + start);
+						oPgEndLookup = $rootScope.findApproxPageNo(l + end);
 					}
 				}else if(!d){ //this processes empty letters.
-					pageStatus[l] = "(" + pgLetterFirst + "-" + pgLetterLast + ")";
+					$rootScope.pageStatus[l] = "(" + pgLetterFirst + "-" + pgLetterLast + ")";
 					return;
 				}
 				pgStart = oPgLookup.pg; pgEnd = oPgEndLookup.pgEnd;
 				//_log( {l: l, d: d, start: start, end: end, pgStart: pgStart, pgEnd: pgEnd} );
 				arr = arr.concat( _.range(start, end+1) ); //push all the topic indexes.
 				arrPg = arrPg.concat( _.range(pgStart, pgEnd+1) );
-				pageStatus[l] = (pageStatus[l] || "");
+				$rootScope.pageStatus[l] = ($rootScope.pageStatus[l] || "");
 				
 				//At beginning: any missed pages?
 				if(i == 0 && pgLetterFirst < pgStart){
-					pageStatus[l] += "(" + pgLetterFirst + "-" + (-1+pgStart) + ") ";
+					$rootScope.pageStatus[l] += "(" + pgLetterFirst + "-" + (-1+pgStart) + ") ";
 				}
 				//in middle: any missed pages?
 				if( pgPrevious && pgPrevious < pgStart ){ //append missing pages, in brackets
-					pageStatus[l] += "(" + (1+pgPrevious) + "-" + (-1+pgStart) + ") ";
+					$rootScope.pageStatus[l] += "(" + (1+pgPrevious) + "-" + (-1+pgStart) + ") ";
 				}
-				pageStatus[l] += pgStart + "-" + pgEnd;
+				$rootScope.pageStatus[l] += pgStart + "-" + pgEnd;
 				//in end: any missed pages?
 				if(i >= (-1+nDataParts)){
 					if(pgLetterLast > pgEnd)
-						pageStatus[l] += " (" + (1+pgEnd) + "-" + pgLetterLast + ")";
-				}else{ pageStatus[l] += " "; }
+						$rootScope.pageStatus[l] += " (" + (1+pgEnd) + "-" + pgLetterLast + ")";
+				}else{ $rootScope.pageStatus[l] += " "; }
 				//All done. store last page processed in this iteration.
 				pgPrevious = pgEnd;			
 				o[l] = arr;
 				oo[l] = arrPg;
 			});
 		});
-		_log( o );_log( oo );_log( pageStatus ); 
-		return pageStatus;
+		$rootScope._log( o );$rootScope._log( oo );$rootScope._log( $rootScope.pageStatus ); 
+		return $rootScope.pageStatus;
 	}
 	
 	$scope.getRange = function(data){
@@ -178,9 +179,9 @@ var statusController = function($scope, $route, $routeParams, $location, $http){
 	$scope.letters = _.map(SYNONYMS_INDEX, function(o){ return o.l; });
 	$scope.lettersLong = _.map(SYNONYMS_INDEX, function(o){ return o.ll; });
 
-	$scope.click = function(o){		_log(o);
+	$scope.click = function(o){		$rootScope._log(o);
 		var pg = o.pg, letter = o.l, pgLetterStart, oLookup, id;
-		id = findLetterEntryFromPage( pg );
+		id = $rootScope.findLetterEntryFromPage( pg );
 		console.log( id );
 		location.href = '#/' + id;
 	}

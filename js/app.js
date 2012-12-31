@@ -22,6 +22,10 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 			templateUrl: 'partials/status.html',
 			controller: 'statusController'
 	});
+	$routeProvider.when('/page/:pg', {
+			templateUrl: 'content/urlrouter.html',
+			controller: 'PageController'
+	});
 	$routeProvider.when('/:primaryNav', {// '/:secondaryNav', {
             templateUrl: 'content/urlrouter.html',
             controller: 'RouteController'
@@ -39,8 +43,8 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
     }
   });
   
-  function RouteController($scope, $routeParams) {console.log('RouteController ' + JSON.stringify($routeParams) );
-		var path = '', number='', hash = $routeParams.primaryNav, mode = $routeParams.mode;
+  function RouteController($scope, $routeParams, $rootScope) {console.log('RouteController ' + JSON.stringify($routeParams) );
+		var path = '', number='', hash = $routeParams.primaryNav, mode = $routeParams.mode, id, letter, max;
 		if(hash){
 			var arr = hash.match(/\d+$/), arr2 = hash.match(/[^\d]+/);
 			if(arr && arr[0]){	number = arr[0]; }
@@ -49,17 +53,55 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
         //$scope.templateUrl = 'resources/angular/templates/nav/'+$routeParams.primaryNav+'/'+$routeParams.secondaryNav+'.html';
 		if(number){
 			$scope.templateUrl = 'content/' + path + '/'+$routeParams.primaryNav+ '.html';
-			$scope.synonymSelected = path + number;
+			$scope.synonymSelected = id = path + number; 
+			letter = path; max = parseInt(_.where(SYNONYMS_INDEX, {l: letter})[0].n);
 		}else{
 			$scope.templateUrl = 'content/' + $routeParams.primaryNav+ '.html';
 		}
 
-		$scope.mode = mode;
 		var IDs = ['', 'trans', 'book', 'pdf', 'info'];
 		if( _.indexOf(IDs, mode) != -1){
 			$scope.tab = _.indexOf(IDs, mode);
 		}
 		setTimeout("urlCheck('" + $scope.templateUrl + "', '" + hash + "')", 0);
+		$rootScope.mLetter = letter; //"Alif mamdooah";
+		$rootScope.mIndexRange = _.range(1, 1+ max);//$scope.indexCount); 
+		console.log( max ); console.log( $rootScope.mIndexRange ); console.log(number);
+		$rootScope.mIndex = number;
+		$rootScope.mPage = (findApproxPageNo(id) && (findApproxPageNo(id)).pg ) || 67;
+		$rootScope.mMode = mode;
+    }
+
+  function PageController($scope, $routeParams, $rootScope) {console.log('PageController ' + JSON.stringify($routeParams) );
+		var pg = $routeParams.pg, id, hash;
+		if( !(pg = parseInt(pg)) ){ console.log('FATAL ERROR: invalid param ' + pg); return; }
+		id = hash = $rootScope.findLetterEntryFromPage(pg);
+
+		var path = '', number='', mode = $routeParams.mode, letter, max;
+		if(hash){
+			var arr = hash.match(/\d+$/), arr2 = hash.match(/[^\d]+/);
+			if(arr && arr[0]){	number = arr[0]; }
+			if(arr2 && arr2[0]){ path = arr2[0]; } console.log(path +' '+ number);
+		}
+		if(number){
+			$scope.templateUrl = 'content/' + path + '/'+id+ '.html';
+			$scope.synonymSelected = id = path + number; 
+			letter = path; max = parseInt(_.where(SYNONYMS_INDEX, {l: letter})[0].n);
+		}else{
+			$scope.templateUrl = 'content/' + id+ '.html';
+		}
+
+		var IDs = ['', 'trans', 'book', 'pdf', 'info'];
+		if( _.indexOf(IDs, mode) != -1){
+			$scope.tab = _.indexOf(IDs, mode);
+		}
+		setTimeout("urlCheck('" + $scope.templateUrl + "', '" + hash + "')", 0);
+		$rootScope.mLetter = letter; //"Alif mamdooah";
+		$rootScope.mIndexRange = _.range(1, 1+ max);//$scope.indexCount); 
+		console.log( max ); console.log( $rootScope.mIndexRange ); console.log(number);
+		$rootScope.mIndex = number;
+		$rootScope.mPage = (findApproxPageNo(id) && (findApproxPageNo(id)).pg ) || 67;
+		$rootScope.mMode = mode;
     }
 	
 	var urlCheck = function( url, hash ){console.log('urlCheck ' + url + ' '+ hash);
