@@ -26,7 +26,25 @@ var statusController = function($scope, $route, $routeParams, $location, $http){
 			console.log(prefix +" Assert failed! ***********"); //debugger;
 		}
 	}
-
+	
+	var findLetterEntryFromPage = function(pageToFind){
+	  var match = -2, oLetterLookup, offsets, letter, index, maxEntry; 
+	  _.find(SYNONYMS_INDEX, function(o, key, list){
+		  ++match; return parseInt(o.pg) > pageToFind; 
+		}, match); 
+	  if(match < 0){ return; } //invalid?
+	  oLetterLookup = SYNONYMS_INDEX[match];
+	  letter = oLetterLookup.l;
+	  maxEntry = oLetterLookup.n;
+	  //console.log( JSON.stringify(oLetterLookup) );
+	  if((findApproxPageNo(letter + 1) ).pg == pageToFind) return letter + 1;
+	  index = 1;
+	  for(; (findApproxPageNo(letter + index) ).pg <= pageToFind && index <= maxEntry; ++index){
+	  }
+	  if(index-1 <= 0) return letter + 1;
+	  return ( letter + (index-1) );
+	}
+	
 	var findApproxPageNo = function(id, offset){
 		var pageno, _html='', page_offset=0; if(!offset) offset = 0;
 		var sectionAlphabet = id && id.match( /[^\d]*/ ), sectionNumber = id && id.match( /\d+/g );
@@ -159,35 +177,13 @@ var statusController = function($scope, $route, $routeParams, $location, $http){
 	$scope.pageStatus = getStatus();
 	$scope.letters = _.map(SYNONYMS_INDEX, function(o){ return o.l; });
 	$scope.lettersLong = _.map(SYNONYMS_INDEX, function(o){ return o.ll; });
-/*	$scope.roots = _.without( _.uniq(_.map(SYNONYMS_DETAILS, function(o){ return o.root; }) ), undefined );
-	$scope.EnToAr = EnToAr;
-	
-	$scope.getRoots = function(){
-		return _.chain(SYNONYMS_DETAILS)
-				.map(function(sd){ return sd.root; })
-				.uniq()
-				.value();
-	}
-	
-	$scope.mapTopicToRoots = function(topicID){
-		return _.chain(SYNONYMS_DETAILS)
-		 .filter(function(sd){ return sd.id == topicID; })
-		 .map(function(sd){ return sd.root; })
-		 .uniq()
-		 .value();
-	}
-	
-	$scope.mapRootToTopics = function(root){
-		return _.chain(SYNONYMS_DETAILS)
-		 .filter(function(sd){ return sd.root == root; })
-		 .map(function(sd){ return sd.id; })
-		 .uniq()
-		 .map(function(id){ 
-			  return _.find( SYNONYMS, function(s){ return s.id == id })
-		  })
-		 .map(function(s){ return s.topic; })
-		 .value();
-	}
 
-	$scope.roots = $scope.getRoots();*/
+	$scope.click = function(o){		_log(o);
+		var pg = o.pg, letter = o.l, pgLetterStart, oLookup, id;
+		id = findLetterEntryFromPage( pg );
+		console.log( id );
+	}
+	//$scope.mouseover = function(o){
+	//	_log(o);
+	//}	
 }
