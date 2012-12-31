@@ -173,8 +173,10 @@ var synonymsController = function($scope, $route, $routeParams, $location, $http
 	$scope.$location = $location;
 	$scope.$routeParams = $routeParams;
 	
-	$rootScope.mLetter = "A"; //"Alif mamdooah";
+	$rootScope.mLetter = "A"; 
+	$rootScope.mLetterLong = "Alif mamdooah";
 	$rootScope.mIndex = 1;
+	$rootScope.mID = "A1";
 	$rootScope.mIndexRange = _.range(1, 1+ 29);//$scope.indexCount);
 	$rootScope.mPage = 67;
 	//$scope.indexCount = (_.where(SYNONYMS_INDEX, {l: $scope.letter}))[0].n;
@@ -220,7 +222,7 @@ var synonymsController = function($scope, $route, $routeParams, $location, $http
 		$scope.synonymSelected = synonym; console.log( synonym );
 		//$scope.synonymDetailSelected = {id: synonym.id};
 		$location.path(synonym.id); // path not hash
-		$scope.tabClick($scope.tab, ($scope.synonymSelected || SYNONYMS[0]).id); //$scope.tab = 1;
+		$rootScope.tabClick($scope.tab, ($scope.synonymSelected || SYNONYMS[0]).id); //$scope.tab = 1;
 	}
 	
 	$scope.tableDetailRowClicked = function(synonymdetail, index){
@@ -253,7 +255,9 @@ var synonymsController = function($scope, $route, $routeParams, $location, $http
 		console.log( letter );
 	}
 	
-	$scope.tabClick = function(tabNo, id){
+	$rootScope.tabClick = function(tabNo, id){
+		tabNo = tabNo || $rootScope.mTab || 1;
+		$rootScope.mTab = tabNo;
 		var IDs = TABLIST; //['', 'trans', 'book', 'pdf', 'info'];
 		if(tabNo <= 0 || tabNo > IDs.length) return;
 		var element = '#tab-' + IDs[tabNo], _html = '';
@@ -292,7 +296,7 @@ var synonymsController = function($scope, $route, $routeParams, $location, $http
 		$(element).show();
 	}
 	var tabno = _.indexOf(['', 'trans', 'book', 'pdf', 'info'], $routeParams.mode);
-	if(tabno && tabno > 0){ $scope.tab = tabno; $scope.tabClick(tabno, ($scope.synonymSelected || $scope.synonyms[0]).id); }
+	if(tabno && tabno > 0){ $scope.tab = tabno; $rootScope.tabClick(tabno, ($scope.synonymSelected || $scope.synonyms[0]).id); }
 	//$http.get( 'content/A/A1.html').success(	function(data){ 
 	//	$scope.contentpane = data; debugger;
 	//});	

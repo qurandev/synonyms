@@ -44,7 +44,7 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
   });
   
   function RouteController($scope, $routeParams, $rootScope) {console.log('RouteController ' + JSON.stringify($routeParams) );
-		var path = '', number='', hash = $routeParams.primaryNav, mode = $routeParams.mode, id, letter, max;
+		var path = '', number='', hash = $routeParams.primaryNav, mode = $routeParams.mode, id, letter, letterLong, max;
 		if(hash){
 			var arr = hash.match(/\d+$/), arr2 = hash.match(/[^\d]+/);
 			if(arr && arr[0]){	number = arr[0]; }
@@ -55,6 +55,7 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 			$scope.templateUrl = 'content/' + path + '/'+$routeParams.primaryNav+ '.html';
 			$scope.synonymSelected = id = path + number; 
 			letter = path; max = parseInt(_.where(SYNONYMS_INDEX, {l: letter})[0].n);
+			letterLong = (_.where(SYNONYMS_INDEX, {l: letter})[0].ll);
 		}else{
 			$scope.templateUrl = 'content/' + $routeParams.primaryNav+ '.html';
 		}
@@ -64,12 +65,15 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 			$scope.tab = _.indexOf(IDs, mode);
 		}
 		setTimeout("urlCheck('" + $scope.templateUrl + "', '" + hash + "')", 0);
-		$rootScope.mLetter = letter; //"Alif mamdooah";
+		$rootScope.mLetter = letter;
+		$rootScope.mLetterLong = letterLong;
 		$rootScope.mIndexRange = _.range(1, 1+ max);//$scope.indexCount); 
 		console.log( max ); console.log( $rootScope.mIndexRange ); console.log(number);
 		$rootScope.mIndex = number;
+		$rootScope.mID = id;
 		$rootScope.mPage = (findApproxPageNo(id) && (findApproxPageNo(id)).pg ) || 67;
 		$rootScope.mMode = mode;
+		$rootScope.tabClick();
     }
 
   function PageController($scope, $routeParams, $rootScope) {console.log('PageController ' + JSON.stringify($routeParams) );
@@ -77,7 +81,7 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 		if( !(pg = parseInt(pg)) ){ console.log('FATAL ERROR: invalid param ' + pg); return; }
 		id = hash = findLetterEntryFromPage(pg);
 
-		var path = '', number='', mode = $routeParams.mode, letter, max;
+		var path = '', number='', mode = $routeParams.mode, letter, letterLong, max;
 		if(hash){
 			var arr = hash.match(/\d+$/), arr2 = hash.match(/[^\d]+/);
 			if(arr && arr[0]){	number = arr[0]; }
@@ -86,7 +90,8 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 		if(number){
 			$scope.templateUrl = 'content/' + path + '/'+id+ '.html';
 			$scope.synonymSelected = id = path + number; 
-			letter = path; max = parseInt(_.where(SYNONYMS_INDEX, {l: letter})[0].n);
+			letter = path; max = parseInt(_.where(SYNONYMS_INDEX, {l: letter})[0].n); 
+			letterLong = (_.where(SYNONYMS_INDEX, {l: letter})[0].ll);
 		}else{
 			$scope.templateUrl = 'content/' + id+ '.html';
 		}
@@ -96,12 +101,15 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 			$scope.tab = _.indexOf(IDs, mode);
 		}
 		setTimeout("urlCheck('" + $scope.templateUrl + "', '" + hash + "')", 0);
-		$rootScope.mLetter = letter; //"Alif mamdooah";
+		$rootScope.mLetter = letter;
+		$rootScope.mLetterLong = letterLong;
+		$rootScope.mID = id;
 		$rootScope.mIndexRange = _.range(1, 1+ max);//$scope.indexCount); 
 		console.log( max ); console.log( $rootScope.mIndexRange ); console.log(number);
 		$rootScope.mIndex = number;
 		$rootScope.mPage = (findApproxPageNo(id) && (findApproxPageNo(id)).pg ) || 67;
 		$rootScope.mMode = mode;
+		$rootScope.tabClick();
     }
 	
 	var urlCheck = function( url, hash ){console.log('urlCheck ' + url + ' '+ hash);

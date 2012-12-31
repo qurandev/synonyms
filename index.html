@@ -327,7 +327,7 @@
 						<li><a href="#/appendices">Appendices</a></li>
 						
 						<BR><span class="divider">|</span>
-						<span ng-bind="mLetter + mIndex" class="muted badge badge-inverse"></span>
+						<span ng-bind="mLetterLong +' #'+ mIndex" class="muted badge badge-inverse"></span>
 						Page
 						<select ng-options="opt for opt in pageRange" ng-model="mPage" class="pageDD"></select>
 						Topic   
@@ -340,11 +340,11 @@
 						<div ng-view id="ng-view">
 						</div>
 					</div>
-					<div class="tab-pane"  ng:show="tab==2" id="tab-book">
+					<div class="tab-pane"  ng:show="tab==2" id="tab-book" Xng-bind="tab-book">
 					</div>
-					<div class="tab-pane"  ng:show="tab==3" id="tab-pdf">
+					<div class="tab-pane"  ng:show="tab==3" id="tab-pdf" Xng-bind="tab-pdf">
 					</div>
-					<div class="tab-pane"  ng:show="tab==4" id="tab-info">
+					<div class="tab-pane"  ng:show="tab==4" id="tab-info" Xng-bind="tab-info">
 					</div>
 				  </div>
 				</div>
