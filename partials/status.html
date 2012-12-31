@@ -1,22 +1,64 @@
+<style>
+.statusHeading{
+	padding-bottom: 10px;
+}
+span.status a {
+	padding: 2px 2px 0px 2px;
+	text-align: center;
+	border: solid gray 1px;
+	width: 25px;
+	height: 18px;
+	display: block;
+	float: left;
+	margin: 1px;
+	font-size: 12px;
+	text-decoration: none;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	border-radius: 3px;
+	color: white!important;
+}
 
-<!--<script src="controllers/searchController.js"></script>-->
-<!--<script type="text/ng-template" id="partials/search.html">-->
+span.status a, span.status a:hover, .status_h_50, .status_h_50:hover {
+background-color: #FAFF31; //yellow
+color: black;
+}
+
+span.status a.true, span.status a.true:hover, .status_h_75, .status_h_75:hover {
+background-color: #91BF4B; //green
+color: white!important;
+}
+
+span.status a.false, span.status a.false:hover, .status_h_25, .status_h_25:hover {
+background-color: #BB312F; //maroon
+color: white!important;
+}
+
+</style>
+
 <div class="container-fluid">
   <div class="row-fluid">
-	<div class="span3">
-		<div ng-include src="'partials/topicToRoots.html'"></div>
-	</div>
-	<div class="span3">
-		<div ng-include src="'partials/words.html'"></div>
-	</div>
-	<div class="span3">
-		<div ng-include src="'partials/rootToTopics.html'"></div>
-	</div>
-	<div class="span3">
-		<div ng-include src="'partials/rootToVerses.html'"></div>
+	<div class="span12">
+		<div ng-include src="'partials/status.html'"></div>
 	</div>
   </div>
 </div>
+
+<script type="text/ng-template" id="partials/status.html">	<!-- {{pageStatus}} -->
+	<H4>Pages translation status</H4>
+	<div ng-repeat="key in letters" style="clear:both;"><HR>
+		<div ng-bind="lettersLong[$index] + '  ('+key+')'" class="muted statusHeading" style="font-size: 2em;"></div>
+		<span ng-init="value = pageStatus[key]"></span>
+		<span ng-repeat="item in value.split(' ')">			<!-- {{item}} ... -->
+			<span ng-init="range = getRange(item)" class="status">
+				<a ng-repeat="box in range.data" class="{{range.isDone}}">{{box}}</a>
+			</span>
+		</span>
+		<BR/>
+	</div>
+	
+</script>
 
 
 <script type="text/ng-template" id="partials/rootToVerses.html">

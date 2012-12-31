@@ -18,6 +18,10 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 			templateUrl: 'partials/search.html',
 			controller: 'searchController'
 	});
+	$routeProvider.when('/status', {
+			templateUrl: 'partials/status.html',
+			controller: 'statusController'
+	});
 	$routeProvider.when('/:primaryNav', {// '/:secondaryNav', {
             templateUrl: 'content/urlrouter.html',
             controller: 'RouteController'
