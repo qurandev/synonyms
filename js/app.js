@@ -67,11 +67,11 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 		setTimeout("urlCheck('" + $scope.templateUrl + "', '" + hash + "')", 0);
 		$rootScope.mLetter = letter;
 		$rootScope.mLetterLong = letterLong;
-		$rootScope.mIndexRange = _.range(1, 1+ max);//$scope.indexCount); 
+		$rootScope.mIndexRange = max ? _.range(1, 1+ max) : [];//$scope.indexCount); 
 		console.log( max ); console.log( $rootScope.mIndexRange ); console.log(number);
 		$rootScope.mIndex = number;
 		$rootScope.mID = id;
-		$rootScope.mPage = (findApproxPageNo(id) && (findApproxPageNo(id)).pg ) || 67;
+		$rootScope.mPage = (number && findApproxPageNo(id) && (findApproxPageNo(id)).pg ) || 67;
 		$rootScope.mMode = mode;
 		$rootScope.tabClick();
     }
@@ -104,7 +104,7 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 		$rootScope.mLetter = letter;
 		$rootScope.mLetterLong = letterLong;
 		$rootScope.mID = id;
-		$rootScope.mIndexRange = _.range(1, 1+ max);//$scope.indexCount); 
+		$rootScope.mIndexRange = max ? _.range(1, 1+ max) : [];//$scope.indexCount); 
 		console.log( max ); console.log( $rootScope.mIndexRange ); console.log(number);
 		$rootScope.mIndex = number;
 		$rootScope.mPage = (findApproxPageNo(id) && (findApproxPageNo(id)).pg ) || 67;

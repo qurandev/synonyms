@@ -173,7 +173,7 @@ var statusController = function($scope, $route, $routeParams, $location, $http, 
 	}
 	
 	var findApproxPageNo = function(id, offset){
-		var pageno, _html='', page_offset=0; if(!offset) offset = 0;
+		var pageno, _html='', page_offset=0, section_offset=0; if(!offset) offset = 0;
 		var sectionAlphabet = id && id.match( /[^\d]*/ ), sectionNumber = id && id.match( /\d+/g );
 		var sectionAlphabetObj = sectionAlphabet && _.find( SYNONYMS_INDEX, function(o){ return o.l == sectionAlphabet; }); 
 		if(sectionAlphabetObj && parseInt(sectionAlphabetObj.pg)){ 
@@ -187,9 +187,12 @@ var statusController = function($scope, $route, $routeParams, $location, $http, 
 				_html = '';
 			}
 		}catch(e){debugger;}
+		if(pageOffsets[sectionAlphabet] && pageOffsets[sectionAlphabet].length > sectionNumber){
+			section_offset = (pageOffsets[sectionAlphabet][sectionNumber]) || 0;
+		}
 		return {id: id,
 				pg: pageno + offset + page_offset, 
-				pgEnd: pageno + offset + page_offset + (pageOffsets[sectionAlphabet][sectionNumber] || 0), 
+				pgEnd: pageno + offset + page_offset + section_offset, 
 				l: (pageOffsets[sectionAlphabet][sectionNumber] || 0),
 				html: _html};
 	}
