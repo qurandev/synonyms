@@ -1,10 +1,35 @@
 <div class="container-fluid">
   <div class="row-fluid">
 	<div class="span12">
+		<div ng-include src="'partials/topics-status.html'"></div><BR>
+		<div ng-include src="'partials/words-status.html'"></div><BR>
 		<div ng-include src="'partials/status.html'"></div>
 	</div>
   </div>
 </div>
+
+<script type="text/ng-template" id="partials/topics-status.html">	<!-- {{pageStatus}} -->
+	<H4>Topics search</H4>
+	<input type=text ng-model="search_topics" class="search-query" placeholder="Search for a topic" style="width:20%;align:center;margin-bottom:11px;" />&nbsp;&nbsp;
+	Show <select ng-options="opt for opt in [100, 200, 400, 1000]" ng-model="pagesize" ng-init="pagesize=100" class="pageDD"></select>entries
+	&nbsp;&nbsp;<span class="alert alert-info">Note: Limiting to first {{pagesize}} entries. Use search to narrow your selection.</span><BR/>
+	<span ng-repeat="key in (synonyms | filter:search_topics | limitTo:pagesize)" style="clear:both;padding-bottom:20px!important;">
+		<A HREF="#/{{key.id}}" ng-bind="key.topic" class="label label-success"></A>&nbsp;
+		<span ng-show="!$first && $index%35 == 0"><BR/><BR/></span>
+	</span>
+</script>
+
+<script type="text/ng-template" id="partials/words-status.html">	<!-- {{pageStatus}} -->
+	<H4>Words search</H4>
+	<input type=text ng-model="search_words" class="search-query" placeholder="arabic word (transliteration) search.." style="width:20%;align:center;margin-bottom:11px;" />&nbsp;&nbsp;
+	Show <select ng-options="opt for opt in [200, 400, 1000, 3000]" ng-model="pagesize" ng-init="pagesize=200" class="pageDD"></select>entries
+	&nbsp;&nbsp;<span class="alert alert-info">Note: Limiting to first {{pagesize}} entries. Use search to narrow your selection.</span><BR/>
+	<span ng-repeat="key in (synonymdetails | filter:search_words | limitTo:pagesize)" style="clear:both;padding-bottom:20px!important;">
+		<A HREF="#/{{key.id}}" ng-bind="key.wordEn" class="label label-info"></A>&nbsp;
+		<span ng-show="!$first && $index%50 == 0"><BR/><BR/></span>
+	</span>
+</script>
+
 
 <script type="text/ng-template" id="partials/status.html">	<!-- {{pageStatus}} -->
 	<H4>Pages translation status</H4>
@@ -19,5 +44,4 @@
 		</span>
 		<BR/>
 	</div>
-	
 </script>
