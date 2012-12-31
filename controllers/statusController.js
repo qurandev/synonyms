@@ -182,6 +182,7 @@ var statusController = function($scope, $route, $routeParams, $location, $http){
 		var pg = o.pg, letter = o.l, pgLetterStart, oLookup, id;
 		id = findLetterEntryFromPage( pg );
 		console.log( id );
+		location.href = '#/' + id;
 	}
 	//$scope.mouseover = function(o){
 	//	_log(o);
