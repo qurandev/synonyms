@@ -28,7 +28,7 @@ var statusController = function($scope, $route, $routeParams, $location, $http, 
 	}
 	
 	$rootScope.findLetterEntryFromPage = findLetterEntryFromPage;
-	
+	$rootScope.findApproxPageNo = findApproxPageNo;
 
 
 	$rootScope.pageStatus = {};
