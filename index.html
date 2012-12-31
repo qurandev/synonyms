@@ -52,11 +52,11 @@
 	  <TBODY>
 		<tr ng-repeat="item in synonymsindex"  ng-click="tableRowClicked(synonym, $index)">
 			<!--<td><XA HREF="#{{item.l}}1"><SPAN ng-bind="1 + $index"></SPAN></XA></td>-->
-			<td><A HREF="#{{item.l}}1">
+			<td><A HREF="#/{{item.l}}1">
 				<SPAN class=arabic ng-bind="(item.l.length ==1 && EnToAr(item.l) ) || ''"></SPAN>&nbsp;
 				<SPAN ng-bind="item.ll"></SPAN></A>
 			</td>
-			<td><A HREF="#{{item.l}}1"><SPAN ng-bind="item.pg"></SPAN></A></td>
+			<td><A HREF="#/{{item.l}}1"><SPAN ng-bind="item.pg"></SPAN></A></td>
 			<TD>
 			 <div id=work class="progress progress-success progress-striped">
 			  <div class="bar" style="width: {{item.d*100/item.n}}%"></div>
@@ -86,8 +86,8 @@
 	  <TBODY>
 		<tr ng-repeat="item in (synonyms | filter:topic_keyword | limitTo:pageSize*2)"  ng-click="tableRowClicked(synonym, $index)">
 			<!--<td><XA HREF="#{{item.id}}"><SPAN ng-bind="1 + $index"></SPAN></XA></td>-->
-			<td><A HREF="#{{item.id}}"><SPAN ng-bind="item.topic"></SPAN></A></td>
-			<td><A HREF="#{{item.id}}"><SPAN ng-bind="item.topicUr.toLowerCase()"></SPAN></A></td>
+			<td><A HREF="#/{{item.id}}"><SPAN ng-bind="item.topic"></SPAN></A></td>
+			<td><A HREF="#/{{item.id}}"><SPAN ng-bind="item.topicUr.toLowerCase()"></SPAN></A></td>
 		</tr>
 	  </TBODY>
 	</TABLE>
@@ -106,8 +106,8 @@
 	  <TBODY>
 		<tr ng-repeat="item in (synonymdetails | filter:word_keyword | limitTo:pageSize*2)"  ng-click="tableRowClicked(synonym, $index)">
 			<!--<td><XA HREF="#{{item.id}}"><SPAN ng-bind="1 + $index"></SPAN></XA></td>-->
-			<td dir=rtl><XA HREF="#{{item.word}}"><SPAN ng-bind="item.word"></SPAN></XA></td>
-			<td><XA HREF="#{{item.wordEn}}"><SPAN ng-bind="item.wordEn"></SPAN></XA></td>
+			<td dir=rtl><A HREF="#/{{item.id}}"><SPAN ng-bind="item.word"></SPAN></A></td>
+			<td><A HREF="#/{{item.id}}"><SPAN ng-bind="item.wordEn"></SPAN></A></td>
 		</tr>
 	  </TBODY>
 	</TABLE>
@@ -200,7 +200,7 @@
 				</A>
 			</td>
 			<!--<td><A HREF="#{{synonym.id}}"><span ng-bind="synonym.topicUr.toLowerCase().substring(0,12) + '…'" title="{{synonym.topicUr}}" class="muted"></span></A></td>-->
-			<td><A HREF="#{{synonym.id}}"><span ng-bind="synonym.pg || '-'" class="muted"></span></A></td>
+			<td><A HREF="#/{{synonym.id}}"><span ng-bind="synonym.pg || '-'" class="muted"></span></A></td>
 			<!-- <td><A HREF="#{{synonym.id}}"><span ng-bind="synonym.count || '-'" class="muted"></span></A></td> -->
 		</tr>
 	  </TBODY>

@@ -247,6 +247,7 @@ var synonymsController = function($scope, $route, $routeParams, $location, $http
 			hash = hash.replace(/\#\//g, '');
 			synonym = _.find(SYNONYMS, function(o){return o.id == hash;});
 			if(synonym && synonym[property]){ ret = '['+ synonym[property] +'] '; }
+			else ret = hash + ': ';
 		}
 		return ret;
 	}
