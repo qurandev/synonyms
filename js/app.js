@@ -7,10 +7,10 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 	//$locationProvider.html5Mode(true);
     //$routeProvider.when('/A1', {templateUrl: 'content/A/A1.html', controller: synonymsController});
 	$routeProvider.when('', {
-			//templateUrl: 'content/urlrouter.html',
-			//controller: 'synonymsController'
-			templateUrl: 'partials/status.html',
-			controller: 'statusController'
+			templateUrl: 'content/urlrouter.html',
+			controller: 'synonymsController'
+			//templateUrl: 'partials/status.html',
+			//controller: 'statusController'
 	});
 	$routeProvider.when('/index', {
 			templateUrl: 'partials/index.html',
