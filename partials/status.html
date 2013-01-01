@@ -32,9 +32,15 @@
 
 
 <script type="text/ng-template" id="partials/status.html">	<!-- {{pageStatus}} -->
-	<H4>Pages translation status</H4>
+	<HR/><H4>Pages translation status</H4>
+	Total progress: 
+	<B><span ng-bind="mStatus.percentPg"></span>%</B> pages complete (<B><span ng-bind="mStatus.donePg"></span></B> of <span ng-bind="mStatus.totalPg"></span> total pages)
+	<span class="pull-right muted"><B><span ng-bind="mStatus.percent"></span>%</B> topics complete (<B><span ng-bind="mStatus.done"></span></B> of <span ng-bind="mStatus.total"></span> total topics)</span>
+	
 	<div ng-repeat="key in letters" style="clear:both;"><HR>
 		<div ng-bind="lettersLong[$index] + '  ('+key+')'" class="muted statusHeading" style="font-size: 2em;"></div>
+		<span ng-bind="'Pages ' + topicsStatus[key].donePg +'/'+ topicsStatus[key].totalPg + ' done' "></span>
+		<span ng-bind="'Topics ' + topicsStatus[key].data +' done ('+ topicsStatus[key].done + '/'+ topicsStatus[key].total +')' " class="pull-right muted"></span><BR/>
 		<span ng-init="value = pageStatus[key]"></span>
 		<span ng-repeat="item in value.split(' ')">			<!-- {{item}} ... -->
 			<span ng-init="range = getRange(item)" class="status">

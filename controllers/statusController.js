@@ -7,6 +7,7 @@ var statusController = function($scope, $route, $routeParams, $location, $http, 
 		o = _.where(SYNONYMS_INDEX, {l: letter}); //console.log( JSON.stringify(o) );
 		$rootScope.assert(o && o.length > 0, "lookup pgStart "+letter);
 		pgStart = o[0].pg;
+		ret.n = o[0].n; ret.d = o[0].d;
 		ret.pg = parseInt( pgStart ); //console.log( letter + " pgStart " + pgStart );
 
 		pgCount = _.reduce(pageOffsets[ letter ], function(a,b){return (a||0) + (b||0); }, 0);
@@ -74,13 +75,26 @@ var statusController = function($scope, $route, $routeParams, $location, $http, 
 		'appendix5': [991,3,2,1,2, 2,3,3,1,]*/
 	}
 
+	$rootScope.totalDone = function(){
+		var o = {};
+		o.done  = _.reduce( _.map($rootScope.topicsStatus, function(o){return parseInt( o.done );}), function(a,b){return a+b;});
+		o.total = _.reduce( _.map($rootScope.topicsStatus, function(o){return parseInt( o.total );}), function(a,b){return a+b;});
+		o.percent = (100*o.done/o.total).toFixed();
+		o.donePg  = _.reduce( _.map($rootScope.topicsStatus, function(o){return parseInt( o.donePg );}), function(a,b){return a+b;});
+		o.totalPg = _.reduce( _.map($rootScope.topicsStatus, function(o){return parseInt( o.totalPg );}), function(a,b){return a+b;});
+		o.percentPg = (100*o.donePg/o.totalPg).toFixed();		
+		$rootScope.mStatus = o;
+		return o;
+	}
+
 	var getStatus = function(){
-		var o = {}, oo = {}, pageStatus = {}, regexp = /(\d+)\-(\d+)/;
+		var o = {}, pageStatus = {}, regexp = /(\d+)\-(\d+)/;
 		$.each( $rootScope.letterStatus, function(l, data){
-			var arr = [], arrPg = [], pgPrevious, pgLast, oPgLookup, oPgEndLookup, oPgLetterLookup, nDataParts, pgLetterFirst, pgLetterLast;
+			var arr = [], arrPg = [], pgPrevious, pgLast, oPgLookup, oPgEndLookup, oPgLetterLookup, nDataParts, pgLetterFirst, pgLetterLast, nEntries=0, nEntriesDone=0, nPages=0;
 			if(l){ 
 				oPgLetterLookup = $rootScope.lookup( l );
-				pgLetterFirst = oPgLetterLookup.pg; pgLetterLast = oPgLetterLookup.pgEnd;
+				nEntries = oPgLetterLookup.n; nEntriesDone = oPgLetterLookup.d;
+				pgLetterFirst = oPgLetterLookup.pg; pgLetterLast = oPgLetterLookup.pgEnd; nPages = oPgLetterLookup.pgCount;
 				nDataParts = data.split(' ') && data.split(' ').length; 
 			}
 			$.each( data.split(' '), function(i, d){
@@ -97,6 +111,7 @@ var statusController = function($scope, $route, $routeParams, $location, $http, 
 					}
 				}else if(!d){ //this processes empty letters.
 					$rootScope.pageStatus[l] = "(" + pgLetterFirst + "-" + pgLetterLast + ")";
+					o[l] = {data: data, done: arr.length, total: nEntries, d: nEntriesDone,  donePg: arrPg.length, totalPg: nPages};
 					return;
 				}
 				pgStart = oPgLookup.pg; pgEnd = oPgEndLookup.pgEnd;
@@ -119,13 +134,18 @@ var statusController = function($scope, $route, $routeParams, $location, $http, 
 					if(pgLetterLast > pgEnd)
 						$rootScope.pageStatus[l] += " (" + (1+pgEnd) + "-" + pgLetterLast + ")";
 				}else{ $rootScope.pageStatus[l] += " "; }
+				arr = arr || []; arrPg = arrPg || [];
 				//All done. store last page processed in this iteration.
-				pgPrevious = pgEnd;			
-				o[l] = arr;
-				oo[l] = arrPg;
+				pgPrevious = pgEnd;
+				o[l] = {data: data, 
+						done: arr.length, 	  total: nEntries, d: nEntriesDone,  
+						donePg: arrPg.length, totalPg: nPages,
+						/*arr: arr, arrPg: arrPg*/};
 			});
 		});
-		$rootScope._log( o );$rootScope._log( oo );$rootScope._log( $rootScope.pageStatus ); 
+		$rootScope._log( o );$rootScope._log( $rootScope.pageStatus ); 
+		$rootScope.topicsStatus = o;
+		$rootScope.totalDone();
 		return $rootScope.pageStatus;
 	}
 	
