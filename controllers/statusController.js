@@ -35,7 +35,7 @@ var statusController = function($scope, $route, $routeParams, $location, $http, 
 	$rootScope.pageStatus = {};
 	
 	$rootScope.whatsNew = {
-		'Jan 22, 2013': {'n': "29-33", 'w': "3 4", 'h': "1 2 6-16", 'b': "39-44", 'p': "4 5"},
+		'Jan 22, 2013': {'n': "29-33", 'w': "3 4", 'h': "1 2 6-16", 'b': "38-45", 'p': "4 5"},
 		'Jan 14, 2013': {'HA': "5-15"},
 		'Jan 12, 2013': {'l': "13-17", 'm': "1-48", 'n': "1-26", 'ch': "18-20"},
 		'Jan 11, 2013': {'j': "5-26", 'p': "30-32", 'ch': "1-8"},
@@ -45,7 +45,7 @@ var statusController = function($scope, $route, $routeParams, $location, $http, 
 	$rootScope.letterStatus = {
 		'A': "1-29",
 		'AA': "1-51",
-		'b': "1-37 39-44 46-80",
+		'b': "1-80",
 		'p': "1 2 4-20 22-32 36-46 47-59",
 		't': "1-8 15 18-27",
 		'tt': "2-8",
