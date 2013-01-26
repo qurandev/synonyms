@@ -2,7 +2,7 @@
 <html lang="en" ng-app="myApp" ng-controller="ayahsController">
 <head>
   <meta charset="utf-8">
-  <title ng-bind="getCurrentSynonymProperty() + 'Mutaradifaat ul Qur\'an'"> بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ Mutaradifaat al Qur'an Translation Project</title>
+  <title ng-bind="'Mutaradifaat ul Qur\'an'"> بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ Mutaradifaat al Qur'an Translation Project</title>
   <link rel="stylesheet" href="css/app.css"/>
 	<!-- CSS Files -->
 	<link type="text/css" href="css/base.css" rel="stylesheet" />
@@ -61,7 +61,7 @@
 		<div class="span6 well">
 			<gcse:search></gcse:search><BR/>
 			<span ng-init="id=getID()"></span>
-			<span ng-init="page=167"></span>
+			<span ng-init="page=67"></span>
 			<span ng-init="suras = findSurasForTopic( getID() )"></span>
 			<span ng-show="suras.refs" ng-bind="'Ayahs in topic: ' + getID()"></span>
 
@@ -69,7 +69,7 @@
 				<A ng-click="setRef(ref)"><span ng-show="ref" ng-bind="ref" class="label label-warn"></span></A>
 			</span><BR>
 
-			<span ng-show="suras.suras" ng-bind="' | Suwar in this topic: '"></span>
+			<span ng-show="suras.suras" ng-bind="' | Suwar in this topic: |'"></span>
 			<span ng-show="suras.suras" ng-repeat="sura in findSurasForTopic( getID() ).suras">
 				<A ng-click="setRef(sura+':1')"><span ng-bind="sura" class="label label-warn"></span></A>
 			</span><BR><HR>
@@ -98,22 +98,17 @@
 
 	<!-- Le javascript
     ================================================== -->
-<!--  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script> -->
-  <script src="lib/angular/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+<!--  <script src="lib/angular/angular.min.js"></script> -->
   <script src="js/app.js"></script>
-  <script src="js/services.js"></script>
-<!--  <script src="controllers/controllers.js"></script>-->
-  <script src="js/mapper.js"></script>
-  <script src="js/filters.js"></script>
-  <script src="js/directives.js"></script>
+  <script src="controllers/ayahsController.js"></script>
+<!--  <script src="js/mapper.js"></script>-->
   <script src="js/jquery-1.8.2.min.js"></script>
   <script src="js/underscore-min.js"></script>
-  <script src="js/yepnope.1.5.4-min.js"></script>
-  <script src="controllers/ayahsController.js"></script>
-<!--  <script src="controllers/statusController.js"></script>-->
   <script type="text/javascript">
 	$(document).ready(function() {
 	   if ($.browser.msie) {
+		 alert('Internet Explorer browser is not fully supported. Please retry in Chrome or Firefox, if you are having issues. Thanks.');
 		 $('#IE-ERRROR').show();// create the error box here
 		 $('#IE-ERROR').attr('style', 'z-index:1!important');
 	   }
