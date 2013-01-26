@@ -1,4 +1,67 @@
+Quran to Synonym topics implementation notes:
 
+
+http://api.globalquran.com/page/16:30/quran-wordbyword
+http://api.globalquran.com/page/16:30/quran-simple
+http://api.globalquran.com/page/16:30/quran-simple|quran-wordbyword
+
+//get JSON data for passed in sura
+var fetchSura = function(sura, ayah){
+	var data, o, dataUrl = "http://api.globalquran.com/page/$REF/quran-wordbyword", ref;
+	ref = (sura || 1) + ":" + (ayah || 1);
+	o = $.getJSON( dataUrl.replace(/\$REF/g, ref) );
+	o.then( function(){ 
+		console.log( arguments ); data = arguments[0]; 
+		var html = '', div; html = format(data);
+		div = $('#z'); if(div.length <= 0){ div = $('body').append('<div id=z/>');}
+		$(div).html( html );	
+	});
+}
+var format = function(data){ var html = '';
+	$.each( data.quran['quran-wordbyword'], function(key,val){
+		$.each(val.verse.split('$'), function(index, word){
+			$.each(word.split('|'), function(i, token){
+				if(i<2){ html += token +'    ';}
+			});
+			html += '         ';
+		});
+		html += '<BR/>'; 
+	});
+	return html;
+}
+
+//Find all topics in current sura:
+var findTopicsForSura = function(sura){
+	var regexp, ret;
+	regexp = new RegExp(" " + sura + "\\:");
+	ret = 
+	_.chain(topicsAyahsMap)
+	 .filter( function(val, key){
+	   return val.r && regexp.test( val.r ); 
+	  })
+	 .map(function(o){
+		 return o.t;
+	  })
+	 .value(); return ret;
+}
+
+var sura = 55;
+fetchSura( sura );
+findTopicsForSura( sura );
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 var lookup = function(letter){
 	var pgStart, pgCount, o, ret = {};
 	ret.l = letter;

@@ -1,3 +1,18 @@
+var map = [], CSV='', DATA = [], ch = 'b', n = 80, i=1;
+var getID = function(id){
+		 line = "content\\" + ch +'\\'+ id + ".html"; console.log(line);
+         $.get(line, function(html){
+           var o = {}; o.id = id.trim(); //path
+           o.v = (html.match(/\d{1,3}\:\d{1,3}/mg) || []).join(' ');
+		   DATA.push( {t: id, r: o.v} );
+		   console.log( id +'\t'+ o.v + '\n' );
+		   if(++i <= n){ getID( ch + i); }
+		   else{ console.log(JSON.stringify(DATA) ); }
+         });
+}
+getID(ch + i);
+
+
 var map = [], CSV='';
 $.get('filelist.txt', function(data){
   console.log(data);

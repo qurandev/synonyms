@@ -12,6 +12,10 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.dir
 			//templateUrl: 'partials/status.html',
 			//controller: 'statusController'
 	});
+	$routeProvider.when('/quran', {
+			templateUrl: 'partials/quran.html',
+			controller: 'ayahsController'
+	});
 	$routeProvider.when('/index', {
 			templateUrl: 'partials/index.html',
 			controller: 'indexController'
