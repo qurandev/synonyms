@@ -6,6 +6,13 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	$rootScope.topicsAyahsMap = topicsAyahsMap;
 	$rootScope.findTopicsForSura = findTopicsForSura;
 	$rootScope.findSurasForTopic = findSurasForTopic;
+//	$rootScope._ = _;
+	
+	
+	$rootScope.suwar = [];
+	_.each( _.range(1, 115), function(i, surano){
+		$rootScope.suwar.push( { id: ++surano, group: parseInt( 1 + surano/10 ), label: 'Surah ' + surano });
+	});
 	
 	$rootScope.fetchSura = function(ref){
 		var data, o, dataUrl = "http://api.globalquran.com/page/$REF/quran-simple|en.sahih";
@@ -26,6 +33,12 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 		return $rootScope.topics = findTopicsForSura($rootScope.sura);
 	}	
 	
+	$rootScope.setSura = function(sura){
+		$rootScope.setRef(sura + ":1");
+	}
+	$rootScope.getSura = function(){
+		return $rootScope.sura = $rootScope.sura || 1;
+	}
 	$rootScope.setRef = function(ref){
 		$rootScope.fetchSura(ref);
 		$rootScope.sura = parseInt( ref ); $rootScope.ref = ref;
@@ -45,7 +58,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 			return $rootScope.IDUrl = 'content/' + path + '/'+ id + '.html';
 		}
 	}
-	$rootScope.id = "A1"; $rootScope.sura = "1"; $rootScope.ref = "1:1"; $rootScope.setRef( $rootScope.ref );
+	$rootScope.id = "A1"; $rootScope.sura = $rootScope.suwar[0].value; $rootScope.ref = "1:1"; $rootScope.setRef( $rootScope.ref );
 }
 
 

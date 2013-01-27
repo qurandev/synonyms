@@ -1,0 +1,16 @@
+.hero-unit{
+	padding: 10px!important;
+}
+.hero-unit, .alert-warn {
+	margin-top: 10px!important;
+	margin-bottom: 10px!important;
+	padding-top: 10px!important;
+	padding-bottom: 10px!important;
+}
+.quranpage{
+	text-align: right;
+}
+.qurantext{
+	font-size: 2em;
+	line-height: 1.5;
+}

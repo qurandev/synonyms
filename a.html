@@ -1,15 +1,24 @@
 ﻿<!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="ayahsController">
+<html lang="en" ng-app="myApp" Xng-controller="aController">
 <head>
   <meta charset="utf-8">
   <title ng-bind="'Mutaradifaat ul Qur\'an'"> بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ Mutaradifaat al Qur'an Translation Project</title>
+  <!--<link rel="stylesheet" href="css/app.css"/> -->
 	<!-- CSS Files -->
 	<link type="text/css" href="css/base.css" rel="stylesheet" />
 	<link type="text/css" href="css/bootstrap.min.css" rel="stylesheet" />
 	<link type="text/css" href="css/bootstrap-responsive.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="css/appnew.css"/>
 <!--	<link type="text/css" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet" />-->
 	<!--[if IE]><script language="javascript" type="text/javascript" src="../../Extras/excanvas.js"></script><![endif]-->
+	<style>
+		.quranpage{
+			text-align: right;
+		}
+		.qurantext{
+			font-size: 2em;
+			line-height: 1.5;
+		}
+	</style>
 </head>
 
 
@@ -48,61 +57,22 @@
 		</div>
 	  </div>
 
-	  <div class="row-fluid">
-		<div class="span6 well" id=topics>
-			<gcse:search></gcse:search><BR/>
-			<span ng-init="id=getID()"></span>
-			<span ng-init="page=67"></span>
-			<span ng-init="suras = findSurasForTopic( getID() )"></span>
-			<span ng-show="suras.refs" ng-bind="'Ayahs in topic: ' + getID()"></span>
 
-			<span ng-show="suras.refs" ng-repeat="ref in findSurasForTopic( getID() ).refs">
-				<A ng-click="setRef(ref)"><span ng-show="ref" ng-bind="ref" class="label label-warn"></span></A>
-			</span><BR>
+<div ng-controller="aController">
+    <select ng-model='form.type' required ng-options='option.value as option.name for option in typeOptions'></select>
+</div>
 
-			<span ng-show="suras.suras" ng-bind="' | Suwar in this topic: |'"></span>
-			<span ng-show="suras.suras" ng-repeat="sura in findSurasForTopic( getID() ).suras">
-				<A ng-click="setRef(sura+':1')"><span ng-bind="sura" class="label label-warn"></span></A>
-			</span><BR><HR>
-			<IFRAME ng-show="getID()" STYLE="height:680px;width:95%;"
-				SRC="{{getIDUrl()}}"></IFRAME>
-			<IFRAME ng-show="page" STYLE="height:680px;width:95%;"
-				SRC="http://archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran?ui=embed#mode/1up/page/n{{ page+17 }}"></IFRAME>
-		</div>
-		<div class="span6 well" id=ayahs>
-		  <div class="pull-left">
-			<span ng-show="topics && sura" ng-bind="'Synonyms in sura: ' "></span>
-			<select
-				ng-model="sura" required 
-				ng-change="setSura(sura)"
-				ng-options="value.id as value.label group by value.group for value in suwar">
-				<option>--</option>
-			</select>
-			<span ng-init="topics = findTopicsForSura(36)"></span>
-			<span ng-show="topics" ng-repeat="topic in getTopics()">
-				<A ng-click="setID(topic)"><span ng-show="topic" ng-bind="topic" class="label label-warn"></span></A>
-			</span>
-		  </div><HR>
-			<div ng-show="qurandata" ng-repeat="(key, verse) in getQuranData()" dir=rtl class="quranpage">
-				<span ng-init="ref = verse.surah + ':' + verse.ayah" ng-bind="'['+ ref +']'" class="label label-info"></span>
-				<span ng-bind="verse.verse" class="qurantext">
-				</span><BR/>
-				<span ng-bind="getQuranTrans()[key].verse">
-				</span>
-				<HR>
-			</div>
-		</div>
-	  </div>
-	</div>
-
+	  
+	  
+	  
+	  
 	<!-- Le javascript
     ================================================== -->
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+ <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
 <!--  <script src="lib/angular/angular.min.js"></script> -->
-  <script src="js/app.js"></script>
-  <script src="controllers/ayahsController.js"></script>
+<!--  <script src="js/app.js"></script> -->
+  <script src="controllers/aController.js"></script>
 <!--  <script src="js/mapper.js"></script>-->
-  <script src="js/jquery-1.8.2.min.js"></script>
   <script src="js/underscore-min.js"></script>
   <script type="text/javascript">
 	$(document).ready(function() {

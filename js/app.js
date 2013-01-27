@@ -6,7 +6,7 @@ var app = angular.module('myApp', [/*'myApp.filters', 'myApp.services', 'myApp.d
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	//$locationProvider.html5Mode(true);
     //$routeProvider.when('/A1', {templateUrl: 'content/A/A1.html', controller: synonymsController});
-	$routeProvider.when('', {
+	$routeProvider.when('x', {
 			templateUrl: 'content/urlrouter.html',
 			controller: 'synonymsController'
 			//templateUrl: 'partials/status.html',
