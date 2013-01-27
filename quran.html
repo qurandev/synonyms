@@ -64,10 +64,10 @@
 					<A ng-click="setRef(ref)"><span ng-show="ref" ng-bind="ref" class="label label-info"></span></A>
 				</span>
 
-				<span ng-show="suras.suras">
+				<span ng-show="suras.suras" class='lineheight'>
 					<span ng-bind="' | Suwaar: | '"></span>
 					<span ng-repeat="sura in findSurasForTopic( getID() ).suras">
-						<A ng-click="setRef(sura+':1')"><span ng-bind="sura" class="label label-warn"></span></A>
+						<A ng-click="setRef(sura+':1')"><span ng-bind="sura +': '+ suraNames[ sura ]" class="label label-warn"></span></A>
 					</span>
 				</span>
 			</div>
@@ -82,7 +82,7 @@
 			</div>
 		</div>
 		<div class="span6">
-		  <div class="align-left well">
+		  <div class="align-left well lineheight">
 			<span Xng-show="topics && sura" ng-bind="'Surah ' "></span>
 			<select
 				ng-model="sura" required 
