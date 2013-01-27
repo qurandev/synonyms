@@ -54,10 +54,12 @@
 			<span ng-init="id=getID()"></span>
 			<span ng-init="page=67"></span>
 			<span ng-init="suras = findSurasForTopic( getID() )"></span>
-			<span ng-show="suras.refs" ng-bind="'Ayahs in topic: ' + getID()"></span>
+			<span ng-show="suras.refs" ng-bind="'Ayahs in topic: '"></span>
+			<span ng-bind="getSynonym( getID() )" title="{{getID()}}" class="label label-success"></span> 
+			<!--<span ng-bind="getID()" class="muted" ></span>&nbsp;--> | &nbsp;
 
 			<span ng-show="suras.refs" ng-repeat="ref in findSurasForTopic( getID() ).refs">
-				<A ng-click="setRef(ref)"><span ng-show="ref" ng-bind="ref" class="label label-warn"></span></A>
+				<A ng-click="setRef(ref)"><span ng-show="ref" ng-bind="ref" class="label label-info"></span></A>
 			</span><BR>
 
 			<span ng-show="suras.suras" ng-bind="' | Suwar in this topic: |'"></span>
@@ -69,18 +71,19 @@
 			<IFRAME ng-show="page" STYLE="height:680px;width:95%;"
 				SRC="http://archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran?ui=embed#mode/1up/page/n{{ page+17 }}"></IFRAME>
 		</div>
-		<div class="span6 well" id=ayahs>
+		<div class="span6 well ayahsarea">
 		  <div class="pull-left">
-			<span ng-show="topics && sura" ng-bind="'Synonyms in sura: ' "></span>
+			<span Xng-show="topics && sura" ng-bind="'Synonyms in sura: ' "></span>
 			<select
 				ng-model="sura" required 
 				ng-change="setSura(sura)"
 				ng-options="value.id as value.label group by value.group for value in suwar">
 				<option>--</option>
 			</select>
-			<span ng-init="topics = findTopicsForSura(36)"></span>
-			<span ng-show="topics" ng-repeat="topic in getTopics()">
-				<A ng-click="setID(topic)"><span ng-show="topic" ng-bind="topic" class="label label-warn"></span></A>
+			<span Xng-show="topics" ng-repeat="topic in getTopics()">
+				<A ng-click="setID(topic)">
+					<span ng-show="topic" ng-bind="getSynonym( topic )" class="label label-success"></span>
+				</A>
 			</span>
 		  </div><HR>
 			<div ng-show="qurandata" ng-repeat="(key, verse) in getQuranData()" dir=rtl class="quranpage">

@@ -1,4 +1,4 @@
-var fetchSura, format, findTopicsForSura, findSurasForTopic, topicsAyahsMap;
+var fetchSura, format, findTopicsForSura, findSurasForTopic, topicsAyahsMap, getSynonym;
 
 var ayahsController = function($scope, $route, $routeParams, $location, $http, $rootScope){console.log('ayahsController ' + JSON.stringify($routeParams));
 	$scope.qurandata = "dsffsdfs";
@@ -23,6 +23,21 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 			$rootScope.qurantrans = data.quran["en.sahih"];
 		});
 	}
+	$rootScope.fetchSynonyms = function(){
+		var _url = "data/synonyms.json"; console.log('fetching synonyms');
+		$http.get(_url).success(function(data){
+			$rootScope.synonyms = eval( data ); console.log('got synonyms');
+		});
+	}
+	
+	$rootScope.getSynonym = function(id){
+		var ret, s = $rootScope.synonyms;
+		if(!s){ console.log(id + ': no synonyms! ' + synonyms); return id; }
+		ret = _.filter(s, function(o){ return o.id == id; });
+		if(ret && ret.length >= 1){ return ret[0].topic; }
+		else return id;
+	}
+
 	$rootScope.getQuranData = function(){
 		return $rootScope.qurandata;
 	}
@@ -30,7 +45,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 		return $rootScope.qurantrans;
 	}
 	$rootScope.getTopics = function(){
-		return $rootScope.topics = findTopicsForSura($rootScope.sura);
+		return $rootScope.topics = findTopicsForSura($rootScope.sura, $rootScope.synonyms);
 	}	
 	
 	$rootScope.setSura = function(sura){
@@ -59,6 +74,8 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 		}
 	}
 	$rootScope.id = "A1"; $rootScope.sura = $rootScope.suwar[0].value; $rootScope.ref = "1:1"; $rootScope.setRef( $rootScope.ref );
+	
+	$rootScope.fetchSynonyms();
 }
 
 
@@ -89,7 +106,7 @@ format = function(data){ var html = '';
 }
 
 //Find all topics in current sura:
-findTopicsForSura = function(sura){
+findTopicsForSura = function(sura, synonyms){
 	var regexp, ret;
 	regexp = new RegExp(" " + sura + "\\:");
 	ret = 
@@ -100,7 +117,8 @@ findTopicsForSura = function(sura){
 	 .map(function(o){
 		 return o.t;
 	  })
-	 .value(); return ret;
+	 .value(); 
+	return ret;
 }
 
 findSurasForTopic = function(id){

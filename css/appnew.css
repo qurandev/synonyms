@@ -10,6 +10,10 @@
 .quranpage{
 	text-align: right;
 }
+.ayahsarea{
+	max-height:600px;
+	overflow: auto;
+}
 .qurantext{
 	font-size: 2em;
 	line-height: 1.5;
