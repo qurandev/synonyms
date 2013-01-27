@@ -56,7 +56,7 @@
 			<span ng-init="page=67"></span>
 			<span ng-init="suras = findSurasForTopic( getID() )"></span>
 			<div ng-show="suras.refs" class="align-left well clearfix">
-				<span ng-bind="'Topic: '"></span>
+				<span ng-bind="'Synonym: '"></span>
 				<span ng-bind="getSynonym( getID() )" title="{{getID()}}" class="label label-success"></span> 
 				<!--<span ng-bind="getID()" class="muted" ></span>&nbsp;--> has ayahs: | &nbsp;
 
@@ -90,7 +90,7 @@
 				ng-options="value.id as value.label group by value.group for value in suwar">
 				<option>--</option>
 			</select>
-			has topics: 
+			has synonyms: 
 			<span Xng-show="topics" ng-repeat="topic in getTopics()">
 				<A ng-click="setID(topic)">
 					<span ng-show="topic" ng-bind="getSynonym( topic )" class="label label-success"></span>
