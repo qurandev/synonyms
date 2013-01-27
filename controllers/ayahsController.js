@@ -13,6 +13,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	$rootScope.findTopicsForSura = findTopicsForSura;
 	$rootScope.findSurasForTopic = findSurasForTopic;
 	$rootScope.findApproxPageNo = findApproxPageNo;	
+	$rootScope._ = _; $rootScope.parseInt = parseInt; $rootScope.indexOf = "".indexOf;
 	
 	$rootScope.suwar = [];
 	_.each( _.range(1, 115), function(i, surano){
@@ -112,6 +113,21 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	$rootScope.letters = _.map(SYNONYMS_INDEX, function(o){ return o.l; });
 	$rootScope.lettersLong = _.map(SYNONYMS_INDEX, function(o){ return o.ll; });
 	$rootScope.lettersCount = _.map(SYNONYMS_INDEX, function(o){ return o.n; });
+	
+	$rootScope.getRange = function(data){
+		var ret = {}, regexp = /(\d+)\-(\d+)/, regexp2 = /\d+/, start, end, matches;
+		matches = data.match( regexp );
+		if(matches && (start=parseInt(matches[1])) && (end=parseInt(matches[2])) ){
+			ret.data = _.range(start, end+1);
+		}
+		else if( regexp2.test(data) ){ret.data = regexp2.exec(data);}
+		ret.isDone = (data.indexOf('(') == -1);
+		return ret;
+	}
+
+	$rootScope.getClass = function(key){ return $rootScope.letterStatus[key].indexOf('(') != -1 ? 'incomplete' : 'complete'; }
+	$rootScope.isShowall = function(){ return $rootScope.showall; }
+	$rootScope.setShowall = function(showall){ return $rootScope.showall = showall; }
 }
 
 
@@ -322,37 +338,37 @@ letterStatus = {
 		'A': "1-29",
 		'AA': "1-51",
 		'b': "1-80",
-		'p': "1 2 4-20 22-32 36-46 47-59",
-		't': "1-8 15 18-27",
-		'tt': "2-8",
-		'th': "1 2",
+		'p': "1-2 (3) 4-20 (21) 22-32 (33-35) 36-46 47-59",
+		't': "1-8 (9-14) 15 (16-17) 18-27 (28-34)",
+		'tt': "(1-1) 2-8",
+		'th': "1-2",
 		'j': "1-28",
 		'ch': "1-29",
 		'HA': "1-15",
 		'kh': "1-21",
-		'd': "1-3 16-24 30 34",
-		'dd': "3-9",
+		'd': "1-3 (4-15) 16-24 (25-29) 30 (31-33) 34 (35-36)",
+		'dd': "(1-2) 3-9 (10)",
 		'dh': "1-6",
-		'r': "1-6 14-21",
-		'z': "1-5",
-		's': "3-27",
-		'sh': "",
-		'SA': "",
-		'DA': "",
-		'TA': "",
-		'ZA': "1 2",
-		'E': "1-9",
-		'gh': "3-9",
+		'r': "1-6 (7-13) 14-21",
+		'z': "1-5 (6-10)",
+		's': "(1-2) 3-27 (28-30)",
+		'sh': "(1-15)",
+		'SA': "(1-5)",
+		'DA': "(1-1)",
+		'TA': "(1-7)",
+		'ZA': "1-2",
+		'E': "1-9 (10-13)",
+		'gh': "(1-2) 3-9",
 		'f': "1-14",
 		'q': "1-18",
 		'k': "1-18 19-38 39-45",
 		'gg': "1-27",
-		'l': "1-4 7 13-17",
+		'l': "1-4 (5-6) 7 (8-12) 13-17",
 		'm': "1-48",
-		'n': "1-26 28-33",
+		'n': "1-26 (27) 28-33",
 		'w': "1-4",
-		'h': "1 2 4 6-17",
-		'y': "" /*,
+		'h': "1-2 (3-3) 4 (5-5) 6-17",
+		'y': "(1-4)" /*,
 		'appendix1': [905,9,1,1,1, 1,3,4,3,1, 2,4,2,1,1],
 		'appendix2': [940,3,3,9,7, 1,1,1],
 		'appendix3': [966,6,6,4],
