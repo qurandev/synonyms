@@ -33,7 +33,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	
 	$rootScope.getSynonym = function(id){
 		var ret, s = $rootScope.synonyms;
-		if(!s){ console.log(id + ': no synonyms! ' + synonyms); return id; }
+		if(!s){ console.log(id + ': no synonyms! ' + s); return id; }
 		ret = _.filter(s, function(o){ return o.id == id; });
 		if(ret && ret.length >= 1){ return ret[0].topic; }
 		else return id;

@@ -41,10 +41,10 @@
 			</div>
 			<div ng-include src="'partials/hero-unit.html'">
 			</div>			
-			<div id=WIP class="alert alert-warn">
+			<!--<div id=WIP class="alert alert-warn">
 				<span class=muted>Disclaimer:</span> <b>Work-in-progress; <u>Content still under review</u>. </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<span class=muted>Note:</span> <b>site issues?</b> refresh browser few times; Site updated often.
-			</div>
+			</div>-->
 		</div>
 	  </div>
 
@@ -55,7 +55,7 @@
 			<span ng-init="id=getID()"></span>
 			<span ng-init="page=67"></span>
 			<span ng-init="suras = findSurasForTopic( getID() )"></span>
-			<div ng-show="suras.refs" class="pull-left align-left well">
+			<div ng-show="suras.refs" class="align-left well clearfix">
 				<span ng-bind="'Topic: '"></span>
 				<span ng-bind="getSynonym( getID() )" title="{{getID()}}" class="label label-success"></span> 
 				<!--<span ng-bind="getID()" class="muted" ></span>&nbsp;--> has ayahs: | &nbsp;
@@ -71,11 +71,14 @@
 					</span>
 				</span>
 			</div>
-			<div class="pull-left align-left well">
-				<IFRAME ng-show="getID()" class="clearfix" STYLE="height:680px;width:95%;"
+			<div class="align-left well clearfix">
+				Translation:
+				<IFRAME ng-show="getIDUrl()" class="clearfix" STYLE="height:680px;width:95%;"
 					SRC="{{getIDUrl()}}"></IFRAME>
-				<IFRAME ng-show="page" STYLE="height:680px;width:95%;"
-					SRC="http://archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran?ui=embed#mode/1up/page/n{{ page+17 }}"></IFRAME>
+			</div>
+			<div id=WIP class="alert alert-warn">
+				Refresh page if any issues. &nbsp;&nbsp;&nbsp;   
+				<span class=muted>Disclaimer:</span> <b>Work-in-progress; <u>Content still under review</u>.</b>
 			</div>
 		</div>
 		<div class="span6">
@@ -93,21 +96,52 @@
 					<span ng-show="topic" ng-bind="getSynonym( topic )" class="label label-success"></span>
 				</A>
 			</span>
-			<span ng-show="!getTopics()" ng-bind="-none-"></span>
+			<span ng-show="!getTopics()" ng-bind="'-none-'"></span>
 		  </div><BR><BR>
-		  <div class="pull-left clearfix well ayahsarea">		  
-		    <div ng-show="qurandata" ng-repeat="(key, verse) in getQuranData()" dir=rtl class="quranpage">
-				<span ng-init="ref = verse.surah + ':' + verse.ayah" ng-bind="'['+ ref +']'" class="label label-info"></span>
-				<span ng-bind="verse.verse" class="qurantext">
-				</span><BR/>
-				<span ng-bind="getQuranTrans()[key].verse">
-				</span>
-				<HR>
-		    </div>
+		  
+		  
+		  <div id="myCarousel" class=" carousel slide clearfix">
+			<!-- Carousel items -->
+			<div class="carousel-inner">
+				<div class="active item">
+					<div class=well>
+					<H4>Book view (urdu):</H4>
+					<IFRAME ng-show="page" STYLE="height:680px;width:95%;"
+					SRC="http://archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran?ui=embed#mode/1up/page/n{{page+17}}"></IFRAME>
+					</div>
+				</div>
+				<div class="item">
+					<div class=well>
+					<H4>Quran view:</H4>
+					<div ng-include src="'partials/quran-template.html'"></div>
+					</div>
+				</div>
+				<div class="item">
+					<div ng-include src="'partials/topics.html'"></div>
+				</div>
+			</div>
+			<!-- Carousel nav -->
+			<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+			<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 		  </div>
+		  
+	    
 		</div>
 	  </div>
 	</div>
+
+	<script type='text/ng-template' id="partials/quran-template.html">
+	  <div class="clearfix ayahsarea">		  
+		<div ng-show="qurandata" ng-repeat="(key, verse) in getQuranData()" dir=rtl class="quranpage">
+			<span ng-init="ref = verse.surah + ':' + verse.ayah" ng-bind="'['+ ref +']'" class="label label-info"></span>
+			<span ng-bind="verse.verse" class="qurantext">
+			</span><BR/>
+			<span ng-bind="getQuranTrans()[key].verse">
+			</span>
+			<HR>
+		</div>
+	  </div>
+	</script>
 
 	<!-- Le javascript
     ================================================== -->
@@ -118,6 +152,7 @@
 <!--  <script src="js/mapper.js"></script>-->
   <script src="js/jquery-1.8.2.min.js"></script>
   <script src="js/underscore-min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
   <script type="text/javascript">
 	$(document).ready(function() {
 	   if ($.browser.msie) {

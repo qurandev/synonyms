@@ -1,0 +1,18 @@
+<div class=well>
+<H4>Topics search view:</H4>
+<div class="pull-left align-left clearfix">
+	<input type=text ng-model="search_topics" class="search-query" placeholder="Search for a topic" style="width:20%;align:center;margin-bottom:11px;" />&nbsp;
+
+	Show <select ng-options="opt for opt in [100, 200, 400, 1000]" ng-model="pagesize" ng-init="pagesize=100" class="pageDD"></select>entries
+	<BR/>
+	
+	<span ng-repeat="key in (synonyms | filter:search_topics | limitTo:pagesize)" style="line-height:1.5; clear:both;padding-bottom:20px!important;">
+		<A ng-click="setID(key.id)" ng-bind="key.topic" class="label label-success"></A>&nbsp;
+		<span ng-show="!$first && $index%35 == 0"><BR/><BR/></span>
+	</span>
+	<BR/>
+</div><BR/>
+<div class="align-left clearfix"><BR/><BR/>
+	<span class="alert alert-info">Note: Showing first {{pagesize}} entries that match search.</span><BR/><BR/>
+</div>
+</div>
