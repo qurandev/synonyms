@@ -55,3 +55,8 @@ body .modal.fade.in {
 .viewfull{
 	--padding: 2px 6px!important;
 }
+
+.max-height{
+max-height: 110px;
+overflow: auto;
+}

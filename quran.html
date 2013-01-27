@@ -55,7 +55,7 @@
 			<span ng-init="id=getID()"></span>
 			<span ng-init="page=67"></span>
 			<span ng-init="suras = findSurasForTopic( getID() )"></span>
-			<div ng-show="suras.refs" class="align-left well well-small clearfix">
+			<div ng-show="suras.refs" class="align-left well well-small clearfix max-height">
 				<span ng-bind="'Synonym: '"></span>
 				<span ng-bind="getSynonym( getID() )" title="{{getID()}}" class="label label-success"></span> 
 				<span ng-bind="'('+getID()+')'" class="muted"></span>&nbsp; has ayahs: | &nbsp;
@@ -101,7 +101,7 @@
 			</div>
 		</div>
 		<div class="span6">
-		  <div class="align-left well well-small lineheight">
+		  <div class="align-left well well-small lineheight max-height">
 			<span Xng-show="topics && sura" ng-bind="'Surah ' "></span>
 			<select
 				ng-model="sura" required 
@@ -116,9 +116,8 @@
 				</A>
 			</span>
 			<span ng-show="!getTopics()" ng-bind="'-none-'"></span>
-		  </div><BR><BR>
-		  
-		  
+		  </div>
+
 		  <div id="myCarousel" class=" carousel slide clearfix">
 			<!-- Carousel items -->
 			<div class="carousel-inner stagearea">
