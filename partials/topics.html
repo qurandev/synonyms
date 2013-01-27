@@ -7,7 +7,7 @@
 	<BR/>
 	
 	<span ng-repeat="key in (synonyms | filter:search_topics | limitTo:pagesize)" style="line-height:1.5; clear:both;padding-bottom:20px!important;">
-		<A ng-click="setID(key.id)" ng-bind="key.topic" class="label label-success"></A>&nbsp;
+		<A ng-click="setID(key.id)" ng-bind="key.topic" class="label label-inverse"></A>&nbsp;
 		<span ng-show="!$first && $index%35 == 0"><BR/><BR/></span>
 	</span>
 	<BR/>
