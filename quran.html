@@ -55,10 +55,10 @@
 			<span ng-init="id=getID()"></span>
 			<span ng-init="page=67"></span>
 			<span ng-init="suras = findSurasForTopic( getID() )"></span>
-			<div ng-show="suras.refs" class="align-left well clearfix">
+			<div ng-show="suras.refs" class="align-left well well-small clearfix">
 				<span ng-bind="'Synonym: '"></span>
 				<span ng-bind="getSynonym( getID() )" title="{{getID()}}" class="label label-success"></span> 
-				<!--<span ng-bind="getID()" class="muted" ></span>&nbsp;--> has ayahs: | &nbsp;
+				<span ng-bind="'('+getID()+')'" class="muted"></span>&nbsp; has ayahs: | &nbsp;
 
 				<span ng-repeat="ref in findSurasForTopic( getID() ).refs">
 					<A ng-click="setRef(ref)"><span ng-show="ref" ng-bind="ref" class="label label-info"></span></A>
@@ -71,8 +71,27 @@
 					</span>
 				</span>
 			</div>
-			<div class="align-left well clearfix">
-				<H4>Translation:</H4>
+			<div class="align-left well well-small clearfix">
+				<H4>Translation:
+					<!-- Button to trigger modal -->
+					<a href="#myModal" role="button" class="pull-right btn btn-mini viewfull" data-toggle="modal">view full screen</a>
+					<!-- Modal -->
+					<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					  <div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h3 id="myModalLabel">Translation</h3>
+					  </div>
+					  <div class="modal-body">
+						<p><IFRAME ng-show="getIDUrl()" class="clearfix iframe1"
+								SRC="{{getIDUrl()}}"></IFRAME></p>
+					  </div>
+					  <div class="modal-footer">
+						<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+						<!--<button class="btn btn-primary">Save changes</button>-->
+					  </div>
+					</div>
+					<!--<div ng-include src="'partials/topic-modal.html'"></div>-->
+				</H4>
 				<IFRAME ng-show="getIDUrl()" class="clearfix" STYLE="height:680px;width:95%;"
 					SRC="{{getIDUrl()}}"></IFRAME>
 			</div>
@@ -82,7 +101,7 @@
 			</div>
 		</div>
 		<div class="span6">
-		  <div class="align-left well lineheight">
+		  <div class="align-left well well-small lineheight">
 			<span Xng-show="topics && sura" ng-bind="'Surah ' "></span>
 			<select
 				ng-model="sura" required 
@@ -104,14 +123,14 @@
 			<!-- Carousel items -->
 			<div class="carousel-inner">
 				<div class="active item">
-					<div class=well>
+					<div class=well well-small>
 					<H4>Book view (urdu):</H4>
 					<IFRAME ng-show="page" STYLE="height:680px;width:95%;"
-					SRC="http://archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran?ui=embed#mode/1up/page/n{{page+17}}"></IFRAME>
+					SRC="{{getUrduBookUrl()}}"></IFRAME>
 					</div>
 				</div>
 				<div class="item">
-					<div class=well>
+					<div class=well well-small>
 					<H4>Quran view:</H4>
 					<div ng-include src="'partials/quran-template.html'"></div>
 					</div>
@@ -130,8 +149,26 @@
 	  </div>
 	</div>
 
+	<script type="text/ng-template' id="partials/topic-modal.html">		 
+		<!-- Modal -->
+		<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">Modal header</h3>
+		  </div>
+		  <div class="modal-body">
+			<p><IFRAME ng-show="getIDUrl()" class="clearfix" STYLE="height:680px;width:95%;"
+					SRC="{{getIDUrl()}}"></IFRAME></p>
+		  </div>
+		  <div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+			<button class="btn btn-primary">Save changes</button>
+		  </div>
+		</div>
+	</script>
+	
 	<script type='text/ng-template' id="partials/quran-template.html">
-	  <div class="clearfix ayahsarea">		  
+	  <div dir=rtl class="clearfix ayahsarea">		  
 		<div ng-show="qurandata" ng-repeat="(key, verse) in getQuranData()" dir=rtl class="quranpage">
 			<span ng-init="ref = verse.surah + ':' + verse.ayah" ng-bind="'['+ ref +']'" class="label label-info"></span>
 			<span ng-bind="verse.verse" class="qurantext">

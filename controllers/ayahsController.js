@@ -1,15 +1,17 @@
-var fetchSura, format, findTopicsForSura, findSurasForTopic, topicsAyahsMap, getSynonym, suraNames, synonyms, SYNONYMS_INDEX;
+var fetchSura, format, findTopicsForSura, findSurasForTopic, topicsAyahsMap, getSynonym, suraNames, synonyms, SYNONYMS_INDEX, pageOffsets;
 
 var ayahsController = function($scope, $route, $routeParams, $location, $http, $rootScope){console.log('ayahsController ' + JSON.stringify($routeParams));
 	$scope.qurandata = "dsffsdfs";
 	$scope.ayahhtml = "ayah htmmmmmmmmmmmml";
+	
 	$rootScope.topicsAyahsMap = topicsAyahsMap;
 	$rootScope.synonyms_index = SYNONYMS_INDEX;
 	$rootScope.suraNames = suraNames;
+	$rootScope.pageOffsets = pageOffsets;
+	
 	$rootScope.findTopicsForSura = findTopicsForSura;
 	$rootScope.findSurasForTopic = findSurasForTopic;
-//	$rootScope._ = _;
-	
+	$rootScope.findApproxPageNo = findApproxPageNo;	
 	
 	$rootScope.suwar = [];
 	_.each( _.range(1, 115), function(i, surano){
@@ -84,6 +86,14 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 		if(arr2 && arr2[0]){ path = arr2[0]; }
 		if(number){
 			return $rootScope.IDUrl = 'content/' + path + '/'+ id + '.html';
+		}
+	}
+	$rootScope.getUrduBookUrl = function(){
+		var _url = "http://archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran?ui=embed#mode/1up/page/n", pg = $rootScope.page, id = $rootScope.id; console.log('getUrduBookUrl: ');
+		var o = findApproxPageNo( id );
+		if(o && o.pg){
+			pg = o.pg; $rootScope.page = pg;
+			return _url + (17 + pg);
 		}
 	}
 	$rootScope.id = "A1"; $rootScope.sura = $rootScope.suwar[0].value; $rootScope.ref = "1:1"; $rootScope.setRef( $rootScope.ref );
@@ -242,3 +252,63 @@ suraNames = ["","Al-Faatiha","Al-Baqara","Aal-i-Imraan","An-Nisaa","Al-Maaida","
 
 
 SYNONYMS_INDEX = [{"l":"A","ll":"Alif mamdooah","pg":"67","n":"29","d":"29"},{"l":"AA","ll":"Alif maqsoora","pg":"106","n":"51","d":"51"},{"l":"b","ll":"beh","pg":"167","n":"80","d":"72"},{"l":"p","ll":"(peh)","pg":"260","n":"59","d":"28"},{"l":"t","ll":"teh","pg":"336","n":"34","d":"20"},{"l":"tt","ll":"(tteh)","pg":"367","n":"8","d":"2"},{"l":"th","ll":"theh","pg":"377","n":"2","d":"0"},{"l":"j","ll":"jim","pg":"379","n":"28","d":"2"},{"l":"ch","ll":"(cheem)","pg":"408","n":"29","d":"13"},{"l":"HA","ll":"Ha","pg":"441","n":"15","d":"4"},{"l":"kh","ll":"kha","pg":"454","n":"21","d":"3"},{"l":"d","ll":"dal","pg":"473","n":"36","d":"13"},{"l":"dd","ll":"(ddal)","pg":"516","n":"10","d":"7"},{"l":"dh","ll":"dhal","pg":"527","n":"6","d":"6"},{"l":"r","ll":"ra","pg":"533","n":"21","d":"14"},{"l":"z","ll":"zin","pg":"556","n":"10","d":"5"},{"l":"s","ll":"sin","pg":"570","n":"30","d":"25"},{"l":"sh","ll":"shin","pg":"604","n":"15","d":"0"},{"l":"SA","ll":"Sad","pg":"617","n":"5","d":"0"},{"l":"DA","ll":"Dad","pg":"621","n":"1","d":"0"},{"l":"TA","ll":"Ta","pg":"622","n":"7","d":"0"},{"l":"ZA","ll":"Dha","pg":"631","n":"2","d":"2"},{"l":"E","ll":"ain","pg":"634","n":"13","d":"7"},{"l":"gh","ll":"gain","pg":"648","n":"9","d":"0"},{"l":"f","ll":"feh","pg":"658","n":"14","d":"13"},{"l":"q","ll":"qaf","pg":"671","n":"18","d":"18"},{"l":"k","ll":"kaf","pg":"689","n":"45","d":"28"},{"l":"gg","ll":"(gaaf)","pg":"726","n":"27","d":"27"},{"l":"l","ll":"lam","pg":"757","n":"17","d":"6"},{"l":"m","ll":"mim","pg":"775","n":"48","d":"3"},{"l":"n","ll":"nun","pg":"834","n":"33","d":"2"},{"l":"w","ll":"waav","pg":"871","n":"4","d":"2"},{"l":"h","ll":"heh","pg":"878","n":"17","d":"2"},{"l":"y","ll":"yeh","pg":"902","n":"4","d":"0"}];
+
+
+pageOffsets = {
+	'A': [,2,1,1,3,,2,2,1,1,2,1,1,1,,1,2,1,1,1,2,1,1,1,1,1,1,1,3,2],
+	'AA': [,,2,1,3,2,1,3,1,1,1,,2,1,1,1,1,1,1,1,1,1,2,1,1,1,,1,2,,3,1,1,2,2,1,,2,1,,1,1,2,1,,1,3,,3,,1],
+	'b': [,1,1,2,1, 1,1,1,2,1, ,1,1,,1, 1,1,1,1,1, 2,2,,3,2, 1,1,1,2,3, 1,1,1,1,2, ,1,2,1,1, 1,2,1,,2, ,1,1,1,, 3,1,1,1,2, 2,1,1,2,2, ,1,1,1,, 1,2,1,1,1, 1,2,1,1,1, 1,1,,1,1,1],
+	'p': [,1,4,1,1, 2,2,1,1,, 1,1,1,3,, 2,2,1,1,2, 2,1,1,1,2, 1,1,,1,1, 3,1,2,2,2, 1,2,1,,1, 2,1,1,1,1, 1,,2,1,, 1,1,1,1,2, ,1,1,3,1],
+	't': [,1,1,1,1, ,1,,2,, 1,,1,1,1, ,1,,2,1, 1,2,1,2,1, 1,1,1,1,1, 1,,1,,1],
+	'tt': [,3,,1,1, 1,1,2,],
+	'th': [,,1],
+	'j': [,,1,1,1, 1,1,,1,1, 1,4,1,1,1, 2,1,,1,, 1,1,,3,, 2,1,1,],
+	'ch': [,,1,1,, 2,1,,1,2, ,3,2,2,, 1,1,1,1,1, 2,1,,2,2, 1,2,1,,1],
+	'HA': [,1,,1,1, 2,,1,2,1, ,1,1,,1, ],
+	'kh': [,1,,1,1, 1,2,,1,1, 1,1,,1,1, 1,1,2,1,, 1,],
+	'd': [,1,1,1,, 1,1,1,,1, 1,1,1,2,3, 2,1,1,1,1, 2,1,1,,3, ,1,1,1,1, 2,1,1,2,2, 1,1],
+	'dd': [,1,1,2,2, ,1,1,2,],
+	'dh': [,1,,1,2, 1,],
+	'r': [,,1,3,1, 1,1,,2,, 2,,1,1,, 3,,3,1,1, 1,],
+	'z': [,1,1,1,1, 4,1,1,,1, 2],
+	's': [,,1,2,3, 1,1,1,1,1, 2,1,,2,1, 1,,1,1,1, 1,1,1,1,1, 2,1,2,,1, 1],
+	'sh': [,1,1,,1, 1,1,,1,1, 2,1,,1,1,],
+	'SA': [,1,,1, 1],
+	'DA': [,,],
+	'TA': [,1,1,3,1, ,1,1],
+	'ZA': [,2,,],
+	'E': [,,2,,1, 2,,2,1,1, 1,1,2],
+	'gh': [,1,1,1,1, 1,1,1,,2],
+	'f': [,1,1,1,1, 1,,2,1,, 1,1,1,,1],
+	'q': [,1,1,1,, 2,1,,1,1, 2,1,1,1,1, ,2,1,],
+	'k': [,2,,1,, 1,2,1,1,, 2,,1,,1, ,1,1,1,2, 1,,2,3,, 1,,1,,1, 1,,1,,1, ,1,1,,1, 1,1,1,,1,],
+	'gg': [,1,1,1,, 2,,5,1,1, 2,,1,1,3, 1,1,1,,1, 1,,2,1,, 1,1,1],
+	'l': [,,1,2,1, 1,,2,,1, ,1,2,3,1, 1,1,],
+	'm': [,1,3,2,1, 1,1,1,2,1, 1,,1,1,2, 1,1,2,2,2, 1,1,1,1,1, 1,,2,,1, 2,1,3,2,1, 1,1,,2,3, 1,1,,2,, 1,1,,1],
+	'n': [,1,1,1,1, 1,,1,,2, ,1,1,1,2, 3,,2,1,1, 1,1,2,,1, 1,2,,2,1, 1,1,2,1],
+	'w': [,2,1,1,2],
+	'h': [,2,1,,2, 1,1,3,1,1, 2,,1,1,2, 1,3,1],
+	'y': [,,1,1,],
+	'appendix1': [905,9,1,1,1, 1,3,4,3,1, 2,4,2,1,1],
+	'appendix2': [940,3,3,9,7, 1,1,1],
+	'appendix3': [966,6,6,4],
+	'appendix4': [983,7],
+	'appendix5': [991,3,2,1,2, 2,3,3,1,]
+}
+	var findApproxPageNo = function(id, offset){
+		var pageno, _html='', page_offset=0; if(!offset) offset = 0;
+		var sectionAlphabet = id && id.match( /[^\d]*/ ), sectionNumber = id && id.match( /\d+/g );
+		var sectionAlphabetObj = sectionAlphabet && _.find( SYNONYMS_INDEX, function(o){ return o.l == sectionAlphabet; }); 
+		if(sectionAlphabetObj && parseInt(sectionAlphabetObj.pg)){ 
+			pageno = parseInt(sectionAlphabetObj.pg); 
+			_html = '<div class="alert alert-error"><B>Showing first page of section for this topic. Use page navigation buttons below to find topic.</B></div>' 
+		}
+		else{ _html = '<div class="alert alert-error"><B>Page number not yet available. Showing default page.</B></div>'; }
+		try{
+			if(pageOffsets[sectionAlphabet] && pageOffsets[sectionAlphabet].length >= sectionNumber ){ 
+				page_offset = _.reduce(pageOffsets[sectionAlphabet].slice(0, sectionNumber), function(memo, num){ return memo + num; }, 0); //parseInt( pageOffsets[sectionAlphabet][sectionNumber-1] );
+				_html = '';
+			}
+		}catch(e){debugger;}
+		return {pg: pageno + offset + page_offset, html: _html};
+	}

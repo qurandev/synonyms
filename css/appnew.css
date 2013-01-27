@@ -36,3 +36,22 @@
 .lineheight{
 	line-height: 1.8;
 }
+
+body .modal {
+  height: 580px;
+  width: 90%; /* desired relative width */
+  left: 5%; /* (100%-width)/2 */
+  margin: auto auto auto auto; /* place center */
+}
+body .modal.fade.in {
+  top: 5%; /* fade in to correct spot */
+}
+.modal-body{
+  max-height: 520px!important;
+ }
+.iframe1{
+	height: 440px; width:100%;
+}
+.viewfull{
+	--padding: 2px 6px!important;
+}
