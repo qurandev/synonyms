@@ -18,3 +18,7 @@
 	font-size: 2em;
 	line-height: 1.5;
 }
+
+.align-left{
+	text-align: left!important;
+}
