@@ -1,4 +1,5 @@
-var map = [], CSV='', DATA = [], ch = 'b', n = 80, i=1;
+var map = [], DATA = [], ch = 'b', n = 80, i=1, chIndex=5;
+
 var getID = function(id){
 		 line = "content\\" + ch +'\\'+ id + ".html"; console.log(line);
          $.get(line, function(html){
@@ -8,8 +9,16 @@ var getID = function(id){
 		   console.log( id +'\t'+ o.v + '\n' );
 		   if(++i <= n){ getID( ch + i); }
 		   else{ console.log(JSON.stringify(DATA) ); }
-         });
+         }).fail(function(){
+			console.log('error for '+ch + i);
+			DATA.push( {t: ch+i, r: '-'});
+			if(++i <= n){ getID(ch+i); }
+		   else{ console.log(JSON.stringify(DATA) ); }
+		 });
 }
+var lArr = _.pluck(SYNONYMS_INDEX, 'l');
+var nArr = _.pluck(SYNONYMS_INDEX, 'n'); chIndex=6;
+ch = lArr[ ++chIndex ]; n = parseInt( nArr[ chIndex ] ); i=1; DATA=[];
 getID(ch + i);
 
 

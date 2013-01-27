@@ -1,9 +1,10 @@
-var fetchSura, format, findTopicsForSura, findSurasForTopic, topicsAyahsMap, getSynonym, suraNames;
+var fetchSura, format, findTopicsForSura, findSurasForTopic, topicsAyahsMap, getSynonym, suraNames, synonyms, SYNONYMS_INDEX;
 
 var ayahsController = function($scope, $route, $routeParams, $location, $http, $rootScope){console.log('ayahsController ' + JSON.stringify($routeParams));
 	$scope.qurandata = "dsffsdfs";
 	$scope.ayahhtml = "ayah htmmmmmmmmmmmml";
 	$rootScope.topicsAyahsMap = topicsAyahsMap;
+	$rootScope.synonyms_index = SYNONYMS_INDEX;
 	$rootScope.suraNames = suraNames;
 	$rootScope.findTopicsForSura = findTopicsForSura;
 	$rootScope.findSurasForTopic = findSurasForTopic;
@@ -22,6 +23,12 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 		$http.get(_url).success(function(data) { 
 			$rootScope.qurandata = data.quran["quran-simple"];
 			$rootScope.qurantrans = data.quran["en.sahih"];
+		});
+	}
+	$rootScope.fetchTopicsAyahsMap = function(){
+		var _url = "data/topicsAyahsMap.json"; console.log('fetching topicsAyahsMap');
+		$http.get(_url).success(function(data){ debugger;
+			$rootScope.topicsAyahsMap = topicsAyahsMap = _.union( topicsAyahsMap, data ); console.log('got topicsAyahsMap');
 		});
 	}
 	$rootScope.fetchSynonyms = function(){
@@ -80,7 +87,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 		}
 	}
 	$rootScope.id = "A1"; $rootScope.sura = $rootScope.suwar[0].value; $rootScope.ref = "1:1"; $rootScope.setRef( $rootScope.ref );
-	
+	$rootScope.fetchTopicsAyahsMap();
 	$rootScope.fetchSynonyms();
 }
 
@@ -131,7 +138,7 @@ findSurasForTopic = function(id){
 	var ret = {}; 
 	ret.refs = 	_.chain(topicsAyahsMap)
 	 .where({t: id})
-	 .value(); if(ret.refs) ret.refs = ret.refs[0].r.split(" ");
+	 .value(); if(ret.refs && ret.refs.length >= 1) ret.refs = ret.refs[0].r.split(" "); else return ret;
 	ret.suras = _.chain( ret.refs )
 	 .map( function(i){ 
 		 return i.split(':')[0]; 
@@ -229,9 +236,9 @@ topicsAyahsMap = [
 {t: "AA9", r: " 9:44 24:27 9:43 "},
 
 {"t":"b1","r":"31:33 31:14 18:80 23:24 22:78 7:27 12:100"},{"t":"b2","r":"21:50 25:1 40:64 23:14 25:61 67:1 28:30 7:58 13:29"},{"t":"b3","r":"18:19 58:8 19:34 65:1 39:23 23:44 23:100 18:109 39:19"},{"t":"b4","r":"3:77 18:37 11:37 25:63"},{"t":"b5","r":"69:28 69:29 3:26 2:102 36:83"},{"t":"b6","r":"35:9 2:57 46:24 78:14 56:69 2:19"},{"t":"b7","r":"9:126 17:6 67:4 20:55"},{"t":"b8","r":"26:173 2:22 2:265 24:43 57:20 11:52 72:16 2:19 2:264"},{"t":"b9","r":"9:12 98:1"},{"t":"b10","r":"28:32 18:51 18:18 69:32"},{"t":"b11","r":"2:265 27:60 30:15"},{"t":"b12","r":"53:50 53:51 13:39 18:49"},{"t":"b13","r":"16:80"},{"t":"b14","r":"91:14 19:5 51:41 42:50"},{"t":"b15","r":"28:10 47:4 5:64"},{"t":"b16","r":"14:35 5:3 22:30 4:51"},{"t":"b17","r":"2:20 13:13 13:13"},{"t":"b18","r":"66:6 59:2 69:47 66:12 14:35 5:67 11:43"},{"t":"b19","r":"2:63 24:33 22:30 12:32 64:14 2:273"},{"t":"b20","r":"53:32 26:18 31:33 2:233 76:19 24:59 19:12 52:24"},{"t":"b21","r":"91:5 91:6 79:30 88:20 2:22 74:14 74:15 51:48"},{"t":"b22","r":"78:6 55:54 32:16"},{"t":"b23","r":"4:37 17:100 70:17 70:18 69:12 53:33 53:34 25:67 81:24 59:9 33:19 5:64"},{"t":"b24","r":"23:106 41:16 36:18 36:19 90:17 90:18 90:19 69:6 69:7"},{"t":"b25","r":"5:78 11:95 67:11 3:61"},{"t":"b26","r":"36:67 23:104 28:42"},{"t":"b27","r":"17:32 24:33 19:28 4:25 4:19 4:15"},{"t":"b28","r":"35:43 13:11 4:119 5:13 8:16 27:41 3:140"},{"t":"b29","r":"18:50 25:70 5:45 2:48 12:57 28:27 37:39 2:125 3:148 83:36 2:196 5:95 59:15 2:194 2:85 4:92"},{"t":"b30","r":"17:15 39:3 1:4 56:86 56:87"},{"t":"b31","r":"16:126 85:8 32:22 42:39 54:10"},{"t":"b32","r":"56:19 37:47 4:43"},{"t":"b33","r":"2:206 2:216 38:62 6:31 67:27 17:7 40:58 28:42"},{"t":"b34","r":"17:18 41:24 5:54 6:108 12:92"},{"t":"b35","r":"54:6 85:8"},{"t":"b36","r":"5:95 2:6 13:16 82:7"},{"t":"b37","r":"32:10 7:37 93:7"},{"t":"b38","r":"37:101 2:177 12:84 68:48 3:134"},{"t":"b39","r":"12:80 21:58 2:219 2:7 56:96 55:78 85:14"},{"t":"b40","r":"2:266 40:56 55:78 72:3"},{"t":"b41","r":"2:247 13:8 2:109 4:7 7:86 89:12 2:261 7:95 2:219 2:184 17:79 2:276"},{"t":"b42","r":"12:82 12:100 9:98"},{"t":"b43","r":"8:41 21:78 6:143"},{"t":"b44","r":"56:5 62:10 62:11 82:2 76:7"},{"t":"b45","r":"2:127 49:2 13:12"},{"t":"b46","r":""},{"t":"b47","r":""},{"t":"b48","r":""},{"t":"b49","r":""},{"t":"b50","r":""},{"t":"b51","r":""},{"t":"b52","r":""},{"t":"b53","r":""},{"t":"b54","r":""},{"t":"b55","r":""},{"t":"b56","r":""},{"t":"b57","r":""},{"t":"b58","r":""},{"t":"b59","r":""},{"t":"b60","r":""},{"t":"b61","r":""},{"t":"b62","r":""},{"t":"b63","r":""},{"t":"b64","r":""},{"t":"b65","r":""},{"t":"b66","r":""},{"t":"b67","r":""},{"t":"b68","r":"58:11 6:68 9:90 55:54 9:5 24:60 45:28"},{"t":"b69","r":"2:10 9:91 12:85"},{"t":"b70","r":"2:35 58:1 4:23 66:10 33:32 81:34"},{"t":"b71","r":"31:13 4:148 24:50 4:3"},{"t":"b72","r":""},{"t":"b73","r":""},{"t":"b74","r":"2:20 2:259 2:68 63:1 11:22 16:23 16:109 11:22 40:43 58:1"},{"t":"b75","r":""},{"t":"b76","r":""},{"t":"b77","r":""},{"t":"b78","r":""},{"t":"b79","r":""},{"t":"b80","r":""},
-
-
-
-]
+];
 
 suraNames = ["","Al-Faatiha","Al-Baqara","Aal-i-Imraan","An-Nisaa","Al-Maaida","Al-An'aam","Al-A'raaf","Al-Anfaal","At-Tawba","Yunus","Hud","Yusuf","Ar-Ra'd","Ibrahim","Al-Hijr","An-Nahl","Al-Israa","Al-Kahf","Maryam","Taa-Haa","Al-Anbiyaa","Al-Hajj","Al-Muminoon","An-Noor","Al-Furqaan","Ash-Shu'araa","An-Naml","Al-Qasas","Al-Ankaboot","Ar-Room","Luqman","As-Sajda","Al-Ahzaab","Saba","Faatir","Yaseen","As-Saaffaat","Saad","Az-Zumar","Al-Ghaafir","Fussilat","Ash-Shura","Az-Zukhruf","Ad-Dukhaan","Al-Jaathiya","Al-Ahqaf","Muhammad","Al-Fath","Al-Hujuraat","Qaaf","Adh-Dhaariyat","At-Tur","An-Najm","Al-Qamar","Ar-Rahmaan","Al-Waaqia","Al-Hadid","Al-Mujaadila","Al-Hashr","Al-Mumtahana","As-Saff","Al-Jumu'a","Al-Munaafiqoon","At-Taghaabun","At-Talaaq","At-Tahrim","Al-Mulk","Al-Qalam","Al-Haaqqa","Al-Ma'aarij","Nooh","Al-Jinn","Al-Muzzammil","Al-Muddaththir","Al-Qiyaama","Al-Insaan","Al-Mursalaat","An-Naba","An-Naazi'aat","Abasa","At-Takwir","Al-Infitaar","Al-Mutaffifin","Al-Inshiqaaq","Al-Burooj","At-Taariq","Al-A'laa","Al-Ghaashiya","Al-Fajr","Al-Balad","Ash-Shams","Al-Lail","Ad-Dhuhaa","Ash-Sharh","At-Tin","Al-Alaq","Al-Qadr","Al-Bayyina","Az-Zalzala","Al-Aadiyaat","Al-Qaari'a","At-Takaathur","Al-Asr","Al-Humaza","Al-Fil","Quraish","Al-Maa'un","Al-Kawthar","Al-Kaafiroon","An-Nasr","Al-Masad","Al-Ikhlaas","Al-Falaq","An-Naas"]
+
+
+SYNONYMS_INDEX = [{"l":"A","ll":"Alif mamdooah","pg":"67","n":"29","d":"29"},{"l":"AA","ll":"Alif maqsoora","pg":"106","n":"51","d":"51"},{"l":"b","ll":"beh","pg":"167","n":"80","d":"72"},{"l":"p","ll":"(peh)","pg":"260","n":"59","d":"28"},{"l":"t","ll":"teh","pg":"336","n":"34","d":"20"},{"l":"tt","ll":"(tteh)","pg":"367","n":"8","d":"2"},{"l":"th","ll":"theh","pg":"377","n":"2","d":"0"},{"l":"j","ll":"jim","pg":"379","n":"28","d":"2"},{"l":"ch","ll":"(cheem)","pg":"408","n":"29","d":"13"},{"l":"HA","ll":"Ha","pg":"441","n":"15","d":"4"},{"l":"kh","ll":"kha","pg":"454","n":"21","d":"3"},{"l":"d","ll":"dal","pg":"473","n":"36","d":"13"},{"l":"dd","ll":"(ddal)","pg":"516","n":"10","d":"7"},{"l":"dh","ll":"dhal","pg":"527","n":"6","d":"6"},{"l":"r","ll":"ra","pg":"533","n":"21","d":"14"},{"l":"z","ll":"zin","pg":"556","n":"10","d":"5"},{"l":"s","ll":"sin","pg":"570","n":"30","d":"25"},{"l":"sh","ll":"shin","pg":"604","n":"15","d":"0"},{"l":"SA","ll":"Sad","pg":"617","n":"5","d":"0"},{"l":"DA","ll":"Dad","pg":"621","n":"1","d":"0"},{"l":"TA","ll":"Ta","pg":"622","n":"7","d":"0"},{"l":"ZA","ll":"Dha","pg":"631","n":"2","d":"2"},{"l":"E","ll":"ain","pg":"634","n":"13","d":"7"},{"l":"gh","ll":"gain","pg":"648","n":"9","d":"0"},{"l":"f","ll":"feh","pg":"658","n":"14","d":"13"},{"l":"q","ll":"qaf","pg":"671","n":"18","d":"18"},{"l":"k","ll":"kaf","pg":"689","n":"45","d":"28"},{"l":"gg","ll":"(gaaf)","pg":"726","n":"27","d":"27"},{"l":"l","ll":"lam","pg":"757","n":"17","d":"6"},{"l":"m","ll":"mim","pg":"775","n":"48","d":"3"},{"l":"n","ll":"nun","pg":"834","n":"33","d":"2"},{"l":"w","ll":"waav","pg":"871","n":"4","d":"2"},{"l":"h","ll":"heh","pg":"878","n":"17","d":"2"},{"l":"y","ll":"yeh","pg":"902","n":"4","d":"0"}];
