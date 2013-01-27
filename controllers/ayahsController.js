@@ -39,7 +39,14 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 			$rootScope.synonyms = eval( data ); console.log('got synonyms');
 		});
 	}
-	
+
+	$rootScope.fetchSynonymsDetails = function(){
+		var _url = "data/synonymsdetails.json"; console.log('fetching synonymsdetails');
+		$http.get(_url).success(function(data){
+			$rootScope.synonymdetails = eval( data ); console.log('got synonymsdetails');
+		});
+	}
+		
 	$rootScope.getSynonym = function(id){
 		var ret, s = $rootScope.synonyms;
 		if(!s){ console.log(id + ': no synonyms! ' + s); return id; }
@@ -99,6 +106,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	$rootScope.id = "A1"; $rootScope.sura = $rootScope.suwar[0].value; $rootScope.ref = "1:1"; $rootScope.setRef( $rootScope.ref );
 	$rootScope.fetchTopicsAyahsMap();
 	$rootScope.fetchSynonyms();
+	$rootScope.fetchSynonymsDetails();
 }
 
 

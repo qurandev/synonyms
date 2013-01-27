@@ -1,0 +1,18 @@
+<div class=well>
+<H4>Words search view:</H4>
+<div class="align-left clearfix">
+  <div class="well well-small">
+	<input type=text ng-model="search_words" class="search-query" placeholder="arabic word (transliteration) search.." style="width:60%;align:center;margin-bottom:11px;" />&nbsp;
+	Show <select ng-options="opt for opt in [200, 400, 1000, 3000]" ng-model="pagesize" ng-init="pagesize=200" class="pageDD"></select>entries
+  </div><BR/>
+	
+	<span ng-repeat="key in (synonymdetails | filter:search_words | limitTo:pagesize)" class="lineheight" style="clear:both;padding-bottom:20px!important;">
+		<A ng-click="setID(key.id)" ng-bind="key.wordEn" class="label label-info"></A>&nbsp;
+		<span ng-show="!$first && $index%50 == 0"><BR/><BR/></span>
+	</span>
+	<BR/>
+</div><BR/>
+<div class="align-left clearfix"><BR/><BR/>
+	<span class="alert alert-info">Note: Showing first {{pagesize}} entries that match search.</span><BR/><BR/>
+</div>
+</div>
