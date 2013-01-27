@@ -58,6 +58,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	$rootScope.setRef = function(ref){
 		$rootScope.fetchSura(ref);
 		$rootScope.sura = parseInt( ref ); $rootScope.ref = ref;
+		$('.carousel').carousel('pause'); $('.carousel').carousel(1); //move to Quran view - when sura dropdown or ref clicked
 	}
 	$rootScope.setID = function(id){
 		$rootScope.id = id; console.log(id);
