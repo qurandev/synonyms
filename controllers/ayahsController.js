@@ -27,7 +27,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	}
 	$rootScope.fetchTopicsAyahsMap = function(){
 		var _url = "data/topicsAyahsMap.json"; console.log('fetching topicsAyahsMap');
-		$http.get(_url).success(function(data){ debugger;
+		$http.get(_url).success(function(data){
 			$rootScope.topicsAyahsMap = topicsAyahsMap = _.union( topicsAyahsMap, data ); console.log('got topicsAyahsMap');
 		});
 	}
