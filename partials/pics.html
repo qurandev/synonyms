@@ -1,0 +1,24 @@
+<div class=well>
+<H4>Icons view:</H4>
+<div class="container">  
+<BR/>
+	<span ng-init="icons = 'bookOfDeeds-noun_project_2248.svg; book_noun_project_1009.svg; camel-noun_project_720.svg; children-noun_project_4283.svg; clouds-noun_project_7739.svg; cover-noun_project_2688.svg; enter-noun_project_2276.svg; fingers-noun_project_3730.svg; fire-noun_project_3646.svg; fuel-noun_project_2440.svg; garden-noun_project_2424.svg; hit-noun_project_2327.svg; justice-noun_project_4226.svg; lightning-noun_project_5143.svg; muslim-noun_project_6016.svg; rain-noun_project_427.svg; speech_project_1993.svg; statue-noun_project_5207.svg; talk-noun_project_1202.svg; time-noun_project_6732.svg; tree-noun_project_1470.svg; wing-noun_project_7562.svg; wings-noun_project_7563.svg'.split('; ')"></span>
+	
+	<span ng-init="iconstopics = 'AA24 k10 AA48 AA46 b6 AA45 d1 AA44 A14 AA50 b11 m1 AA42 b17 E4 b8 b3 b16 b4 w4 d7 j23 b10'.split(' ')"></span>
+	
+	<div class="row">
+	  <div class="span5">
+		<ul class="thumbnails">
+		  <li ng-repeat="icon in icons" class="span3">
+			<a ng-click="setID(iconstopics[$index])" class="thumbnail">  
+			  <img data-src="holder.js/160x120" src="http://quransynonyms.com/data/misc-icons/{{icon}}" title="{{$index + ': '+ icon}}" alt="{{icon}}" />  
+			</a>
+		  </li>
+		</ul>
+	  </div>
+	  <div class="span7">...</div>
+	</div>
+
+<hr>  
+</div> <!-- /container -->
+</div>

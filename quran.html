@@ -121,7 +121,7 @@
 		  
 		  <div id="myCarousel" class=" carousel slide clearfix">
 			<!-- Carousel items -->
-			<div class="carousel-inner">
+			<div class="carousel-inner stagearea">
 				<div class="active item">
 					<div class=well well-small>
 					<H4>Book view (urdu):</H4>
@@ -140,6 +140,12 @@
 				</div>
 				<div class="item">
 					<div ng-include src="'partials/words.html'"></div>
+				</div>
+				<div class="item">
+					<div ng-include src="'partials/pics.html'"></div>
+				</div>
+				<div class="item">
+					<div ng-include src="'partials/statusnew.html'"></div>
 				</div>
 			</div>
 			<!-- Carousel nav -->
@@ -171,7 +177,7 @@
 	</script>
 	
 	<script type='text/ng-template' id="partials/quran-template.html">
-	  <div dir=rtl class="clearfix ayahsarea">		  
+	  <div dir=rtl class="clearfix">		  
 		<div ng-show="qurandata" ng-repeat="(key, verse) in getQuranData()" dir=rtl class="quranpage">
 			<span ng-init="ref = verse.surah + ':' + verse.ayah" ng-bind="'['+ ref +']'" class="label label-info"></span>
 			<span ng-bind="verse.verse" class="qurantext">

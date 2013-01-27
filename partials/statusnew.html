@@ -1,0 +1,28 @@
+<div class="well align-left">
+<H4>Pages translation status:</H4>
+	Total progress: 
+	<B><span ng-bind="mStatus.percentPg"></span>%</B> pages complete (<B><span ng-bind="mStatus.donePg"></span></B> of <span ng-bind="mStatus.totalPg"></span> total pages)
+	<span class="pull-right muted"><B><span ng-bind="mStatus.percent"></span>%</B> topics complete (<B><span ng-bind="mStatus.done"></span></B> of <span ng-bind="mStatus.total"></span> total topics)</span>
+	
+	<div ng-repeat="key in letters" style="clear:both;"><HR>
+		<div ng-bind="lettersLong[$index] + '  ('+key+')'" class="muted statusHeading" style="font-size: 2em;"></div>
+		
+		<span ng-bind="'Pages ' + topicsStatus[key].donePg +'/'+ topicsStatus[key].totalPg + ' done' "></span>
+		
+		<span ng-bind="'Topics ' + (letterStatus[key] || '-') + ' of ' + lettersCount[$index] + ' done '" class="pull-right"></span>
+		<span ng-bind="' ('+ topicsStatus[key].done + '/'+ lettersCount[$index] +')' " class="pull-right muted"></span><BR/>
+		{{_.range(1, 1+parseInt(lettersCount[$index]))}}
+		<span ng-repeat="item in _.range(1, 1+parseInt(lettersCount[$index]))">
+			{{item}}		
+		</span>
+
+		<span ng-init="value = pageStatus[key]"></span>
+		<span ng-repeat="item in value.split(' ')">			<!-- {{item}} ... -->
+			<span ng-init="range = getRange(item)" class="status">
+				<a ng-repeat="box in range.data" ng-init="o = {pg: box, isDone: range.isDone, l: key, i: 1+$index}" 
+				   ng-click="click(o)" ng-mouseover="mouseover(o)" class="{{range.isDone}}">{{box}}</a>
+			</span>
+		</span>
+		<BR/>
+	</div>
+</div>
