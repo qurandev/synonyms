@@ -1,4 +1,4 @@
-var fetchSura, format, findTopicsForSura, findSurasForTopic, topicsAyahsMap, getSynonym, suraNames, synonyms, SYNONYMS_INDEX, pageOffsets, whatsNew, letterStatus;
+var fetchSura, format, findTopicsForSura, findSurasForTopic, topicsAyahsMap, getSynonym, suraNames, synonyms, SYNONYMS_INDEX, pageOffsets, whatsNew, letterStatus, getNextID;
 
 var ayahsController = function($scope, $route, $routeParams, $location, $http, $rootScope){console.log('ayahsController ' + JSON.stringify($routeParams));
 	$scope.qurandata = "dsffsdfs";
@@ -13,6 +13,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	$rootScope.findTopicsForSura = findTopicsForSura;
 	$rootScope.findSurasForTopic = findSurasForTopic;
 	$rootScope.findApproxPageNo = findApproxPageNo;	
+	$rootScope.getNextID = getNextID;
 	$rootScope._ = _; $rootScope.parseInt = parseInt; $rootScope.indexOf = "".indexOf;
 	
 	$rootScope.suwar = [];
@@ -128,6 +129,14 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	$rootScope.getClass = function(key){ return $rootScope.letterStatus[key].indexOf('(') != -1 ? 'incomplete' : 'complete'; }
 	$rootScope.isShowall = function(){ return $rootScope.showall; }
 	$rootScope.setShowall = function(showall){ return $rootScope.showall = showall; }
+	
+	$(function() {
+		$('.carousel').each(function(){
+            $(this).carousel({
+                interval: false
+            });
+        });
+    });
 }
 
 
@@ -393,3 +402,24 @@ letterStatus = {
 		}catch(e){debugger;}
 		return {pg: pageno + offset + page_offset, html: _html};
 	}
+
+var l = _.pluck(SYNONYMS_INDEX, 'l'), n = _.pluck(SYNONYMS_INDEX, 'n'); var id = 'A0'; 
+
+getNextID = function(id, prev){ 
+  var r = /([^\d]+)(\d+)/, a=[], ltr, num, max, offset;
+  offset = (!prev || prev != -1) ? 1 : -1;
+  if( r.test( id ) ){
+    a = r.exec( id ); ltr = a[1]; num = parseInt(a[2]); 
+    /*fix letter*/ if(-1 == _.indexOf(l, ltr)){ ltr=_.first(l); num = 1; } max = n[_.indexOf(l, ltr)]; 
+    /*fix number*/ if(num > max) num = max; else if(num < 1) num = 1;
+    if(num == max && offset == 1){ //this ltr exhausted. go next.
+      ltr = (ltr == _.last(l)) ? (_.first(l)) : (l[offset + _.indexOf(l, ltr)]); num = 1;
+    }
+    else if(num == 1 && offset == -1){
+      ltr = (ltr == _.first(l)) ? (_.last(l)) : (l[offset + _.indexOf(l, ltr)]); num = n[_.indexOf(l, ltr)];
+    }
+    else num += offset;
+    return ltr + num;
+  }
+}
+//for(i=0, a=[]; i<20; ++i)  a.push( id = getNext( id, 1 ) ); console.log( a );
