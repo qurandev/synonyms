@@ -405,7 +405,7 @@ letterStatus = {
 
 var l = _.pluck(SYNONYMS_INDEX, 'l'), n = _.pluck(SYNONYMS_INDEX, 'n'); var id = 'A0'; 
 
-getNextID = function(id, prev){ 
+getNextID = function(id, prev){ console.log('getNextID called');
   var r = /([^\d]+)(\d+)/, a=[], ltr, num, max, offset;
   offset = (!prev || prev != -1) ? 1 : -1;
   if( r.test( id ) ){

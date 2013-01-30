@@ -72,7 +72,12 @@
 				</span>
 			</div>
 			<div class="align-left well well-small clearfix">
-				<H4>Translation:
+				<H4>
+				<ul class="pager" style="margin: 0!important;">
+				  <li><a href="#" ng-click="setID( getNextID(getID(), -1) )">Previous</a></li>
+				  Translation
+				  <li><a href="#" ng-click="setID(  getNextID( getID() ) )">Next</a></li>
+				</ul>
 					<!-- Button to trigger modal -->
 					<a href="#myModal" role="button" class="pull-right btn btn-mini viewfull" data-toggle="modal">view full screen</a>
 					<!-- Modal -->
