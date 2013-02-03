@@ -97,4 +97,9 @@ color: white!important;
 span.status a.false, span.status a.false:hover, .status_h_25, .status_h_25:hover {
 background-color: #BB312F; //maroon
 color: white!important;
+width: auto!important;
+}
+
+span.status a.true span{
+	display: none;
 }
