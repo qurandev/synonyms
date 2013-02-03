@@ -4,7 +4,15 @@
 // Declare app level module which depends on filters, and services
 var app = angular.module('myApp', [/*'myApp.filters', 'myApp.services', 'myApp.directives'*/]).
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-/*	$routeProvider.when('/quran', {
+	//$locationProvider.html5Mode(true);
+    //$routeProvider.when('/A1', {templateUrl: 'content/A/A1.html', controller: synonymsController});
+	$routeProvider.when('x', {
+			templateUrl: 'content/urlrouter.html',
+			controller: 'synonymsController'
+			//templateUrl: 'partials/status.html',
+			//controller: 'statusController'
+	});
+	$routeProvider.when('/quran', {
 			templateUrl: 'partials/quran.html',
 			controller: 'ayahsController'
 	});
@@ -24,15 +32,15 @@ var app = angular.module('myApp', [/*'myApp.filters', 'myApp.services', 'myApp.d
 			templateUrl: 'content/urlrouter.html',
 			controller: 'PageController'
 	});
-	$routeProvider.when('/:primaryNav', {
+	$routeProvider.when('/:primaryNav', {// '/:secondaryNav', {
             templateUrl: 'content/urlrouter.html',
             controller: 'RouteController'
     });
-	$routeProvider.when('/:primaryNav/:mode', {
+	$routeProvider.when('/:primaryNav/:mode', {// '/:secondaryNav', {
             templateUrl: 'content/urlrouter.html',
             controller: 'synonymsController'
     });
-    //$routeProvider.otherwise({redirectTo: '/A1'});*/
+    //$routeProvider.otherwise({redirectTo: '/A1'});
   }]);
   
   app.filter('prettify', function() {
