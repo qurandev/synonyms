@@ -1,12 +1,33 @@
 IT workitems backlog:
 =====================
 
-* iframe initial request & non-existent topics show weird page [Defect, Severity: 1] 2/3/2013
+*002* non-existent topics show weird page [Defect, Severity: 1] 2/3/2013
 
-* Topic fullscreen stopped working [Defect] 2/3/2013
+*003* Topic fullscreen stopped working [Defect] 2/3/2013
 
-* Letter-Section dropdown selector [Enhancement] 2/3/2013
+*004* Letter-Section dropdown selector [Enhancement] 2/3/2013
 
-* I.E. - site doesnt work [Defect] 2/3/2013
+*005* I.E. - site doesnt work [Defect] 2/3/2013
 
-* Translation formatting issues [Enhancement] 2/3/2013
+*006* Translation formatting issues [Enhancement] 2/3/2013
+
+*007* DATA: some entries have Ayah references in wrong format. [Enhancement/Data]
+
+*008* Status: mark partial topics with Orange color [Enhancement]
+
+
+Completed:
+==============================
+
+*001* iframe initial request - shows weird page [Defect, Severity: 1] 2/3/2013 <Fixed: 2/3/2012>
+
+
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Assalaamualaikum all,
+
+brother Linguist, I believe sister was looking for a new assignment in Mutaradifaat-ul-Quraan translation project.
+
+If so, suggest her to look at the below spreadsheet & select any of the available work items. Please dont forget to put your name across the workitem & send acknowledgement.
+
+salaam/QD
