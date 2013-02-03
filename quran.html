@@ -88,7 +88,7 @@
 					  </div>
 					  <div class="modal-body">
 						<p><IFRAME ng-show="getIDUrl()" class="clearfix iframe1"
-								SRC="{{getIDUrl()}}"></IFRAME></p>
+								ng-src="{{getIDUrl()}}"></IFRAME></p>
 					  </div>
 					  <div class="modal-footer">
 						<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -98,7 +98,7 @@
 					<!--<div ng-include src="'partials/topic-modal.html'"></div>-->
 				</H4>
 				<IFRAME ng-show="getIDUrl()" class="clearfix" STYLE="height:680px;width:95%;"
-					SRC="{{getIDUrl()}}"></IFRAME>
+					ng-src="{{getIDUrl()}}"></IFRAME>
 			</div>
 			<div id=WIP class="alert alert-warn">
 				Refresh page if any issues. &nbsp;&nbsp;&nbsp;   
@@ -130,7 +130,7 @@
 					<div class=well well-small>
 					<H4>Book view (urdu):</H4>
 					<IFRAME ng-show="page" STYLE="height:680px;width:95%;"
-					SRC="{{getUrduBookUrl()}}"></IFRAME>
+					ng-src="{{getUrduBookUrl()}}"></IFRAME>
 					</div>
 				</div>
 				<div class="item">
@@ -171,7 +171,7 @@
 		  </div>
 		  <div class="modal-body">
 			<p><IFRAME ng-show="getIDUrl()" class="clearfix" STYLE="height:680px;width:95%;"
-					SRC="{{getIDUrl()}}"></IFRAME></p>
+					ng-src="{{getIDUrl()}}"></IFRAME></p>
 		  </div>
 		  <div class="modal-footer">
 			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>

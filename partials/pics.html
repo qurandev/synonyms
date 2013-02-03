@@ -11,7 +11,7 @@
 		<ul class="thumbnails">
 		  <li ng-repeat="icon in icons" class="span3">
 			<a ng-click="setID(iconstopics[$index])" class="thumbnail">  
-			  <img data-src="holder.js/160x120" src="http://quransynonyms.com/data/misc-icons/{{icon}}" title="{{$index + ': '+ icon}}" alt="{{icon}}" />  
+			  <img data-src="holder.js/160x120" ng-src="http://quransynonyms.com/data/misc-icons/{{icon}}" title="{{$index + ': '+ icon}}" alt="{{icon}}" />  
 			</a>
 		  </li>
 		</ul>
