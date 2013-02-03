@@ -1,9 +1,6 @@
 IT workitems backlog:
 =====================
-
 *002* non-existent topics show weird page [Defect, Severity: 1] 2/3/2013
-
-*003* Topic fullscreen stopped working [Defect] 2/3/2013
 
 *004* Letter-Section dropdown selector [Enhancement] 2/3/2013
 
@@ -16,10 +13,12 @@ IT workitems backlog:
 *008* Status: mark partial topics with Orange color [Enhancement]
 
 
-Completed:
+Fixed / Completed:
 ==============================
-
 *001* iframe initial request - shows weird page [Defect, Severity: 1] 2/3/2013 <Fixed: 2/3/2012>
+
+*003* Topic fullscreen stopped working [Defect] 2/3/2013
+
 
 
 
