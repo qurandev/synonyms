@@ -84,7 +84,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 		}
 	}
 	$rootScope.setID = function(id){
-		$rootScope.id = id; console.log(id);
+		$rootScope.id = id; console.log(id); $rootScope.ltr = _.indexOf($rootScope.letters, id.match(/[^\d]+/)[0] ); console.log( $rootScope.ltr );
 	}
 	$rootScope.getID = function(){
 		return $rootScope.id = $rootScope.id || "A1";
@@ -106,7 +106,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 			return _url + (17 + pg);
 		}
 	}
-	$rootScope.id = "A1"; $rootScope.sura = $rootScope.suwar[0].value; $rootScope.ref = "1:1"; $rootScope.setRef( $rootScope.ref );
+	$rootScope.id = "A1"; $rootScope.sura = $rootScope.suwar[0].value; $rootScope.ref = "1:1"; $rootScope.setRef( $rootScope.ref ); 
 	$rootScope.fetchTopicsAyahsMap();
 	$rootScope.fetchSynonyms();
 	$rootScope.fetchSynonymsDetails();
@@ -114,6 +114,10 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	$rootScope.letters = _.map(SYNONYMS_INDEX, function(o){ return o.l; });
 	$rootScope.lettersLong = _.map(SYNONYMS_INDEX, function(o){ return o.ll; });
 	$rootScope.lettersCount = _.map(SYNONYMS_INDEX, function(o){ return o.n; });
+	$rootScope.lettersDD = [];
+	_.each( $rootScope.lettersLong, function(letter, i){
+		$rootScope.lettersDD.push( { id: i, group: 1, label: letter });
+	});$rootScope.ltr = 0;
 	
 	$rootScope.getRange = function(data){
 		var ret = {}, regexp = /(\d+)\-(\d+)/, regexp2 = /\d+/, start, end, matches;

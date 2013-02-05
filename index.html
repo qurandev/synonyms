@@ -73,7 +73,14 @@
 			</div>
 			<div class="align-left well well-small clearfix">
 				<H4>
-				<ul class="pager" style="margin: 0!important;">
+				<div class="pull-right">Section: <select 
+				ng-model="ltr" required 
+				ng-change="setID(letters[ltr] + '1')"
+				ng-options="value.id as value.label group by value.group for value in lettersDD">
+				<option>--</option>
+				</select>
+				</div>
+				<ul class="pager clearfix" style="margin: 0!important;">
 				  <li><a href="#" ng-click="setID( getNextID(getID(), -1) )">Previous</a></li>
 				  Translation
 				  <li><a href="#" ng-click="setID(  getNextID( getID() ) )">Next</a></li>
