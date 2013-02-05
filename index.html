@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
 <html lang="en" ng-app="myApp" ng-controller="ayahsController">
 <head>
   <meta charset="utf-8">
@@ -251,7 +252,7 @@
   <script type="text/javascript">
 	$(document).ready(function() {
 	   if ($.browser.msie) {
-		 alert('Internet Explorer browser is not fully supported. Please retry in Chrome or Firefox, if you are having issues. Thanks.');
+		 alert('Internet Explorer browser is not fully supported. Please retry in Chrome or Firefox, if you have issues. We apologize for the inconvenience. \n\nAnother option, if you wish to stick to Internet Explorer, is to click OK & activate Google Frame on next screen.');
 		 $('#IE-ERRROR').show();// create the error box here
 		 $('#IE-ERROR').attr('style', 'z-index:1!important');
 	   }
@@ -289,5 +290,31 @@
 	})();
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <!--[if IE]>
+    <script type="text/javascript" 
+     src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+
+    <style>
+     .chromeFrameInstallDefaultStyle {
+       width: 100%; /* default is 800px */
+       border: 5px solid blue;
+     }
+    </style>
+
+    <div id="prompt">
+     <!-- if IE without GCF, prompt goes here -->
+    </div>
+ 
+    <script>
+     // The conditional ensures that this code will only execute in IE,
+     // Therefore we can use the IE-specific attachEvent without worry
+     window.attachEvent("onload", function() {
+       CFInstall.check({
+         mode: "inline", // the default
+         node: "prompt"
+       });
+     });
+    </script>
+  <![endif]-->
 </body>
 </html>
