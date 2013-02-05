@@ -1,4 +1,4 @@
-var fetchSura, format, findTopicsForSura, findTopicsForRef, findSurasForTopic, topicsAyahsMap, getSynonym, suraNames, synonyms, SYNONYMS_INDEX, pageOffsets, whatsNew, letterStatus, getNextID;
+var fetchSura, format, findTopicsForSura, findTopicsForRef, findSurasForTopic, topicsAyahsMap, getSynonym, suraNames, synonyms, SYNONYMS_INDEX, pageOffsets, whatsNew, letterStatus, getNextID, initTopicsAyahsMap;
 
 var ayahsController = function($scope, $route, $routeParams, $location, $http, $rootScope){console.log('ayahsController ' + JSON.stringify($routeParams));
 	$scope.qurandata = "dsffsdfs";
@@ -35,7 +35,8 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	$rootScope.fetchTopicsAyahsMap = function(){
 		var _url = "data/topicsAyahsMap.json"; console.log('fetching topicsAyahsMap');
 		$http.get(_url).success(function(data){
-			$rootScope.topicsAyahsMap = topicsAyahsMap = _.union( topicsAyahsMap, data ); console.log('got topicsAyahsMap');
+			$rootScope.topicsAyahsMap = topicsAyahsMap = initTopicsAyahsMap(data);
+			console.log('got topicsAyahsMap');
 		});
 	}
 	$rootScope.fetchSynonyms = function(){
@@ -194,6 +195,17 @@ findTopicsForSura = function(sura){
 	  })
 	 .value(); 
 	return ret;
+}
+
+initTopicsAyahsMap = function(data){
+	topicsAyahsMap = _.union( topicsAyahsMap, data ); 
+	topicsAyahsMap = _.chain( topicsAyahsMap )
+	 .map( function(o){
+		if(o.r != '-') o.r = " " + o.r + " ";
+		return o;
+	  })
+	 .value()
+	return topicsAyahsMap;
 }
 
 findTopicsForRef = function(ref){
