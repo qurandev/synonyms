@@ -27,7 +27,8 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 		$http.defaults.headers.common = {}; //get[	"Access-Control-Request-Headers"] = "accept, origin";
 		$http.get(_url).success(function(data) { 
 			$rootScope.qurandata = data.quran["quran-simple"];
-			$rootScope.qurantrans = data.quran["en.sahih"];
+			$rootScope.qurantrans = data.quran["en.sahih"];			
+			setTimeout('scrollToAyah("' + ref + '")', 2000); //now scroll to that ayah
 		});
 	}
 	$rootScope.fetchTopicsAyahsMap = function(){
@@ -143,6 +144,11 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
     });
 }
 
+var scrollToAyah = function(ref){ if(ref == '1:1') return;
+	var target = $( '#' + ref.replace(/\:/, '_') );
+	if( target && target.length > 0 )
+		target[0].scrollIntoView();
+}
 
 //get JSON data for passed in sura
 fetchSura = function(sura, ayah, $rootScope){
