@@ -80,7 +80,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 		if(ref != '1:1'){ 
 			$('.carousel').carousel('pause'); $('.carousel').carousel(1); //move to Quran view - when sura dropdown or ref clicked
 		}else{
-			setTimeout( "$('.carousel').carousel( 1 );", 2000);
+			setTimeout( "$('.carousel').carousel( 1 );", 5000);
 		}
 	}
 	$rootScope.setID = function(id){
