@@ -116,7 +116,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	$rootScope.lettersCount = _.map(SYNONYMS_INDEX, function(o){ return o.n; });
 	$rootScope.lettersDD = [];
 	_.each( $rootScope.lettersLong, function(letter, i){
-		$rootScope.lettersDD.push( { id: i, group: 1, label: letter });
+		$rootScope.lettersDD.push( { id: i, group: 1, label: letter.toUpperCase() });
 	});$rootScope.ltr = 0;
 	
 	$rootScope.getRange = function(data){

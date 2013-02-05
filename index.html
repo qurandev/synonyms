@@ -55,22 +55,7 @@
 			<span ng-init="id=getID()"></span>
 			<span ng-init="page=67"></span>
 			<span ng-init="suras = findSurasForTopic( getID() )"></span>
-			<div ng-show="suras.refs" class="align-left well well-small clearfix max-height">
-				<span ng-bind="'Synonym: '"></span>
-				<span ng-bind="getSynonym( getID() )" title="{{getID()}}" class="label label-success"></span> 
-				<span ng-bind="'('+getID()+')'" class="muted"></span>&nbsp; has ayahs: | &nbsp;
 
-				<span ng-repeat="ref in findSurasForTopic( getID() ).refs">
-					<A ng-click="setRef(ref)"><span ng-show="ref" ng-bind="ref" class="label label-info"></span></A>
-				</span>
-
-				<span ng-show="suras.suras" class='lineheight'>
-					<span ng-bind="' | Suwaar: | '"></span>
-					<span ng-repeat="sura in findSurasForTopic( getID() ).suras">
-						<A ng-click="setRef(sura+':1')"><span ng-bind="sura +': '+ suraNames[ sura ]" class="label label-warn"></span></A>
-					</span>
-				</span>
-			</div>
 			<div class="align-left well well-small clearfix">
 				<H4>
 				<div class="pull-right">Section: <select 
@@ -105,6 +90,22 @@
 						</ul>
 					  </div>
 					  <div class="modal-body">
+<div ng-show="suras.refs" class="pull-left align-left well well-small clearfix max-height">
+				<span ng-bind="'Synonym: '"></span>
+				<span ng-bind="getSynonym( getID() )" title="{{getID()}}" class="label label-success"></span> 
+				<span ng-bind="'('+getID()+')'" class="muted"></span>&nbsp; has ayahs: | &nbsp;
+
+				<span ng-repeat="ref in findSurasForTopic( getID() ).refs">
+					<A ng-click="setRef(ref)"><span ng-show="ref" ng-bind="ref" class="label label-info"></span></A>
+				</span>
+
+				<span ng-show="suras.suras" class='lineheight'>
+					<span ng-bind="' | Suwaar: | '"></span>
+					<span ng-repeat="sura in findSurasForTopic( getID() ).suras">
+						<A ng-click="setRef(sura+':1')"><span ng-bind="sura +': '+ suraNames[ sura ]" class="label label-warn"></span></A>
+					</span>
+				</span>
+			</div>
 						<p><IFRAME ng-show="getIDUrl()" class="clearfix iframe1"
 								ng-src="{{getIDUrl()}}"></IFRAME></p>
 					  </div>
@@ -115,6 +116,22 @@
 					</div>
 					<!--<div ng-include src="'partials/topic-modal.html'"></div>-->
 				</H4>
+<div ng-show="suras.refs" class="pull-left align-left well well-small clearfix max-height">
+				<span ng-bind="'Synonym: '"></span>
+				<span ng-bind="getSynonym( getID() )" title="{{getID()}}" class="label label-success"></span> 
+				<span ng-bind="'('+getID()+')'" class="muted"></span>&nbsp; has ayahs: | &nbsp;
+
+				<span ng-repeat="ref in findSurasForTopic( getID() ).refs">
+					<A ng-click="setRef(ref)"><span ng-show="ref" ng-bind="ref" class="label label-info"></span></A>
+				</span>
+
+				<span ng-show="suras.suras" class='lineheight'>
+					<span ng-bind="' | Suwaar: | '"></span>
+					<span ng-repeat="sura in findSurasForTopic( getID() ).suras">
+						<A ng-click="setRef(sura+':1')"><span ng-bind="sura +': '+ suraNames[ sura ]" class="label label-warn"></span></A>
+					</span>
+				</span>
+			</div>
 				<IFRAME ng-show="getIDUrl()" class="clearfix" STYLE="height:680px;width:95%;"
 					ng-src="{{getIDUrl()}}"></IFRAME>
 			</div>
