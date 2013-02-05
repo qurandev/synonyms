@@ -91,7 +91,18 @@
 					<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					  <div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h3 id="myModalLabel">Translation</h3>
+						<div class="pull-right">Section: <select 
+							ng-model="ltr" required 
+							ng-change="setID(letters[ltr] + '1')"
+							ng-options="value.id as value.label group by value.group for value in lettersDD">
+							<option>--</option>
+							</select>
+						</div>
+						<ul class="pager clearfix" style="margin: 0!important;">
+						  <li><a href="#" ng-click="setID( getNextID(getID(), -1) )">Previous</a></li>
+						  Translation
+						  <li><a href="#" ng-click="setID(  getNextID( getID() ) )">Next</a></li>
+						</ul>
 					  </div>
 					  <div class="modal-body">
 						<p><IFRAME ng-show="getIDUrl()" class="clearfix iframe1"
