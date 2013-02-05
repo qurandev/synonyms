@@ -1,4 +1,4 @@
-var fetchSura, format, findTopicsForSura, findSurasForTopic, topicsAyahsMap, getSynonym, suraNames, synonyms, SYNONYMS_INDEX, pageOffsets, whatsNew, letterStatus, getNextID;
+var fetchSura, format, findTopicsForSura, findTopicsForRef, findSurasForTopic, topicsAyahsMap, getSynonym, suraNames, synonyms, SYNONYMS_INDEX, pageOffsets, whatsNew, letterStatus, getNextID;
 
 var ayahsController = function($scope, $route, $routeParams, $location, $http, $rootScope){console.log('ayahsController ' + JSON.stringify($routeParams));
 	$scope.qurandata = "dsffsdfs";
@@ -11,6 +11,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	$rootScope.whatsNew = whatsNew; $rootScope.letterStatus = letterStatus;
 	
 	$rootScope.findTopicsForSura = findTopicsForSura;
+	$rootScope.findTopicsForRef = findTopicsForRef;
 	$rootScope.findSurasForTopic = findSurasForTopic;
 	$rootScope.findApproxPageNo = findApproxPageNo;	
 	$rootScope.getNextID = getNextID;
@@ -67,7 +68,10 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	}
 	$rootScope.getTopics = function(){
 		return $rootScope.topics = findTopicsForSura($rootScope.sura, $rootScope.synonyms);
-	}	
+	}
+	$rootScope.getRefTopics = function(ref){
+		return $rootScope.refTopics = findTopicsForRef(ref);
+	}
 	
 	$rootScope.setSura = function(sura){
 		$rootScope.setRef(sura + ":1");
@@ -177,9 +181,24 @@ format = function(data){ var html = '';
 }
 
 //Find all topics in current sura:
-findTopicsForSura = function(sura, synonyms){
+findTopicsForSura = function(sura){
 	var regexp, ret;
 	regexp = new RegExp(" " + sura + "\\:");
+	ret = 
+	_.chain(topicsAyahsMap)
+	 .filter( function(val, key){
+	   return val.r && regexp.test( val.r ); 
+	  })
+	 .map(function(o){
+		 return o.t;
+	  })
+	 .value(); 
+	return ret;
+}
+
+findTopicsForRef = function(ref){
+	var regexp, ret;
+	regexp = new RegExp(" " + ref + " "); //BUG. disregards ayahs at beginning.
 	ret = 
 	_.chain(topicsAyahsMap)
 	 .filter( function(val, key){

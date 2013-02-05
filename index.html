@@ -224,6 +224,11 @@
 			</span><BR/>
 			<span ng-bind="getQuranTrans()[key].verse">
 			</span>
+			<span Xng-show="refTopics" ng-repeat="topic in getRefTopics(ref)">
+				<A ng-click="setID(topic)">
+					<span ng-show="topic" ng-bind="getSynonym( topic )" class="label label-success"></span>
+				</A>
+			</span>
 			<HR>
 		  </div>
 		</div>
