@@ -12,6 +12,7 @@
 }
 .stagearea{
 	max-height:600px;
+	min-height:500px;
 	overflow: auto;
 }
 .qurantext{
@@ -85,7 +86,7 @@ span.status a {
 }
 
 span.status a, span.status a:hover, .status_h_50, .status_h_50:hover {
-background-color: #FAFF31; //yellow
+background-color: #faa732; //#FAFF31; //yellow
 color: black;
 }
 
@@ -97,6 +98,10 @@ color: white!important;
 span.status a.false, span.status a.false:hover, .status_h_25, .status_h_25:hover {
 background-color: #BB312F; //maroon
 color: white!important;
+width: auto!important;
+}
+
+span.status a.partial{
 width: auto!important;
 }
 

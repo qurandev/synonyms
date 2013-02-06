@@ -95,15 +95,28 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	$rootScope.getID = function(){
 		return $rootScope.id = $rootScope.id || "A1";
 	}
-	$rootScope.getIDUrl = function(){
+	$rootScope.getIDUrl = function(){var _url;
 		var id = $rootScope.id || "A1";
 		var number, path, arr = id.match(/\d+$/), arr2 = id.match(/[^\d]+/);
 		if(arr && arr[0]){	number = arr[0]; }
 		if(arr2 && arr2[0]){ path = arr2[0]; }
 		if(number){
-			return $rootScope.IDUrl = 'content/' + path + '/'+ id + '.html';
+			_url = $rootScope.IDUrl = 'content/' + path + '/'+ id + '.html';
 		}
+		if(_url != _url_previous){_url_previous = _url; //make sure no dupe ajax calls.
+		  $http.get(_url)
+		  .success(function(data){
+			$('#IDContent').html( data ); console.log('got IDContent '+_url);
+			$('#NOTRANSLATION').hide();
+		  })
+		  .error(function(data){
+			$('#IDContent').html( "- not yet translated - <BR><BR>To see the original Book pages (in Urdu), scroll to book view." );
+			$('#NOTRANSLATION').show();
+		  });
+		}
+		return _url;
 	}
+	var _url_previous;
 	$rootScope.getUrduBookUrl = function(){
 		var _url = "http://archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran?ui=embed#mode/1up/page/n", pg = $rootScope.page, id = $rootScope.id; console.log('getUrduBookUrl: ');
 		var o = findApproxPageNo( id );
@@ -133,7 +146,6 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 		}
 		else if( regexp2.test(data) ){ret.data = regexp2.exec(data);}
 		ret.isDone = (data.indexOf('(') == -1);
-		if(data.indexOf('[') != -1) ret.isDone = "partial";
 		return ret;
 	}
 
@@ -389,27 +401,27 @@ whatsNew = {
 letterStatus = {
 		'A': "1-29",
 		'AA': "1-51",
-		'b': "1-26 [37] 38-45 [46-48] 49-60 [61] 62-70 [71] 72-80",
-		'p': "1-2 [3] 4 [5] 6-8 [9] 10-25 [26-28] 29-32 [33-35] 36-46 [47] 48-59",
+		'b': "1-80",
+		'p': "1-2 (3) 4-59",
 		't': "1-8 (9-14) 15 (16-17) 18-27 (28-34)",
 		'tt': "1-8",
 		'th': "1-2",
-		'j': "1-4 [5] 6-28",
-		'ch': "1-22 [23-29]",
-		'HA': "[1-4] 5-15",
+		'j': "1-28",
+		'ch': "1-29",
+		'HA': "1-15",
 		'kh': "1-21",
 		'd': "1-3 (4-15) 16-24 (25-29) 30 (31-33) 34 (35-36)",
 		'dd': "(1-2) 3-9 (10)",
 		'dh': "1-6",
 		'r': "1-6 (7-13) 14-21",
 		'z': "1-5 (6-10)",
-		's': "1-26 [27] 28-30",
-		'sh': "1-13 [14] 15",
+		's': "1-30",
+		'sh': "1-15",
 		'SA': "1 (2-5)",
 		'DA': "1",
 		'TA': "(1-7)",
 		'ZA': "1-2",
-		'E': "1-11 [12-13]",
+		'E': "1-13",
 		'gh': "1-9",
 		'f': "1-14",
 		'q': "1-18",
