@@ -63,7 +63,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 
 	$rootScope.getQuranData = function(){
 		return $rootScope.qurandata;
-	}
+	} 
 	$rootScope.getQuranTrans = function(){
 		return $rootScope.qurantrans;
 	}
@@ -106,11 +106,11 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 		if(_url != _url_previous){_url_previous = _url; //make sure no dupe ajax calls.
 		  $http.get(_url)
 		  .success(function(data){
-			$('#IDContent').html( data ); console.log('got IDContent '+_url);
+			$('#IDContent, #IDContentModal').html( data ); console.log('got IDContent '+_url);
 			$('#NOTRANSLATION').hide();
 		  })
 		  .error(function(data){
-			$('#IDContent').html( "- not yet translated - <BR><BR>To see the original Book pages (in Urdu), scroll to book view." );
+			$('#IDContent, #IDContentModal').html( "- not yet translated - <BR><BR>To see the original Book pages (in Urdu), scroll to book view." );
 			$('#NOTRANSLATION').show();
 		  });
 		}

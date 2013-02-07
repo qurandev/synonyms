@@ -116,7 +116,7 @@
 					<div id="NOTRANSLATION" class="alert alert-error" style="display: none">
 					This topic's not yet been translated. Please check back later or <A HREF=mailto:linguisticmiracle@gmail.com>volunteer as a translator</A>.
 					</div>
-					<div class="clearfix well well-small iframe1 xpull-left" id="IDContent"></div>
+					<div class="clearfix well well-small iframe1 xpull-left" id="IDContentModal"></div>
 				  </div>
 				  <div class="modal-footer">
 					<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -213,7 +213,7 @@
 	
 	<script type='text/ng-template' id="partials/quran-template.html">
 	  <div dir=rtl class="clearfix">		  
-		<div ng-show="qurandata" ng-repeat="(key, verse) in getQuranData() | orderBy:key" dir=rtl class="quranpage">
+		<div ng-show="qurandata" ng-repeat="(key, verse) in getQuranData()" dir=rtl class="quranpage">
 		  <div ng-init="ref = verse.surah + ':' + verse.ayah" id="{{verse.surah + '_' + verse.ayah}}">
 			<span ng-bind="'['+ ref +']'" class="label label-info"></span>
 			<span ng-bind="verse.verse" class="qurantext">
