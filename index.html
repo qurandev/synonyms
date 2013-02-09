@@ -159,7 +159,7 @@
 			<div class="carousel-inner stagearea">
 				<div class="active item">
 					<div class=well well-small>
-					<H4>Book view (urdu):</H4>
+					<H4>Book view (urdu - Mutaradifaat al-Qur'aan):</H4>
 					<IFRAME ng-show="page" STYLE="height:680px;width:95%;"
 					ng-src="{{getUrduBookUrl()}}"></IFRAME>
 					</div>
@@ -168,6 +168,20 @@
 					<div class=well well-small>
 					<H4>Quran view:</H4>
 					<div ng-include src="'partials/quran-template.html'"></div>
+					</div>
+				</div>
+				<div class="item">
+					<div class=well well-small>
+					<H4>Book view (Maariful Quraan):</H4>
+					<IFRAME ng-show="page" STYLE="height:680px;width:95%;"
+					ng-src="{{getBookUrl('MaarifulQuraan')}}"></IFRAME>
+					</div>
+				</div>
+				<div class="item">
+					<div class=well well-small>
+					<H4>Book view (Asbab Al Nuzul):</H4>
+					<IFRAME ng-show="page" STYLE="height:680px;width:95%;"
+					ng-src="{{getBookUrl('AsbabAlNuzul')}}"></IFRAME>
 					</div>
 				</div>
 				<div class="item">
