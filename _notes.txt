@@ -1,6 +1,85 @@
 Quran to Synonym topics implementation notes:
 
 
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Maarif-ul-Qur'aan tafseer: http://archive.org/details/English-MaarifulQuran
+http://islamicstudies.info/maarif/surah67.htm
+
+http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-1#page/n17/mode/2up
+http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-2#page/n19/mode/2up
+http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-3#page/n15/mode/2up
+http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-4#page/n21/mode/2up
+http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-5#page/n19/mode/2up
+http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-6#page/n25/mode/2up
+http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-7#page/n19/mode/2up
+http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-8#page/n9/mode/2up
+
+344 -> Sura Mujadalah
+http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-8#page/n343/mode/1up
+
+
+var MaarifulQuraan = {
+   _MAP: { //surahPageNoMap
+	2:   [1,  53,95], //vol #1. key is last sura in vol. vol# is object index. first sura is 1st array value.
+	4:   [3,  23,291], //v 2
+	7:   [5,  19,297,537], //v 3
+	11:  [8,  145,299,509,593], //v 4
+	18:  [12,  23,181,235,295,331,  453,569], //v 5
+	30:  [19,  29,75,175,241,297,  343,471,523,567,627,  681,717], //v 6
+	46:  [31,  25,65,85,259,321,  363,419,497,543,585,  627,669,709,743,767,  785], //v 7
+	114: [47,  30,63,113,149,171,  189,199,237,252,277,  304,344,366,410,435,  445,461,477,488,517,  529,544,564,574,585,  594,611,634,649,661,  672,680,692,703,713,  721,725,738,750,756,  761,772,778,792,799,  804,811,818,824,830,  843,849,855,858,863,  865,869,874,877,885,  889,892,898,904,906,  914,918,926] //from surah 47. v 8
+   },
+   _PG_OFFSET: [-1, 19,16,  -4,-6,  -5,-8,-10,  10,8,6,4,  -4,-7,-9,-12,-14,-16,-19,  -5,-7,-9,-12,-14,-17,-19,-21,-23,-26,-29,-31,  
+				-4,-6,-9,-11,-13, -16,-19,-22,-24,-27,  -30,-32,-34,-36,-39,  -42, //v7
+				//-1,-1, for all of v8
+				],
+
+   _URL: "http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-$VOL#page/n$PAGE/mode/1up",
+   _VOL: 1, _PAGE: 17, _MODE: 1, 
+   
+   lookupSura: function(suraNo){ if(!suraNo || suraNo <1 || suraNo > 114) return;
+     var url, pageNo, volNo=0, map, pageNo;
+	 map = _.find(MaarifulQuraan._MAP, function(value, key){ ++volNo; return key >= suraNo; })
+	 if( map ){
+		pageNo = map[ suraNo - map[0] + 1];
+		offset = suraNo >=47 ? -1 : MaarifulQuraan._PG_OFFSET[ volNo ]; pageNo += offset;
+		url = MaarifulQuraan._URL.replace(/\$VOL/, volNo).replace(/\$PAGE/, pageNo);
+	 }
+	 return url;
+   }
+}
+var i = _.range(1,115);
+_.each(i, function(val){ console.log( val + ' '+ MaarifulQuraan.lookupSura(val) ); });
+
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+var x=-1, AsbabAlNuzul = {
+   _MAP: //surahPageNoMap
+[-1, 1,1,30,48,65, 74,79,81,85,95, 95,97,97,x,99, 100,104,108,110,111, 111,112,113,114,121, x,x,123,124,125, 125,127,127,x,x, 132,x,133,133,x, 135,135,136,136,136, 137,x,137,138,143, x,x,143,144,x, 145,146,147,150,152, 154,154,155,157,157, 158,159,159,160,160, x,x,x,160,161, 161,x,x,x,161, 162,x,162,x,x, 162,x,x,x,x, x,163,163,x,x, 164,164,x,165,x, x,165,x,x,165, 166,166,166,166,167, 167,168,168,169],
+
+   _URL: "http://archive.org/stream/Al-wahidisAsbabAl-nuzultheGreatCommentariesOfTheHolyQuranVol.3/Al-wahidisAsbabAl-nuzultheGreatCommentariesOfTheHolyQuranVol.3ImamAl-wahidi#page/n$PAGE/mode/1up",
+   _PG_OFFSET: 15,
+   lookupSura: function(suraNo){ if(!suraNo || suraNo <1 || suraNo > 114) return;
+     var url, pageNo, pageLookup;
+     pageLookup = AsbabAlNuzul._MAP[ suraNo ];
+     if(pageLookup && pageLookup > 0){
+       pageNo = AsbabAlNuzul._PG_OFFSET + pageLookup;
+       url = AsbabAlNuzul._URL.replace(/\$PAGE/g, pageNo); 
+     }
+     return url;
+   }
+}
+var i = _.range(1,115);
+_.each(i, function(val){ console.log( val + ' '+ AsbabAlNuzul.lookupSura( val ) ); });
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Mutaradifaat
+http://archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran?ui=embed#mode/1up/page/n84
+
+http://archive.org/stream/English-MaarifulQuran/English-MaarifulQuran-MuftiShafiUsmaniRA-Vol-5#page/n286/mode/1up
+
+
 http://api.globalquran.com/page/16:30/quran-wordbyword
 http://api.globalquran.com/page/16:30/quran-simple
 http://api.globalquran.com/page/16:30/quran-simple|quran-wordbyword
