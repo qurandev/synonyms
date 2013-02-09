@@ -95,15 +95,28 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	$rootScope.getID = function(){
 		return $rootScope.id = $rootScope.id || "A1";
 	}
-	$rootScope.getIDUrl = function(){
+	$rootScope.getIDUrl = function(){var _url;
 		var id = $rootScope.id || "A1";
 		var number, path, arr = id.match(/\d+$/), arr2 = id.match(/[^\d]+/);
 		if(arr && arr[0]){	number = arr[0]; }
 		if(arr2 && arr2[0]){ path = arr2[0]; }
 		if(number){
-			return $rootScope.IDUrl = 'content/' + path + '/'+ id + '.html';
+			_url = $rootScope.IDUrl = 'content/' + path + '/'+ id + '.html';
 		}
+		if(_url != _url_previous){_url_previous = _url; //make sure no dupe ajax calls.
+		  $http.get(_url)
+		  .success(function(data){
+			$('#IDContent, #IDContentModal').html( data ); console.log('got IDContent '+_url);
+			$('#NOTRANSLATION').hide();
+		  })
+		  .error(function(data){
+			$('#IDContent, #IDContentModal').html( "- not yet translated - <BR><BR>To see the original Book pages (in Urdu), scroll to book view." );
+			$('#NOTRANSLATION').show();
+		  });
+		}
+		return _url;
 	}
+	var _url_previous;
 	$rootScope.getUrduBookUrl = function(){
 		var _url = "http://archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran?ui=embed#mode/1up/page/n", pg = $rootScope.page, id = $rootScope.id; console.log('getUrduBookUrl: ');
 		var o = findApproxPageNo( id );

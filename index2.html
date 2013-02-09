@@ -32,26 +32,6 @@
 </script>
 
 
-<script type="text/ng-template" id="partials/synonymsContent.html">
-	<div>
-		<div ng-show="suras.refs" class="xpull-left align-left well well-small clearfix max-height">
-			<span ng-bind="'Synonym: '"></span>
-			<span ng-bind="getSynonym( getID() )" title="{{getID()}}" class="label label-success"></span> 
-			<span ng-bind="'('+getID()+')'" class="muted"></span>&nbsp; has ayahs: | &nbsp;
-
-			<span ng-repeat="ref in findSurasForTopic( getID() ).refs">
-				<A ng-click="setRef(ref)"><span ng-show="ref" ng-bind="ref" class="label label-info"></span></A>
-			</span>
-
-			<span ng-show="suras.suras" class='lineheight'>
-				<span ng-bind="' | Suwaar: | '"></span>
-				<span ng-repeat="sura in findSurasForTopic( getID() ).suras">
-					<A ng-click="setRef(sura+':1')"><span ng-bind="sura +': '+ suraNames[ sura ]" class="label label-warn"></span></A>
-				</span>
-			</span>
-		</div>
-	</div>
-</script>
 
 
 <body>
@@ -78,59 +58,84 @@
 			<span ng-init="suras = findSurasForTopic( getID() )"></span>
 
 			<div class="align-left well well-small clearfix">
-			  <H4>
+				<H4>
 				<div class="pull-right">Section: <select 
-					ng-model="ltr" required 
-					ng-change="setID(letters[ltr] + '1')"
-					ng-options="value.id as value.label group by value.group for value in lettersDD">
-					<option>--</option>
-				  </select>
+				ng-model="ltr" required 
+				ng-change="setID(letters[ltr] + '1')"
+				ng-options="value.id as value.label group by value.group for value in lettersDD">
+				<option>--</option>
+				</select>
 				</div>
 				<ul class="pager clearfix" style="margin: 0!important;">
 				  <li><a href="#" ng-click="setID( getNextID(getID(), -1) )">Previous</a></li>
 				  Translation
 				  <li><a href="#" ng-click="setID(  getNextID( getID() ) )">Next</a></li>
 				</ul>
-				<!-- Button to trigger modal -->
-				<a href="#myModal" role="button" class="pull-right btn btn-mini viewfull" data-toggle="modal">view full screen</a>
-				<!-- Modal -->
-				<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				  <div class="modal-header">
-					&nbsp;&nbsp;&nbsp;<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>&nbsp;&nbsp;&nbsp;
-					<div class="pull-right">Section: <select 
-						ng-model="ltr" required 
-						ng-change="setID(letters[ltr] + '1')"
-						ng-options="value.id as value.label group by value.group for value in lettersDD">
-						<option>--</option>
-						</select>
-					</div>
-					<ul class="pager clearfix" style="margin: 0!important;">
+					<!-- Button to trigger modal -->
+					<a href="#myModal" role="button" class="pull-right btn btn-mini viewfull" data-toggle="modal">view full screen</a>
+					<!-- Modal -->
+					<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					  <div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<div class="pull-right">Section: <select 
+							ng-model="ltr" required 
+							ng-change="setID(letters[ltr] + '1')"
+							ng-options="value.id as value.label group by value.group for value in lettersDD">
+							<option>--</option>
+							</select>
+						</div>
+						<ul class="pager clearfix" style="margin: 0!important;">
 						  <li><a href="#" ng-click="setID( getNextID(getID(), -1) )">Previous</a></li>
 						  Translation
 						  <li><a href="#" ng-click="setID(  getNextID( getID() ) )">Next</a></li>
-					</ul>
-				  </div>
-				  <div class="modal-body">
-					<div ng-include src="'partials/synonymsContent.html'"></div>
-					<span ng-bind="getIDUrl()" style="display: none;"></span>			  
-					<div id="NOTRANSLATION" class="alert alert-error" style="display: none">
-					This topic's not yet been translated. Please check back later or <A HREF=mailto:linguisticmiracle@gmail.com>volunteer as a translator</A>.
-					</div>
-					<div class="clearfix well well-small iframe1 xpull-left" id="IDContentModal"></div>
-				  </div>
-				  <div class="modal-footer">
-					<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-				  </div>
-				</div>
-			  </H4>
-			  <div ng-include src="'partials/synonymsContent.html'"></div>
-			  <span ng-bind="getIDUrl()" style="display: none;"></span>			  
-			  <div id="NOTRANSLATION" class="alert alert-error" style="display: none">
-			This topic's not yet been translated. Please check back later or <A HREF=mailto:linguisticmiracle@gmail.com>volunteer as a translator</A>.
-			  </div>
-			  <div class="clearfix well well-small stagearea xpull-left" id="IDContent"></div>
+						</ul>
+					  </div>
+					  <div class="modal-body">
+<div ng-show="suras.refs" class="pull-left align-left well well-small clearfix max-height">
+				<span ng-bind="'Synonym: '"></span>
+				<span ng-bind="getSynonym( getID() )" title="{{getID()}}" class="label label-success"></span> 
+				<span ng-bind="'('+getID()+')'" class="muted"></span>&nbsp; has ayahs: | &nbsp;
+
+				<span ng-repeat="ref in findSurasForTopic( getID() ).refs">
+					<A ng-click="setRef(ref)"><span ng-show="ref" ng-bind="ref" class="label label-info"></span></A>
+				</span>
+
+				<span ng-show="suras.suras" class='lineheight'>
+					<span ng-bind="' | Suwaar: | '"></span>
+					<span ng-repeat="sura in findSurasForTopic( getID() ).suras">
+						<A ng-click="setRef(sura+':1')"><span ng-bind="sura +': '+ suraNames[ sura ]" class="label label-warn"></span></A>
+					</span>
+				</span>
 			</div>
-			
+						<p><IFRAME ng-show="getIDUrl()" class="clearfix iframe1"
+								ng-src="{{getIDUrl()}}"></IFRAME></p>
+					  </div>
+					  <div class="modal-footer">
+						<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+						<!--<button class="btn btn-primary">Save changes</button>-->
+					  </div>
+					</div>
+					<!--<div ng-include src="'partials/topic-modal.html'"></div>-->
+				</H4>
+<div ng-show="suras.refs" class="pull-left align-left well well-small clearfix max-height">
+				<span ng-bind="'Synonym: '"></span>
+				<span ng-bind="getSynonym( getID() )" title="{{getID()}}" class="label label-success"></span> 
+				<span ng-bind="'('+getID()+')'" class="muted"></span>&nbsp; has ayahs: | &nbsp;
+
+				<span ng-repeat="ref in findSurasForTopic( getID() ).refs">
+					<A ng-click="setRef(ref)"><span ng-show="ref" ng-bind="ref" class="label label-info"></span></A>
+				</span>
+
+				<span ng-show="suras.suras" class='lineheight'>
+					<span ng-bind="' | Suwaar: | '"></span>
+					<span ng-repeat="sura in findSurasForTopic( getID() ).suras">
+						<A ng-click="setRef(sura+':1')"><span ng-bind="sura +': '+ suraNames[ sura ]" class="label label-warn"></span></A>
+					</span>
+				</span>
+			</div>
+				<IFRAME ng-show="getIDUrl()" class="clearfix" STYLE="height:680px;width:95%;"
+					ng-src="{{getIDUrl()}}"></IFRAME>
+			</div>
 			<div id=WIP class="alert alert-warn">
 				Refresh page if any issues. &nbsp;&nbsp;&nbsp;   
 				<span class=muted>Disclaimer:</span> <b>Work-in-progress; <u>Content still under review</u>.</b>
@@ -240,7 +245,7 @@
   <script src="js/jquery-1.8.2.min.js"></script>
   <script src="js/underscore-min.js"></script>
 <!--  <script src="js/bootstrap.min.js"></script> -->
-  <script src="controllers/ayahsController2.js"></script>
+  <script src="controllers/ayahsController.js"></script>
 <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-transition.js"></script>
 <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-carousel.js"></script>
 <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-modal.js"></script>
