@@ -38,14 +38,15 @@
 			<span ng-bind="'Synonym: '"></span>
 			<span ng-bind="getSynonym( getID() )" title="{{getID()}}" class="label label-success"></span> 
 			<span ng-bind="'('+getID()+')'" class="muted"></span>&nbsp; has ayahs: | &nbsp;
+			<span ng-init="lookupResult = findSurasForTopic( getID() )"></span>
 
-			<span ng-repeat="ref in findSurasForTopic( getID() ).refs">
+			<span ng-repeat="ref in lookupResult.refs">
 				<A ng-click="setRef(ref)"><span ng-show="ref" ng-bind="ref" class="label label-info"></span></A>
 			</span>
 
 			<span ng-show="suras.suras" class='lineheight'>
 				<span ng-bind="' | Suwaar: | '"></span>
-				<span ng-repeat="sura in findSurasForTopic( getID() ).suras">
+				<span ng-repeat="sura in lookupResult.suras">
 					<A ng-click="setRef(sura+':1')"><span ng-bind="sura +': '+ suraNames[ sura ]" class="label label-warn"></span></A>
 				</span>
 			</span>
