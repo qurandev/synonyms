@@ -1,5 +1,16 @@
 Quran to Synonym topics implementation notes:
 
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Word look wrong:
+A22: no words?? QADIMA,ISTAQDAM,SABAQA,ISTABAQA,AQBALA,ISTAQBALA
+
+
+expert Nouman's trans?
+ A12: sky.
+ A25: Halumma. 
+ A28: Noise
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 <i class="icon-refresh"></i>
 <i class="icon-share-alt"></i>
