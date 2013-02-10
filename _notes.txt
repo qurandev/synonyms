@@ -5,6 +5,13 @@ Quran to Synonym topics implementation notes:
 <i class="icon-share-alt"></i>
 <i class="icon-fullscreen"></i>
 <i class="icon-book"></i>
+<i class="icon-share"></i>
+
+<i class="icon-tag"></i>
+<i class="icon-tags"></i>
+<i class="icon-bookmark"></i>
+<i class="icon-comment"></i>
+<i class="icon-globe"></i>
 
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

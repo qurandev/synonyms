@@ -107,7 +107,10 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 		}
 	}
 	$rootScope.setID = function(id){
-		$rootScope.id = id; console.log(id); $rootScope.ltr = _.indexOf($rootScope.letters, id.match(/[^\d]+/)[0] ); console.log( $rootScope.ltr );
+		$rootScope.id = id; $rootScope.ltr = _.indexOf($rootScope.letters, id.match(/[^\d]+/)[0] );
+		if( $('#IDContentOuter').length > 0){//scroll topic into view
+			$('#IDContentOuter')[0].scrollIntoView();
+		}
 	}
 	$rootScope.getID = function(){
 		return $rootScope.id = $rootScope.id || "A1";
