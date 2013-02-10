@@ -2,6 +2,30 @@ Quran to Synonym topics implementation notes:
 
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+var $findme = $('.last'),
+    $msg = $('.first');
+
+    function Scrolled() {
+        var findmeOffset = $findme.offset(),
+            findmeTop = findmeOffset.top,
+            scrollTop = $(document).scrollTop(),
+            visibleBottom = window.innerHeight;
+
+        if (findmeTop < scrollTop + visibleBottom) {
+            $msg.text('findme is visible');
+        }
+        else {
+            $msg.text('findme is NOT visible');
+        }
+    }
+	
+	$(window).scroll(function() {
+        Scrolled();
+    });
+
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 Maarif-ul-Qur'aan tafseer: http://archive.org/details/English-MaarifulQuran
 http://islamicstudies.info/maarif/surah67.htm
 
