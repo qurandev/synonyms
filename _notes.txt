@@ -1,6 +1,22 @@
 Quran to Synonym topics implementation notes:
 
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
+var stats = {};
+stats.done = $('.complete  a.true, .incomplete a.true').length;
+stats.partial = $('.complete  a.partial, .incomplete a.partial').length;
+stats.incomplete = $('.incomplete  a.false').length;
+stats.total = stats.done + stats.partial + stats.incomplete;
+stats.percent = (100* (1 - stats.incomplete/stats.total) ).toFixed();
+console.log( JSON.stringify( stats ) );
+	$('#done.bar').attr('style', "width: " + 100*stats.done/stats.total + '%');
+	$('#partial.bar').attr('style', "width: " + 100*stats.partial/stats.total + '%');
+	$('#notdone.bar').attr('style', "width: " + 100*stats.incomplete/stats.total + '%');
+	$('#percent.btn').html( stats.percent +'%' );
+	$('#partial.badge').html(stats.partial);
+	$('#notdone.badge').html(stats.incomplete);
+
+	
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 var $findme = $('.last'),
