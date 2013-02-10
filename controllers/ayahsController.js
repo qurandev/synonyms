@@ -95,7 +95,13 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 		$rootScope.fetchSura(ref);
 		$rootScope.sura = parseInt( ref ); $rootScope.ref = ref;
 		if(ref != '1:1'){ 
-			$('.carousel').carousel('pause'); $('.carousel').carousel(1); //move to Quran view - when sura dropdown or ref clicked
+			$('.carousel').carousel('pause'); 
+			if( $('.carousel  .item.active').html().indexOf( 'Quran' ) == -1){ //only if no Quran in view, change to it.
+				$('.carousel').carousel(1); //move to Quran view - when sura dropdown or ref clicked
+			}else{ //reset those views.
+				if($rootScope.book1) $rootScope.getBookUrl('MaarifulQuraan', '#book1');
+				if($rootScope.book2) $rootScope.getBookUrl('AsbabAlNuzul', '#book2');
+			}
 		}else{
 			setTimeout( "$('.carousel').carousel( 1 );", 5000);
 		}
@@ -136,10 +142,13 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 			return _url + (17 + pg);
 		}
 	}
-	$rootScope.getBookUrl = function(bookID){
+	$rootScope.getBookUrl = function(bookID, id){
 		var _url, o = eval(bookID);
 		if(o){
 			_url = o.lookupSura( parseInt($rootScope.sura) ); console.log(  'getBookUrl: ' + bookID +' '+ _url );
+			if(id && _url){ 
+				$(id).html( "<IFRAME SRC='" + _url + "' STYLE='height:680px;width:95%;'></IFRAME>");
+			}
 			return _url;
 		}
 	}
@@ -172,7 +181,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	$rootScope.isShowall = function(){ return $rootScope.showall; }
 	$rootScope.setShowall = function(showall){ return $rootScope.showall = showall; }
 	
-	$rootScope.MaarifulQuraan = MaarifulQuraan; $rootScope.AsbabAlNuzul = AsbabAlNuzul;
+	$rootScope.MaarifulQuraan = MaarifulQuraan; $rootScope.AsbabAlNuzul = AsbabAlNuzul; $rootScope.book1 = $rootScope.book2 = true;
 	$(function() {
 		$('.carousel').each(function(){
             $(this).carousel({
