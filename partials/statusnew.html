@@ -1,16 +1,16 @@
 <div class="well align-left">
 <H4>Book translation status:
-	<a id=percent class="btn btn-primary disabled">94%</a> <small><b>done.</b>&nbsp;&nbsp;</small>
+	<a id=percent class="btn btn-primary disabled">95%</a> <small><b>done.</b>&nbsp;&nbsp;</small>
 <!--	<span id=done class="badge badge-success">916</span> <small><span class=muted>done.</span></small>-->
 	<span id=partial class="badge badge-warning">41</span> <small><span class=muted>partials;</span></small>
-	<span id=notdone class="badge badge-important">40</span> <small><span class=muted>incompletes left.</span></small>
+	<span id=notdone class="badge badge-important">34</span> <small><span class=muted>incompletes left.</span></small>
 	<small><b><span class="pull-right">
 		Show all? <input type="checkbox" ng-init="showall = true" ng-model="showall" onClick="$('.complete').toggle()"></input>
 	</span></b></small>
 </H4>
 <div class="progress progress-striped active">
-  <div id=done class="bar bar-success" style="width: 92%;"></div>
-  <div id=partial class="bar bar-warning" style="width: 4%;"></div>
+  <div id=done class="bar bar-success" style="width: 90%;"></div>
+  <div id=partial class="bar bar-warning" style="width: 6%;"></div>
   <div id=notdone class="bar bar-danger" style="width: 4%;"></div>
 </div>
 
@@ -66,11 +66,17 @@
 </div>
 </div>
 <script type='text/ng-template' id="updatestatus"
-	var stats = [$('a.true').length, $('a.partial').length, $('a.false').length]; 
-	stats.push( _.reduce(stats, function(a,b){return a+b;}) );
-	$('#done.bar').attr('style', "width: " + 100*stats[0]/stats[3] + '%');
-	$('#partial.bar').attr('style', "width: " + 100*stats[1]/stats[3] + '%');
-	$('#notdone.bar').attr('style', "width: " + 100*stats[2]/stats[3] + '%');
-	var percent = ( 100* (1-stats[2]/stats[3]) ).toFixed();
-	$('#percent.btn').html( percent +'%' );
+	var stats = {};
+stats.done = $('.complete  a.true, .incomplete a.true').length;
+stats.partial = $('.complete  a.partial, .incomplete a.partial').length;
+stats.incomplete = $('.incomplete  a.false').length;
+stats.total = stats.done + stats.partial + stats.incomplete;
+stats.percent = (100* (1 - stats.incomplete/stats.total) ).toFixed();
+console.log( JSON.stringify( stats ) );
+	$('#done.bar').attr('style', "width: " + 100*stats.done/stats.total + '%');
+	$('#partial.bar').attr('style', "width: " + 100*stats.partial/stats.total + '%');
+	$('#notdone.bar').attr('style', "width: " + 100*stats.incomplete/stats.total + '%');
+	$('#percent.btn').html( stats.percent +'%' );
+	$('#partial.badge').html(stats.partial);
+	$('#notdone.badge').html(stats.incomplete);
 </script>
