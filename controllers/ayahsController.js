@@ -261,14 +261,16 @@ findSurasForTopic = function(id){
 	ret.refs = 	_.chain(topicsAyahsMap)
 	 .where({t: id})
 	 .value(); if(ret.refs && ret.refs.length >= 1) ret.refs = ret.refs[0].r.split(" "); else return ret;
+    ret.refs = _.without( ret.refs, "-");
 	ret.suras = _.chain( ret.refs )
 	 .map( function(i){ 
 		 return i.split(':')[0]; 
 	  })
+	 .compact()
 	 .uniq()
-	 .without("")
 	 .map(function(o){ return parseInt(o); })
 	 .sortBy(function(a){return a; })
+     .compact()
 	 .value(); 
 	 return ret;
  }
