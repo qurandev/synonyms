@@ -1,14 +1,20 @@
 <div class="well align-left">
-<H4>Pages translation status:
-	<span class="pull-right">
+<H4>Book translation status:
+	<a id=percent class="btn btn-primary disabled">94%</a> <small><b>done.</b>&nbsp;&nbsp;</small>
+<!--	<span id=done class="badge badge-success">916</span> <small><span class=muted>done.</span></small>-->
+	<span id=partial class="badge badge-warning">41</span> <small><span class=muted>partials;</span></small>
+	<span id=notdone class="badge badge-important">40</span> <small><span class=muted>incompletes left.</span></small>
+	<small><b><span class="pull-right">
 		Show all? <input type="checkbox" ng-init="showall = true" ng-model="showall" onClick="$('.complete').toggle()"></input>
-	</span>
+	</span></b></small>
 </H4>
-	<!--Total progress: 
-	<B><span ng-bind="mStatus.percentPg"></span>%</B> pages complete (<B><span ng-bind="mStatus.donePg"></span></B> of <span ng-bind="mStatus.totalPg"></span> total pages)
-	<span class="pull-right muted"><B><span ng-bind="mStatus.percent"></span>%</B> topics complete (<B><span ng-bind="mStatus.done"></span></B> of <span ng-bind="mStatus.total"></span> total topics)</span>-->
-	
+<div class="progress progress-striped active">
+  <div id=done class="bar bar-success" style="width: 92%;"></div>
+  <div id=partial class="bar bar-warning" style="width: 4%;"></div>
+  <div id=notdone class="bar bar-danger" style="width: 4%;"></div>
+</div>
 
+<div class=clearfix></div>
 <H6><span class="label label-info">What's new</span>Show recent translations?&nbsp;&nbsp;&nbsp;&nbsp;<A class="btn btn-small" onClick="$('#whatsnew').toggle()">...</A></H4>
 <div id="whatsnew" class="well well-small" style="display:none;max-height:110px;overflow:auto;">
   <div ng-repeat="(date, entries) in whatsNew" style="clear:both;">
@@ -32,11 +38,9 @@
 	<div ng-repeat="key in letters" style="clear:both;">
 	  <div class="{{getClass( key )}}">
 		<div ng-bind="lettersLong[$index] + '  ('+key+')'" class="muted statusHeading" style="font-size: 2em;"></div>
-		
-		<span ng-bind="'Pages ' + topicsStatus[key].donePg +'/'+ topicsStatus[key].totalPg + ' done' "></span>
-		
-		<span ng-bind="'Topics ' + (letterStatus[key] || '-') + ' of ' + lettersCount[$index] + ' done '" class="pull-right"></span>
-		<span ng-bind="' ('+ topicsStatus[key].done + '/'+ lettersCount[$index] +')' " class="pull-right muted"></span><BR/>
+				
+		<span ng-bind="'Topics done: ' + (letterStatus[key] || '-')"></span>
+		<span ng-bind="' ('+ lettersCount[$index] +' total)' " class="pull-right muted"></span><BR/>
 		
 		<span ng-init="topicsRange = _.range(1, 1+parseInt( lettersCount[$index] ) ) "></span>
 		<span ng-init="topicsStatus = letterStatus[key]"></span>
@@ -61,3 +65,12 @@
 	</div>
 </div>
 </div>
+<script type='text/ng-template' id="updatestatus"
+	var stats = [$('a.true').length, $('a.partial').length, $('a.false').length]; 
+	stats.push( _.reduce(stats, function(a,b){return a+b;}) );
+	$('#done.bar').attr('style', "width: " + 100*stats[0]/stats[3] + '%');
+	$('#partial.bar').attr('style', "width: " + 100*stats[1]/stats[3] + '%');
+	$('#notdone.bar').attr('style', "width: " + 100*stats[2]/stats[3] + '%');
+	var percent = ( 100* (1-stats[2]/stats[3]) ).toFixed();
+	$('#percent.btn').html( percent +'%' );
+</script>
