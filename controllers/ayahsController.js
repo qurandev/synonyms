@@ -1,6 +1,6 @@
 var fetchSura, format, findTopicsForSura, findTopicsForRef, findSurasForTopic, topicsAyahsMap, getSynonym, suraNames, synonyms, synonymdetails, SYNONYMS_INDEX, pageOffsets, whatsNew, letterStatus, getNextID, initTopicsAyahsMap, MaarifulQuraan, AsbabAlNuzul;
 
-var ayahsController = function($scope, $route, $routeParams, $location, $http, $rootScope){console.log('ayahsController ' + JSON.stringify($routeParams));
+var ayahsController = function($scope, $route, $routeParams, $location, $http, $rootScope){//console.log('ayahsController ' + JSON.stringify($routeParams));
 	$scope.qurandata = "dsffsdfs";
 	$scope.ayahhtml = "ayah htmmmmmmmmmmmml";
 	
@@ -33,29 +33,28 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 		});
 	}
 	$rootScope.fetchTopicsAyahsMap = function(){
-		var _url = "data/topicsAyahsMap.json"; console.log('fetching topicsAyahsMap');
+		var _url = "data/topicsAyahsMap.json";
 		$http.get(_url).success(function(data){
 			$rootScope.topicsAyahsMap = topicsAyahsMap = initTopicsAyahsMap(data);
-			console.log('got topicsAyahsMap');
 		});
 	}
 	$rootScope.fetchSynonyms = function(){
-		var _url = "data/synonyms.json"; console.log('fetching synonyms');
+		var _url = "data/synonyms.json";
 		$http.get(_url).success(function(data){
-			$rootScope.synonyms = eval( data ); console.log('got synonyms');
+			$rootScope.synonyms = eval( data );
 		});
 	}
 
 	$rootScope.fetchSynonymsDetails = function(){
-		var _url = "data/synonymsdetails.json"; console.log('fetching synonymsdetails');
+		var _url = "data/synonymsdetails.json";
 		$http.get(_url).success(function(data){
-			$rootScope.synonymdetails = synonymdetails = eval( data ); console.log('got synonymsdetails');
+			$rootScope.synonymdetails = synonymdetails = eval( data );
 		});
 	}
 		
 	$rootScope.getSynonym = function(id){
 		var ret, s = $rootScope.synonyms;
-		if(!s){ console.log(id + ': no synonyms! ' + s); return id; }
+		if(!s){ return id; }
 		ret = _.filter(s, function(o){ return o.id == id; });
 		if(ret && ret.length >= 1){ return ret[0].topic; }
 		else return id;
@@ -138,11 +137,11 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	}
 	var _url_previous;
 	$rootScope.getUrduBookUrl = function(){
-		var _url = "http://archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran?ui=embed#mode/1up/page/n", pg = $rootScope.page, id = $rootScope.id; console.log('getUrduBookUrl: ');
+		var url, _url = "http://archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran?ui=embed#mode/1up/page/n", pg = $rootScope.page, id = $rootScope.id; 
 		var o = findApproxPageNo( id );
 		if(o && o.pg){
-			pg = o.pg; $rootScope.page = pg;
-			return _url + (17 + pg);
+			pg = o.pg; $rootScope.page = pg; url = _url + (17 + pg); console.log('getUrduBookUrl: '+ url);
+			return url;
 		}
 	}
 	$rootScope.getBookUrl = function(bookID, id){
@@ -205,12 +204,10 @@ fetchSura = function(sura, ayah, $rootScope){
 	var data, o, dataUrl = "http://api.globalquran.com/page/$REF/quran-wordbyword", ref;
 	ref = (sura || 1) + ":" + (ayah || 1);
 	o = $.getJSON( dataUrl.replace(/\$REF/g, ref) );
-	o.then( function(){ debugger;
-		console.log( arguments ); data = arguments[0]; 
+	o.then( function(){//console.log( arguments ); 
+		data = arguments[0]; 
 		var html = ''; html = format(data);
 		$rootScope.ayahhtml = html;
-		//div = $('#z'); if(div.length <= 0){ div = $('body').append('<div id=z/>');}
-		//$(div).html( html );	
 	});
 }
 format = function(data){ var html = '';
@@ -498,7 +495,7 @@ letterStatus = {
 
 var l = _.pluck(SYNONYMS_INDEX, 'l'), n = _.pluck(SYNONYMS_INDEX, 'n'); var id = 'A0'; 
 
-getNextID = function(id, prev){ console.log('getNextID called');
+getNextID = function(id, prev){
   var r = /([^\d]+)(\d+)/, a=[], ltr, num, max, offset;
   offset = (!prev || prev != -1) ? 1 : -1;
   if( r.test( id ) ){
@@ -515,7 +512,6 @@ getNextID = function(id, prev){ console.log('getNextID called');
     return ltr + num;
   }
 }
-//for(i=0, a=[]; i<20; ++i)  a.push( id = getNext( id, 1 ) ); console.log( a );
 
 var x=-1;
 AsbabAlNuzul = {
