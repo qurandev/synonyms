@@ -8,8 +8,29 @@
 	<B><span ng-bind="mStatus.percentPg"></span>%</B> pages complete (<B><span ng-bind="mStatus.donePg"></span></B> of <span ng-bind="mStatus.totalPg"></span> total pages)
 	<span class="pull-right muted"><B><span ng-bind="mStatus.percent"></span>%</B> topics complete (<B><span ng-bind="mStatus.done"></span></B> of <span ng-bind="mStatus.total"></span> total topics)</span>-->
 	
+
+<H6><span class="label label-info">What's new</span>Show recent translations?&nbsp;&nbsp;&nbsp;&nbsp;<A class="btn btn-small" onClick="$('#whatsnew').toggle()">...</A></H4>
+<div id="whatsnew" class="well well-small" style="display:none;max-height:110px;overflow:auto;">
+  <div ng-repeat="(date, entries) in whatsNew" style="clear:both;">
+	<span ng-bind="date" class="muted"></span><BR>
+	<div ng-repeat="(key, whatsNewTopicsStatus) in entries">	
+	  <span ng-repeat="item in whatsNewTopicsStatus.split(' ')">
+		<span ng-init="range = getRange(item)" class="status">
+			<a ng-repeat="box in range.data" ng-init="o = {pg: box, isDone: range.isDone, l: key, i: 1+$index}" 
+			   ng-click="setID(key+box)" ng-mouseover="mouseover(o)" class="{{range.isDone}}">
+			   {{key + box}}<span ng-bind="(' - page: ' + findApproxPageNo(key+box).pg + ' - topic: '+ getSynonym(key+box) )"></span>
+			</a>
+		</span>
+	  </span>
+	</div>
+	<div ng-show="$last"><BR/><BR/></div>
+  </div><HR>
+  End of recent translations<BR/><BR/>
+</div>
+
+<div class="well well-small">
 	<div ng-repeat="key in letters" style="clear:both;">
-	  <div class="{{getClass( key )}}"><HR>
+	  <div class="{{getClass( key )}}">
 		<div ng-bind="lettersLong[$index] + '  ('+key+')'" class="muted statusHeading" style="font-size: 2em;"></div>
 		
 		<span ng-bind="'Pages ' + topicsStatus[key].donePg +'/'+ topicsStatus[key].totalPg + ' done' "></span>
@@ -35,7 +56,8 @@
 				   ng-click="click(o)" ng-mouseover="mouseover(o)" class="{{range.isDone}}">{{box}}</a>
 			</span>
 		</span>
-		<BR/>
+		<HR><BR/>
 	  </div>
 	</div>
+</div>
 </div>
