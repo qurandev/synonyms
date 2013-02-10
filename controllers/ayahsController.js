@@ -62,10 +62,18 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	}
 
 	$rootScope.getQuranData = function(){
-		return $rootScope.qurandata;
+		var result = [];
+		angular.forEach($rootScope.qurandata, function(data, id) {
+		  result.push(data);
+		});
+		return result;
 	}
 	$rootScope.getQuranTrans = function(){
-		return $rootScope.qurantrans;
+		var result = [];
+		angular.forEach($rootScope.qurantrans, function(data, id) {
+		  result.push(data);
+		});
+		return result;		
 	}
 	$rootScope.getTopics = function(){
 		return $rootScope.topics = findTopicsForSura($rootScope.sura, $rootScope.synonyms);
