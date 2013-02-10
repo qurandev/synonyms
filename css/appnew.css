@@ -11,8 +11,8 @@
 	text-align: right;
 }
 .stagearea{
-	max-height:600px;
-	min-height:500px;
+	max-height:850px;
+	min-height:850px;
 	overflow: auto;
 }
 .qurantext{

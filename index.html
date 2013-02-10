@@ -135,7 +135,9 @@
 				</div>
 			  </H4>
 			  <div ng-include src="'partials/synonymsContent.html'"></div>
-			  <!-- Button to trigger modal -->
+			  <div class=pull-right>
+			    &nbsp;&nbsp;<A ng-click="getBookUrl('AsbabAlNuzul', '#book2')"><i class="icon-refresh"></i></A>&nbsp;&nbsp;<A href="{{getIDUrl()}}" target=_><i class="icon-share-alt"></i></A>&nbsp;&nbsp;
+			  </div><!-- Button to trigger modal -->
 			  <a href="#myModal" role="button" class="pull-right btn btn-mini viewfull" data-toggle="modal">view full screen&nbsp;&nbsp;<i class="icon-fullscreen"></i></a>
 			  <span ng-bind="getIDUrl()" style="display: none;"></span>			  
 			  <div id="NOTRANSLATION" class="alert alert-error" style="display: none">
@@ -172,8 +174,11 @@
 			<div class="carousel-inner stagearea">
 				<div class="active item">
 					<div class=well well-small>
-					<H4>Book view (urdu - Mutaradifaat al-Qur'aan):</H4>
-					<IFRAME ng-show="page" STYLE="height:680px;width:95%;"
+					<H4>Book view (Mutaradifaat al-Qur'aan - urdu):</H4>
+					<div class=pull-right>
+					  <A ng-click="getUrduBookUrl()"><i class="icon-refresh"></i></A>&nbsp;&nbsp;<A href="{{getUrduBookUrl()}}" target=_><i class="icon-share-alt"></i></A>
+					</div>
+					<IFRAME ng-show="page" class=clearfix STYLE="height:680px;width:95%;"
 					ng-src="{{getUrduBookUrl()}}"></IFRAME>
 					</div>
 				</div>
@@ -185,9 +190,12 @@
 				</div>
 				<div class="item">
 					<div class=well well-small>
-					<H4>Quran view (Tafseer Maariful Quraan):</H4>
+					<H4>Quran view (Tafseer Maariful Qur'aan):</H4>
+					<div class=pull-right>
+					  <A ng-click="getBookUrl('MaarifulQuraan', '#book1')"><i class="icon-refresh"></i></A>&nbsp;&nbsp;<A href="{{getBookUrl('MaarifulQuraan')}}" target=_><i class="icon-share-alt"></i></A>
+					</div>
 					<span ng-init="book1 = true" ng-show="book1" ng-click="book1 = !book1; _html1 = '<IFRAME src=' + getBookUrl('MaarifulQuraan', '#book1') +'></IFRAME>'; $('#book1').html(_html1);" class="btn btn-large">
-					  <img src="data/misc-icons/MaarifulQuran.jpg" class="img-polaroid" style="width: 140px; height: 180px;"><BR>
+					  <img src="data/misc-icons/MaarifulQuran.jpg" class="img-polaroid" style="width: 140px; height: 180px;"/><BR>
 					  Click to load. 
 					</span>
 					<span ng-show="!book1" id="book1"></span>
@@ -197,6 +205,9 @@
 				<div class="item">
 					<div class=well well-small>
 					<H4>Quran view (Asbab Al Nuzul):</H4>
+					<div class=pull-right>
+					  <A ng-click="getBookUrl('AsbabAlNuzul', '#book2')"><i class="icon-refresh"></i></A>&nbsp;&nbsp;<A href="{{getBookUrl('AsbabAlNuzul')}}" target=_><i class="icon-share-alt"></i></A>
+					</div>
 					<span ng-init="book2 = true;" ng-show="book2" ng-click="book2 = !book2;_html2 = '<IFRAME src=' + getBookUrl('AsbabAlNuzul', '#book2') +'></IFRAME>'; $('#book2').html(_html2);" class="btn btn-large">
 					  <img src="data/misc-icons/Asbab.jpg" Mutaradifaat.jpg class="img-polaroid" style="width: 140px; height: 180px;"/><BR>
 					  Click to load. 
