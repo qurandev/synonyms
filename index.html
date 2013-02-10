@@ -226,8 +226,9 @@
 	</script>
 	
 	<script type='text/ng-template' id="partials/quran-template.html">
-	  <div dir=rtl class="clearfix">		  
-		<div ng-show="qurandata" ng-repeat="(key, verse) in getQuranData()" dir=rtl class="quranpage">
+	  <div dir=rtl class="clearfix">
+	   <div ng-repeat="pageno in [0]" dir="rtl" class="quranpage well well-small">
+		<div ng-show="qurandata" ng-repeat="(key, verse) in getQuranData(pageno)" dir=rtl class="quranayah">
 		  <div ng-init="ref = verse.surah + ':' + verse.ayah" id="{{verse.surah + '_' + verse.ayah}}" class="{{($first && 'first')||'' + ($last && 'last')||''}}">
 			<span ng-bind="'['+ ref +']'" class="label label-info"></span>
 			<span ng-bind="verse.verse" class="qurantext">
@@ -242,6 +243,7 @@
 			<HR>
 		  </div>
 		</div>
+	   </div>
 	  </div>
 	</script>
 
