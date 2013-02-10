@@ -88,7 +88,10 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	$rootScope.getSura = function(){
 		return $rootScope.sura = $rootScope.sura || 1;
 	}
-	$rootScope.setRef = function(ref){
+	$rootScope.setRef = function(ref, ayahNo){ var suraNo;
+		if( ayahNo && (ayahNo = parseInt(ayahNo)) && (suraNo = parseInt(ref)) ){
+			ref = suraNo +':'+ ++ayahNo; //TODO: ensure ayahNo is < maxAyahs in sura
+		}
 		$rootScope.fetchSura(ref);
 		$rootScope.sura = parseInt( ref ); $rootScope.ref = ref;
 		if(ref != '1:1'){ 
