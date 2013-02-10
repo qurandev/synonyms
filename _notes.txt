@@ -1,5 +1,12 @@
 Quran to Synonym topics implementation notes:
 
+
+<i class="icon-refresh"></i>
+<i class="icon-share-alt"></i>
+<i class="icon-fullscreen"></i>
+<i class="icon-book"></i>
+
+
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 var stats = {};
