@@ -148,7 +148,7 @@
 			has synonyms: 
 			<span Xng-show="topics" ng-repeat="topic in getTopics()">
 				<A ng-click="setID(topic)">
-					<span ng-show="topic" ng-bind="getSynonym( topic )" class="label label-success"></span>
+					<span ng-show="topic" ng-bind="getSynonym( topic )" class="label label-warn"></span>
 				</A>
 			</span>
 			<span ng-show="!getTopics()" ng-bind="'-none-'"></span>
