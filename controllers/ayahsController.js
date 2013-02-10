@@ -1,4 +1,4 @@
-var fetchSura, format, findTopicsForSura, findTopicsForRef, findSurasForTopic, topicsAyahsMap, getSynonym, suraNames, synonyms, SYNONYMS_INDEX, pageOffsets, whatsNew, letterStatus, getNextID, initTopicsAyahsMap, MaarifulQuraan, AsbabAlNuzul;
+var fetchSura, format, findTopicsForSura, findTopicsForRef, findSurasForTopic, topicsAyahsMap, getSynonym, suraNames, synonyms, synonymdetails, SYNONYMS_INDEX, pageOffsets, whatsNew, letterStatus, getNextID, initTopicsAyahsMap, MaarifulQuraan, AsbabAlNuzul;
 
 var ayahsController = function($scope, $route, $routeParams, $location, $http, $rootScope){console.log('ayahsController ' + JSON.stringify($routeParams));
 	$scope.qurandata = "dsffsdfs";
@@ -49,7 +49,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	$rootScope.fetchSynonymsDetails = function(){
 		var _url = "data/synonymsdetails.json"; console.log('fetching synonymsdetails');
 		$http.get(_url).success(function(data){
-			$rootScope.synonymdetails = eval( data ); console.log('got synonymsdetails');
+			$rootScope.synonymdetails = synonymdetails = eval( data ); console.log('got synonymsdetails');
 		});
 	}
 		
@@ -273,7 +273,7 @@ findSurasForTopic = function(id){
 	ret.refs = 	_.chain(topicsAyahsMap)
 	 .where({t: id})
 	 .value(); if(ret.refs && ret.refs.length >= 1) ret.refs = ret.refs[0].r.split(" "); else return ret;
-    ret.refs = _.without( ret.refs, "-");
+    ret.refs = _.chain( ret.refs ).without( "").without( "-").value();
 	ret.suras = _.chain( ret.refs )
 	 .map( function(i){ 
 		 return i.split(':')[0]; 
@@ -284,9 +284,11 @@ findSurasForTopic = function(id){
 	 .sortBy(function(a){return a; })
      .compact()
 	 .value(); 
-	 return ret;
+	if( synonymdetails && synonymdetails.length>0) ret.words = _.chain( synonymdetails )
+     .where({id: id})
+     .value();
+	return ret;
  }
-
 
 topicsAyahsMap = [
 	{t: "A1", r: " 2:35 14:37  12:56 3:121  28:45  2:25  2:196 12:100  4:19  7:92"},

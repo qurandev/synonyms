@@ -35,21 +35,33 @@
 <script type="text/ng-template" id="partials/synonymsContent.html">
 	<div>
 		<div ng-show="suras.refs" class="xpull-left align-left well well-small clearfix max-height">
-			<span ng-bind="'Synonym: '"></span>
-			<span ng-bind="getSynonym( getID() )" title="{{getID()}}" class="label label-success"></span> 
-			<span ng-bind="'('+getID()+')'" class="muted"></span>&nbsp; has ayahs: | &nbsp;
-			<span ng-init="lookupResult = findSurasForTopic( getID() )"></span>
-
-			<span ng-repeat="ref in lookupResult.refs">
-				<A ng-click="setRef(ref)"><span ng-show="ref" ng-bind="ref" class="label label-info"></span></A>
-			</span>
-
-			<span ng-show="suras.suras" class='lineheight'>
-				<span ng-bind="' | Suwaar: | '"></span>
-				<span ng-repeat="sura in lookupResult.suras">
-					<A ng-click="setRef(sura+':1')"><span ng-bind="sura +': '+ suraNames[ sura ]" class="label label-warn"></span></A>
+			<div class=pull-left>
+				<span ng-bind="'Synonym: '"></span>
+				<span ng-bind="getSynonym( getID() )" title="{{getID()}}" class="label label-success"></span> 
+				<span ng-bind="'('+getID()+')'" class="muted"></span>
+			</div>
+			<div ng-show="synonymdetails && synonymdetails.length>0" class=pull-right>
+			  <span dir=rtl ng-repeat="wordO in findSurasForTopic( getID() ).words">
+				<span ng-bind="wordO.word" class="qurantext2 label label-inverse"></span><span ng-show="!$last">&nbsp;-&nbsp;</span>
+			  </span>
+			</div><BR/>
+			<div class="clearfix pull-left">
+				has ayahs: | &nbsp;
+				<span ng-repeat="ref in findSurasForTopic( getID() ).refs">
+					<A ng-click="setRef(ref)"><span ng-show="ref" ng-bind="ref" class="label label-info"></span></A>
 				</span>
-			</span>
+
+				<span ng-show="suras.suras" class='lineheight'>
+					<span ng-bind="' | Suwaar: | '"></span>
+					<span ng-repeat="sura in findSurasForTopic( getID() ).suras">
+						<A ng-click="setRef(sura+':1')"><span ng-bind="sura +': '+ suraNames[ sura ]" class="label label-warn"></span></A>
+					</span>
+				</span>
+				
+				<span ng-show="synonymdetails && synonymdetails.length>0" ng-repeat="wordO in findSurasForTopic( getID() ).words">
+					<small><span ng-bind="wordO.wordEn" class="muted"></span></small><span ng-show="!$last">&nbsp;&nbsp;-&nbsp;&nbsp;</span>
+				</span>
+			</div>
 		</div>
 	</div>
 </script>
@@ -92,8 +104,6 @@
 				  Translation
 				  <li><a href="#" ng-click="setID(  getNextID( getID() ) )">Next</a></li>
 				</ul>
-				<!-- Button to trigger modal -->
-				<a href="#myModal" role="button" class="pull-right btn btn-mini viewfull" data-toggle="modal">view full screen</a>
 				<!-- Modal -->
 				<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				  <div class="modal-header">
@@ -125,11 +135,13 @@
 				</div>
 			  </H4>
 			  <div ng-include src="'partials/synonymsContent.html'"></div>
+			  <!-- Button to trigger modal -->
+			  <a href="#myModal" role="button" class="pull-right btn btn-mini viewfull" data-toggle="modal">view full screen&nbsp;&nbsp;<i class="icon-fullscreen"></i></a>
 			  <span ng-bind="getIDUrl()" style="display: none;"></span>			  
 			  <div id="NOTRANSLATION" class="alert alert-error" style="display: none">
 			This topic's not yet been translated. Please check back later or <A HREF=mailto:linguisticmiracle@gmail.com>volunteer as a translator</A>.
 			  </div>
-			  <div class="clearfix well well-small stagearea xpull-left" id="IDContent"></div>
+			  <div class="clearfix well well-small stagearea pull-left" id="IDContent"></div>
 			</div>
 			
 			<div id=WIP class="alert alert-warn">
