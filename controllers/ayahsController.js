@@ -1,4 +1,4 @@
-var fetchSura, format, findTopicsForSura, findTopicsForRef, findSurasForTopic, topicsAyahsMap, getSynonym, suraNames, synonyms, synonymdetails, SYNONYMS_INDEX, pageOffsets, whatsNew, letterStatus, getNextID, initTopicsAyahsMap, MaarifulQuraan, AsbabAlNuzul;
+var fetchSura, format, findTopicsForSura, findTopicsForRef, findSurasForTopic, topicsAyahsMap, getSynonym, suraNames, synonyms, synonymdetails, SYNONYMS_INDEX, pageOffsets, whatsNew, letterStatus, getNextID, initTopicsAyahsMap, MaarifulQuraan, AsbabAlNuzul, v=0.8;
 
 var ayahsController = function($scope, $route, $routeParams, $location, $http, $rootScope){//console.log('ayahsController ' + JSON.stringify($routeParams));
 	$scope.qurandata = "dsffsdfs";
@@ -46,7 +46,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	}
 
 	$rootScope.fetchSynonymsDetails = function(){
-		var _url = "data/synonymsdetails.json";
+		var _url = "data/synonymsdetails.json?" + v;
 		$http.get(_url).success(function(data){
 			$rootScope.synonymdetails = synonymdetails = eval( data );
 		});

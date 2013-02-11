@@ -1,14 +1,43 @@
-Quran to Synonym topics implementation notes:
+﻿Quran to Synonym topics implementation notes:
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+AA39 - missing!!
+AA49 - missing!! (xAA20 has extra words)
+AA23 - wrong extra word? 3araDa
+AA35- heading wrong? is it mataa or amnaa?
+
+
 Word look wrong:
+To fly, to make fly (AA20) قَدَّمَ-اَسْتَقْدَمَ -  سَبَقَ-اِسْتَبَقَ -  اَقْبَلَ-اِسْتَقْبَلَ words wrong!!
+To indicate (AA21) no words
+AA22: words for AA20??
+AA23: wrong words
+AA24 wrong
+AA25 wrong words
+AA26 wrong words
+AA27 wrng
+------
+AA41 Correct
 A22: no words?? QADIMA,ISTAQDAM,SABAQA,ISTABAQA,AQBALA,ISTAQBALA
 
+
+MINOR:
+AA43 in IDEntry says Hajada. shud be Jahada.
+AA48 ibil arabic in wordEn
 
 expert Nouman's trans?
  A12: sky.
  A25: Halumma. 
  A28: Noise
+
+ 
+ .............................
+AA20 URANA URNA [To Make Fly , To Fly]
+Synonyms: To make fly ----AZRA(ZA-RA-WA),NASAFA, To fly-- TAAR,ISTATAR
+
+AA21 ISHARA KARNA [To Point]
+Synonyms: AASHARA(SH-WA-RA/SH-YA-RA),RAMZ,TAGHAMAZA,3ARRADA
+
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
