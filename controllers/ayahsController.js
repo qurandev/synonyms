@@ -376,7 +376,7 @@ topicsAyahsMap = [
 suraNames = ["","Al-Faatiha","Al-Baqara","Aal-i-Imraan","An-Nisaa","Al-Maaida","Al-An'aam","Al-A'raaf","Al-Anfaal","At-Tawba","Yunus","Hud","Yusuf","Ar-Ra'd","Ibrahim","Al-Hijr","An-Nahl","Al-Israa","Al-Kahf","Maryam","Taa-Haa","Al-Anbiyaa","Al-Hajj","Al-Muminoon","An-Noor","Al-Furqaan","Ash-Shu'araa","An-Naml","Al-Qasas","Al-Ankaboot","Ar-Room","Luqman","As-Sajda","Al-Ahzaab","Saba","Faatir","Yaseen","As-Saaffaat","Saad","Az-Zumar","Al-Ghaafir","Fussilat","Ash-Shura","Az-Zukhruf","Ad-Dukhaan","Al-Jaathiya","Al-Ahqaf","Muhammad","Al-Fath","Al-Hujuraat","Qaaf","Adh-Dhaariyat","At-Tur","An-Najm","Al-Qamar","Ar-Rahmaan","Al-Waaqia","Al-Hadid","Al-Mujaadila","Al-Hashr","Al-Mumtahana","As-Saff","Al-Jumu'a","Al-Munaafiqoon","At-Taghaabun","At-Talaaq","At-Tahrim","Al-Mulk","Al-Qalam","Al-Haaqqa","Al-Ma'aarij","Nooh","Al-Jinn","Al-Muzzammil","Al-Muddaththir","Al-Qiyaama","Al-Insaan","Al-Mursalaat","An-Naba","An-Naazi'aat","Abasa","At-Takwir","Al-Infitaar","Al-Mutaffifin","Al-Inshiqaaq","Al-Burooj","At-Taariq","Al-A'laa","Al-Ghaashiya","Al-Fajr","Al-Balad","Ash-Shams","Al-Lail","Ad-Dhuhaa","Ash-Sharh","At-Tin","Al-Alaq","Al-Qadr","Al-Bayyina","Az-Zalzala","Al-Aadiyaat","Al-Qaari'a","At-Takaathur","Al-Asr","Al-Humaza","Al-Fil","Quraish","Al-Maa'un","Al-Kawthar","Al-Kaafiroon","An-Nasr","Al-Masad","Al-Ikhlaas","Al-Falaq","An-Naas"]
 
 
-SYNONYMS_INDEX = [{"l":"A","ll":"Alif mamdooah","pg":"67","n":"29","d":"29"},{"l":"AA","ll":"Alif maqsoora","pg":"106","n":"51","d":"51"},{"l":"b","ll":"beh","pg":"167","n":"80","d":"72"},{"l":"p","ll":"(peh)","pg":"260","n":"59","d":"28"},{"l":"t","ll":"teh","pg":"336","n":"34","d":"20"},{"l":"tt","ll":"(tteh)","pg":"367","n":"8","d":"2"},{"l":"th","ll":"theh","pg":"377","n":"2","d":"0"},{"l":"j","ll":"jim","pg":"379","n":"28","d":"2"},{"l":"ch","ll":"(cheem)","pg":"408","n":"29","d":"13"},{"l":"HA","ll":"Ha","pg":"441","n":"15","d":"4"},{"l":"kh","ll":"kha","pg":"454","n":"21","d":"3"},{"l":"d","ll":"dal","pg":"473","n":"36","d":"13"},{"l":"dd","ll":"(ddal)","pg":"516","n":"10","d":"7"},{"l":"dh","ll":"dhal","pg":"527","n":"6","d":"6"},{"l":"r","ll":"ra","pg":"533","n":"21","d":"14"},{"l":"z","ll":"zin","pg":"556","n":"10","d":"5"},{"l":"s","ll":"sin","pg":"570","n":"30","d":"25"},{"l":"sh","ll":"shin","pg":"604","n":"15","d":"0"},{"l":"SA","ll":"Sad","pg":"617","n":"5","d":"0"},{"l":"DA","ll":"Dad","pg":"621","n":"1","d":"0"},{"l":"TA","ll":"Ta","pg":"622","n":"7","d":"0"},{"l":"ZA","ll":"Dha","pg":"631","n":"2","d":"2"},{"l":"E","ll":"ain","pg":"634","n":"13","d":"7"},{"l":"gh","ll":"gain","pg":"648","n":"9","d":"0"},{"l":"f","ll":"feh","pg":"658","n":"14","d":"13"},{"l":"q","ll":"qaf","pg":"671","n":"18","d":"18"},{"l":"k","ll":"kaf","pg":"689","n":"45","d":"28"},{"l":"gg","ll":"(gaaf)","pg":"726","n":"27","d":"27"},{"l":"l","ll":"lam","pg":"757","n":"17","d":"6"},{"l":"m","ll":"mim","pg":"775","n":"48","d":"3"},{"l":"n","ll":"nun","pg":"834","n":"33","d":"2"},{"l":"w","ll":"waav","pg":"871","n":"4","d":"2"},{"l":"h","ll":"heh","pg":"878","n":"17","d":"2"},{"l":"y","ll":"yeh","pg":"902","n":"4","d":"0"}];
+SYNONYMS_INDEX = [{"l":"A","ll":"Alif mamdooah","pg":"67","n":"29","d":"29"},{"l":"AA","ll":"Alif maqsoora","pg":"106","n":"51","d":"51"},{"l":"b","ll":"beh","pg":"167","n":"80","d":"72"},{"l":"p","ll":"(peh)","pg":"260","n":"59","d":"28"},{"l":"t","ll":"teh","pg":"336","n":"34","d":"20"},{"l":"tt","ll":"(tteh)","pg":"367","n":"8","d":"2"},{"l":"th","ll":"theh","pg":"377","n":"2","d":"0"},{"l":"j","ll":"jim","pg":"379","n":"28","d":"2"},{"l":"ch","ll":"(cheem)","pg":"408","n":"29","d":"13"},{"l":"HA","ll":"Ha","pg":"441","n":"15","d":"4"},{"l":"kh","ll":"kha","pg":"454","n":"21","d":"3"},{"l":"d","ll":"dal","pg":"473","n":"36","d":"13"},{"l":"dd","ll":"(ddal)","pg":"516","n":"9","d":"7"},{"l":"dh","ll":"dhal","pg":"527","n":"6","d":"6"},{"l":"r","ll":"ra","pg":"533","n":"21","d":"14"},{"l":"z","ll":"zin","pg":"556","n":"10","d":"5"},{"l":"s","ll":"sin","pg":"570","n":"30","d":"25"},{"l":"sh","ll":"shin","pg":"604","n":"15","d":"0"},{"l":"SA","ll":"Sad","pg":"617","n":"5","d":"0"},{"l":"DA","ll":"Dad","pg":"621","n":"1","d":"0"},{"l":"TA","ll":"Ta","pg":"622","n":"7","d":"0"},{"l":"ZA","ll":"Dha","pg":"631","n":"2","d":"2"},{"l":"E","ll":"ain","pg":"634","n":"13","d":"7"},{"l":"gh","ll":"gain","pg":"648","n":"9","d":"0"},{"l":"f","ll":"feh","pg":"658","n":"14","d":"13"},{"l":"q","ll":"qaf","pg":"671","n":"18","d":"18"},{"l":"k","ll":"kaf","pg":"689","n":"45","d":"28"},{"l":"gg","ll":"(gaaf)","pg":"726","n":"27","d":"27"},{"l":"l","ll":"lam","pg":"757","n":"17","d":"6"},{"l":"m","ll":"mim","pg":"775","n":"48","d":"3"},{"l":"n","ll":"nun","pg":"834","n":"33","d":"2"},{"l":"w","ll":"waav","pg":"871","n":"4","d":"2"},{"l":"h","ll":"heh","pg":"878","n":"17","d":"2"},{"l":"y","ll":"yeh","pg":"902","n":"4","d":"0"}];
 
 
 pageOffsets = {
@@ -422,6 +422,7 @@ pageOffsets = {
 }
 
 whatsNew = {
+		'Feb 12, 2013': {'TA': "1-7", 'dd': "1-3"},
 		'Feb 10, 2013': {'t': "9-14"},
 		'Feb 9, 2013': {'z': "6-10", 'r': "7-13", 'p': "3 21 30 33-36", 'n': "14 15", 'd': "25-29", 'SA': "2-5"},
 		'Feb 2, 2013': {'l': "5-12", 'sh': "1-15", 'p': "20 21 30 33-35", 'SA': "1", 'E': "10-13", 'h': "3 5", 'n': "27", 'tt': "1", 's': "1 2 28-30"},
@@ -446,7 +447,7 @@ letterStatus = {
 		'HA': "[1-4] 5-15",
 		'kh': "1-21",
 		'd': "1-3 (4-15) [16] 17-18 [19] 20-32 (33) 34 (35-36)",
-		'dd': "(1-2) 3-9 (10)",
+		'dd': "1-9",
 		'dh': "1-6",
 		'r': "1-5 [6] 7-14 [15] 16-21",
 		'z': "1-4 [5] 6-10",
@@ -454,7 +455,7 @@ letterStatus = {
 		'sh': "1-13 [14] 15",
 		'SA': "1-5",
 		'DA': "1",
-		'TA': "(1-7)",
+		'TA': "1-7",
 		'ZA': "1-2",
 		'E': "1-11 [12-13]",
 		'gh': "1-9",

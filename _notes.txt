@@ -1,10 +1,26 @@
 ﻿Quran to Synonym topics implementation notes:
 
+**BUG** Click ayah isn't working as before; also not changing to Quran slide. also if quran open, clicking ayah ref not changing dropdown value of suwar.
+**BUG** when next topic clicked, change content to loading image. else no indication.
+
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+p1 no words, no suras
+p2 no words
+
+
 AA39 - missing!!
 AA49 - missing!! (xAA20 has extra words)
 AA23 - wrong extra word? 3araDa
 AA35- heading wrong? is it mataa or amnaa?
+
+B37: it shud be aDAA3a, not asnaa3a. also incomplete?? http://quransynonyms.com/content/b/b37.html
+b46: partial
+b47: couldnt translate
+b48: says waSad, or rasad.
+b60, 61: arabic messed up
+b62: incorrect ayah to correct
+b73: maqtaan or maqtan?
 
 
 Word look wrong:
