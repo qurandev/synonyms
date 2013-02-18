@@ -4,12 +4,16 @@
 **BUG** when next topic clicked, change content to loading image. else no indication.
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+INCORRECT REFERENCE: b58 b61 
+
+
 FIXED words:::::::::::::::::::::
 All of PAA; All of GAAF, many KAF.
 tt6 to tt7: 2 topics messed over into tt6
 
 :::::::::::::::::::::::::::::::::
 NO SURAS::::::::::::::::::::::::
+b49: has compound ayahs like 56:15-16. Did the regex pick it up?? b53: 79:10-11 ; b55 56:30-31; b57: 19:27: (is the double colon still cause it to pickup correctly?; b59; b65 &nbsp7:111 did regex pick up?? b66 double colon; 
 p1: no suras
 All of t: no Ayahs/Suras!
 FIXED: tt1: missing URLs

@@ -1,11 +1,18 @@
 var map = [], DATA = [], ch = 'b', n = 80, i=1, chIndex=5;
 
-var getID = function(id){
-		 line = "content\\" + ch +'\\'+ id + ".html"; console.log(line);
+var getID = function(id){var line, o, regexAyah, regexAyahInvalidFormat, invalid = '';
+		 line = "content\\" + ch +'\\'+ id + ".html?" + new Date(); console.log(line);
+		 regexAyah 				= /\d{1,3}\:\d{1,3}/mg;
+		 regexAyahInvalidFormat = /\d{1,3}\/\d{1,3}/mg;
          $.get(line, function(html){
            var o = {}; o.id = id.trim(); //path
-           o.v = (html.match(/\d{1,3}\:\d{1,3}/mg) || []).join(' ');
-		   DATA.push( {t: id, r: o.v} );
+           o.v = (html.match( regexAyah ) || []).join(' ');
+		   invalid = (html.match( regexAyahInvalidFormat ) || []).join(' ');
+		   if(invalid && invalid!= ' '){ 
+			DATA.push( {t: id, r: o.v, invalid: invalid}); 
+		   }else{
+			DATA.push( {t: id, r: o.v} );
+		   }
 		   console.log( id +'\t'+ o.v + '\n' );
 		   if(++i <= n){ getID( ch + i); }
 		   else{ console.log(JSON.stringify(DATA) ); }
@@ -17,7 +24,7 @@ var getID = function(id){
 		 });
 }
 var lArr = _.pluck(SYNONYMS_INDEX, 'l');
-var nArr = _.pluck(SYNONYMS_INDEX, 'n'); chIndex=6;
+var nArr = _.pluck(SYNONYMS_INDEX, 'n'); chIndex=1;
 ch = lArr[ ++chIndex ]; n = parseInt( nArr[ chIndex ] ); i=1; DATA=[];
 getID(ch + i);
 
