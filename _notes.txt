@@ -10,9 +10,10 @@ tt6 to tt7: 2 topics messed over into tt6
 
 :::::::::::::::::::::::::::::::::
 NO SURAS::::::::::::::::::::::::
-p1 no suras
+p1: no suras
 All of t: no Ayahs/Suras!
-tt1: missing URLs
+FIXED: tt1: missing URLs
+FIXED: th1, 2: no urls.
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 CONTENT or FORMATTING ISSUES:
@@ -22,7 +23,7 @@ t19: formatting issues. too much to left.
 
 tt2: has urls of form .to in content
 
-th1, 2: no words. no urls.
+th1, 2: no words.
 
 AA39 - missing!!
 AA49 - missing!! (xAA20 has extra words)
