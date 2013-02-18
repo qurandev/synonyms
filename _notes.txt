@@ -4,19 +4,23 @@
 **BUG** when next topic clicked, change content to loading image. else no indication.
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+FIXED words:::::::::::::::::::::
+All of PAA; All of GAAF, many KAF.
+tt6 to tt7: 2 topics messed over into tt6
 
-p1 no words, no suras
-p2 no words
-All of p: no words!
-
+:::::::::::::::::::::::::::::::::
+NO SURAS::::::::::::::::::::::::
+p1 no suras
 All of t: no Ayahs/Suras!
+tt1: missing URLs
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+CONTENT or FORMATTING ISSUES:
 t12: formatting issues in ttile.
 t18: partial + formatting issues
 t19: formatting issues. too much to left.
 
-tt1: missing URLs
 tt2: has urls of form .to in content
-tt6 to tt7: 2 topics messed over into tt6
 
 th1, 2: no words. no urls.
 
