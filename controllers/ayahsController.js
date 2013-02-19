@@ -1,4 +1,4 @@
-var v=0.822, fetchSura, format, findTopicsForSura, findTopicsForRef, findSurasForTopic, topicsAyahsMap, getSynonym, suraNames, synonyms, synonymdetails, SYNONYMS_INDEX, pageOffsets, whatsNew, letterStatus, getNextID, initTopicsAyahsMap, MaarifulQuraan, AsbabAlNuzul;
+var v=0.823, fetchSura, format, findTopicsForSura, findTopicsForRef, findSurasForTopic, topicsAyahsMap, getSynonym, suraNames, synonyms, synonymdetails, SYNONYMS_INDEX, pageOffsets, whatsNew, letterStatus, getNextID, initTopicsAyahsMap, MaarifulQuraan, AsbabAlNuzul;
 
 var ayahsController = function($scope, $route, $routeParams, $location, $http, $rootScope){//console.log('ayahsController ' + JSON.stringify($routeParams));
 	$scope.qurandata = "dsffsdfs";
