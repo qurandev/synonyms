@@ -137,21 +137,23 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 		return _url;
 	}
 	var _url_previous;
-	$rootScope.getUrduBookUrl = function(){
+	$rootScope.getUrduBookUrl = function(fullScreen){
 		var url, _url = "http://archive.org/stream/Mutaradifaat-ul-Quran_314/Mutaradifaat-ul-Quran?ui=embed#mode/1up/page/n", pg = $rootScope.page, id = $rootScope.id; 
 		var o = findApproxPageNo( id );
 		if(o && o.pg){
 			pg = o.pg; $rootScope.page = pg; url = _url + (17 + pg); console.log('getUrduBookUrl: '+ url);
+			if(fullScreen){ url = url.replace(/\?ui\=embed/g, '').replace(/1up/g, '2up') }
 			return url;
 		}
 	}
-	$rootScope.getBookUrl = function(bookID, id){
+	$rootScope.getBookUrl = function(bookID, id, fullScreen){
 		var _url, o = eval(bookID);
 		if(o){
 			_url = o.lookupSura( parseInt($rootScope.sura) ); console.log(  'getBookUrl: ' + bookID +' '+ _url );
 			if(id && _url){ 
 				$(id).html( "<IFRAME SRC='" + _url + "' STYLE='height:680px;width:95%;'></IFRAME>");
 			}
+			if(fullScreen){ _url = _url.replace(/\?ui\=embed/g, '').replace(/1up/g, '2up') }
 			return _url;
 		}
 	}
