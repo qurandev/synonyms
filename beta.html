@@ -189,6 +189,24 @@
 					</div>
 				</div>
 				<div class="item">
+					<iframe src="http://quran.ksu.edu.sa/index.php?l=en" style="xmin-width:1000px;width:100%;height:890px;border:none;overflow:hidden"></iframe>
+				</div>
+
+				<!--<span ng-init="books = ['MaarifulQuraan', 'MoharAliWordByWordQuraan', 'AsbabAlNuzul'], bookTitles=['Tafseer Maariful Qur\'aan', 'A Word for Word meaning of Qur\'aan - Mohar Ali', 'Asbab Al Nuzul']"></span>
+				<div ng-repeat="book in books" class="item">
+				  <div class=well well-small>
+					<H4>Quran view ({{bookTitles[$index]}}):</H4>
+					<div class=pull-right>
+					  <A ng-click="getBookUrl(book, '#book'+(1+$index))"><i class="icon-refresh"></i></A>&nbsp;&nbsp;<A href="{{getBookUrl(book)}}" target=_><i class="icon-share-alt"></i></A>
+					</div>
+					<span ng-init="book1 = true" ng-show="book1" ng-click="book1 = !book1; _html1 = '<IFRAME src=' + getBookUrl('MaarifulQuraan', '#book1') +'></IFRAME>'; $('#book1').html(_html1);" class="btn btn-large">
+					  <img src="data/misc-icons/MaarifulQuran.jpg" class="img-polaroid" style="width: 140px; height: 180px;"/><BR>
+					  Click to load. 
+					</span>
+					<span ng-show="!book1" id="book1"></span>
+				  </div>
+				</div>-->
+				<div class="item">
 					<div class=well well-small>
 					<H4>Quran view (Tafseer Maariful Qur'aan):</H4>
 					<div class=pull-right>
@@ -199,6 +217,7 @@
 					  Click to load. 
 					</span>
 					<span ng-show="!book1" id="book1"></span>
+					
 					</div>
 				</div>
 				<div class="item">
@@ -225,9 +244,9 @@
 					  Click to load. 
 					</span>
 					<span ng-show="!book2" id="book2"></span>
-					
 					</div>
 				</div>
+
 				<div class="item">
 					<div ng-include src="'partials/topics.html'"></div>
 				</div>

@@ -1,4 +1,4 @@
-var v=0.833, fetchSura, format, findTopicsForSura, findTopicsForRef, findSurasForTopic, topicsAyahsMap, getSynonym, suraNames, synonyms, synonymdetails, SYNONYMS_INDEX, pageOffsets, whatsNew, letterStatus, getNextID, initTopicsAyahsMap, MaarifulQuraan, AsbabAlNuzul;
+var v=0.84, fetchSura, format, findTopicsForSura, findTopicsForRef, findSurasForTopic, topicsAyahsMap, getSynonym, suraNames, synonyms, synonymdetails, SYNONYMS_INDEX, pageOffsets, whatsNew, letterStatus, getNextID, initTopicsAyahsMap, MaarifulQuraan, AsbabAlNuzul, MoharAliWordByWordQuraan;
 
 var ayahsController = function($scope, $route, $routeParams, $location, $http, $rootScope){//console.log('ayahsController ' + JSON.stringify($routeParams));
 	$scope.qurandata = "dsffsdfs";
@@ -100,6 +100,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 			}else{ //reset those views.
 				if($rootScope.book1) $rootScope.getBookUrl('MaarifulQuraan', '#book1');
 				if($rootScope.book2) $rootScope.getBookUrl('AsbabAlNuzul', '#book2');
+				if($rootScope.book3) $rootScope.getBookUrl('MoharAliWordByWordQuraan', '#book3');
 			}
 		}else{
 			setTimeout( "$('.carousel').carousel( 1 );", 5000);
@@ -183,7 +184,7 @@ var ayahsController = function($scope, $route, $routeParams, $location, $http, $
 	$rootScope.isShowall = function(){ return $rootScope.showall; }
 	$rootScope.setShowall = function(showall){ return $rootScope.showall = showall; }
 	
-	$rootScope.MaarifulQuraan = MaarifulQuraan; $rootScope.AsbabAlNuzul = AsbabAlNuzul; $rootScope.book1 = $rootScope.book2 = true;
+	$rootScope.MaarifulQuraan = MaarifulQuraan; $rootScope.AsbabAlNuzul = AsbabAlNuzul; $rootScope.MoharAliWordByWordQuraan = MoharAliWordByWordQuraan; $rootScope.book1 = $rootScope.book2 = $rootScope.book3 = true;
 	$(function() {
 		$('.carousel').each(function(){
             $(this).carousel({
@@ -483,6 +484,31 @@ MaarifulQuraan = {
 		pageNo = map[ suraNo - map[0] + 1];
 		offset = suraNo >=47 ? -1 : MaarifulQuraan._PG_OFFSET[ suraNo ]; pageNo += offset;
 		url = MaarifulQuraan._URL.replace(/\$VOL/, volNo).replace(/\$PAGE/, pageNo);
+	 }
+	 return url;
+   }
+}
+
+MoharAliWordByWordQuraan = {
+   _MAP: { //vol #1. key is last sura in vol. vol# is object index. first sura is 1st array value.
+	11:   [1,  1,4,154,236,325,  391,465,546,576,635,  677], 
+	35:   [12,  722,763,782,806,827,  872,910,950,976,1012,  1044,1075,1105,1137,1162,  1202,1231,1265,1290,1311,  1324,1334,1367,1389],//v 2
+	114:   [36,  1409,1430,1459,1480,1509,  1540,1560,1582,1606,1618,  1631,1647,1661,1676,1685,  1696,1707,1717,1729,1741,  1753,1767,1782,1794,1806,  1814,1820,1825,1830,1837,  1844,1850,1859,1868,1877,  1884,1890,1898,1904,1913,  1919,1926,1933,1940,1947,  1953,1957,1960,1966,1970,  1974,1977,1980,1984,1989,  1992,1995,1998,2000,2002,  2004,2007,2008,2011,2013,  2015,2017,2019,2020,2022,  2023,2024,2025,2026,2027, 2028,2029,2030,2031,2032], //v 3
+   },
+   _VOLS: [-1, 'AWordForWordMeaningOfTheQuran/AWordForWordMeaningOtTheQuran-1', 'AWordForWordMeaningOtTheQuran--2/AWordForWordMeaningOtTheQuran--2', 'AWordForWordMeaningOtTheQuran-3/AWordForWordMeaningOtTheQuran-3'],
+   _PG_OFFSET: [-1, 14,14,14,14,14, 14,14,17,17,17, 17,
+					14,14,16,14,14, 14,14,14,14,14, 14,14,14,14,14, 15,15,16,16,16, 17,16,16,16,
+					13,13,13,13,13, 13,13,13,13,13, 13,13,13,13,13, 14,14,14,14,13, 13,13,13,13,13, 13,13,13,13,13, 13,13,13,13,13, 13,13,13,13,13, 13,13,13,13,13, 13,13,13,13,13, 13,13,13,13,13, 13,13,13,13,13, 13,13,13,13,13, 13,13,13,13,13, 13,13,13,13,13, 13,13,13,13,13
+				],
+   _URL: "http://archive.org/stream/$VOL?ui=embed#page/n$PAGE/mode/1up",   
+   lookupSura: function(suraNo){ if(!suraNo || suraNo <1 || suraNo > 114) return;
+     var url, pageNo, volNo=0, map, pageNo;
+	 map = _.find(MoharAliWordByWordQuraan._MAP, function(value, key){ ++volNo; return key >= suraNo; })
+	 if( map ){
+		pageNo = map[ suraNo - map[0] + 1];
+		pageNo -= map[ 1 ] - 1; //this book has increasing pg numbers vol to vol.
+		offset = MoharAliWordByWordQuraan._PG_OFFSET[ suraNo ]; pageNo += offset;
+		url = MoharAliWordByWordQuraan._URL.replace(/\$VOL/, MoharAliWordByWordQuraan._VOLS[volNo]).replace(/\$PAGE/, pageNo);
 	 }
 	 return url;
    }
